@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
 
-// import { router } from '../js/router'
-
 import disco from '@/assets/disco.json'
 
 export const useDiscoStore = defineStore('disco', {
@@ -120,16 +118,16 @@ export const useDiscoStore = defineStore('disco', {
         if (disco) {
           for (const track in disco[album].tracks) {
             if (disco[album].tracks.length && disco[album].tracks[track].scIdx === newIndex) {
-              // router.push({ params: {
-              //   album: disco[album].slug,
-              //   track: disco[album].tracks[track].slug
-              // } })
+              const router = useRouter()
+              router.push({ params: {
+                album: disco[album].slug,
+                track: disco[album].tracks[track].slug
+              } })
             }
           }
         }
       }
     }
   },
-
 
 })

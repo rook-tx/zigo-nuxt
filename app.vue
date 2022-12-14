@@ -4,13 +4,23 @@
       'sec', 'player'
     ]"
   >
-    <player-background />
+    <player-background
+      :fade="obj.type === 'album' ? 0.8 : fade"
+    />
 
     <app-page-nav />
 
-    <div class="content">
-      <nuxt-page />
+    <div
+      ref="content"
+      class="content"
+      @scroll.passive="handleScroll"
+    >
+      <nuxt-page
+        :key="$route.fullPath"
+      />
     </div>
+
+    <player-play-controls />
 
     <player-audio-frame />
   </div>
@@ -18,10 +28,27 @@
 
 <script>
 
-import { mapActions } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
+import { useDeviceStore } from './stores/device'
 
 export default {
+
+  data() {
+    return {
+      fade: 0
+    }
+  },
+
+  computed: {
+    ...mapState(useDeviceStore, [
+      'winHeight'
+    ]),
+    ...mapState(useDiscoStore, [
+      'obj'
+    ])
+  },
+
   watch: {
     $route: {
       handler(route) {
@@ -38,6 +65,11 @@ export default {
     ...mapActions(useDiscoStore, [
       'updateTrack'
     ]),
+
+    handleScroll(e) {
+      const fade = e.target.scrollTop / (this.winHeight / 2)
+      this.fade = Math.min(1, fade)
+    }
   }
 }
 

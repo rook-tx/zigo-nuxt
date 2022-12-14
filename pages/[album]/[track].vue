@@ -1,9 +1,9 @@
 <template>
   <section class="track-page">
     <div
-      v-if="rdrAlbum.lyrics"
+      v-if="rdrTrack.lyrics"
       class="lyrics"
-      v-html="rdrAlbum.lyrics"
+      v-html="rdrTrack.lyrics"
     />
   </section>
 </template>
@@ -27,12 +27,12 @@ export default {
   },
 
   data() {
-    const rdrAlbum = []
+    const rdrTrack = {}
 
     return {
       loading: true,
       disco,
-      rdrAlbum
+      rdrTrack
     }
   },
 
@@ -41,29 +41,23 @@ export default {
       if (this.$route.params.album === this.disco[album].slug) {
         for (const track in this.disco[album].tracks) {
           if (this.$route.params.track === this.disco[album].tracks[track].slug) {
-            this.rdrAlbum = this.disco[album].tracks[track]
+            this.rdrTrack = this.disco[album].tracks[track]
             this.loading = false
           }
         }
-        this.rdrAlbum.album = this.disco[album].id
+        this.rdrTrack.album = this.disco[album].id
       }
     }
   },
 
   methods: {
     src() {
-      let url = `/static/tracks/${this.rdrAlbum.id}-bg.jpg`
-      if (this.rdrAlbum.album === 'tihie') {
-        url = '/static/tracks/tihie-inner-bg.jpg'
-      }
+      const url = (this.rdrTrack.album === 'tihie') ? '/static/tracks/tihie-inner-bg.jpg' : `/static/tracks/${this.rdrTrack.id}-bg.jpg`
       return url
     },
 
     type() {
-      let size = 'contain'
-      if (this.rdrAlbum.album === 'fox' || this.rdrAlbum.album === 'tihie') {
-        size = 'cover'
-      }
+      const size = (this.rdrTrack.album === 'fox' || this.rdrTrack.album === 'tihie') ? 'cover' : 'contain'
       return size
     }
   }

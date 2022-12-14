@@ -17,6 +17,18 @@ export default defineNuxtConfig({ // eslint-disable-line no-undef
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', type: 'image/jpg', href: '/apple-touch-icon.jpg' },
         { rel: 'manifest', href: '/manifest.json' }
+      ],
+      script: [
+        {
+          async: true,
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-BZYDLG7H21'
+        },
+        {
+          children: `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BZYDLG7H21');`
+        }
       ]
     },
   },
