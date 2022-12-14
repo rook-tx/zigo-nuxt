@@ -7,15 +7,19 @@ export const useDeviceStore = defineStore('device', {
       win: {
         x: 1440,
         y: 900
-      }
-    },
-    utcOffset: 'America/Toronto'
+      },
+      keys: null,
+      mouse: null,
+      touch: null
+    }
   }),
 
   getters: {
     win: (state) => state.device.win,
     winWidth: (state) => state.device.win.x,
     winHeight: (state) => state.device.win.y,
+
+    portrait: (state) => state.device.win.y > state.device.win.x,
 
     smMobile: (state) => state.device.win.x < 600 + 1,
     mobile: (state) => state.device.win.x < 768 + 1,
@@ -27,10 +31,6 @@ export const useDeviceStore = defineStore('device', {
   actions: {
     updateDevice(device) {
       this.device = device
-    },
-
-    updateUTC(offset) {
-      this.utcOffset = offset
     }
   }
 

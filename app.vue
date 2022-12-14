@@ -4,9 +4,13 @@
       'sec', 'player'
     ]"
   >
+    <ui-sniffer />
+
     <player-background
       :fade="obj.type === 'album' ? 0.8 : fade"
     />
+
+    <svg-logo />
 
     <app-page-nav />
 
@@ -20,6 +24,10 @@
       />
     </div>
 
+    <player-track-nav
+      v-if="$route.name === 'album-track'"
+    />
+
     <player-play-controls />
 
     <player-audio-frame />
@@ -30,7 +38,7 @@
 
 import { mapState, mapActions } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
-import { useDeviceStore } from './stores/device'
+import { useDeviceStore } from '@/stores/device'
 
 export default {
 

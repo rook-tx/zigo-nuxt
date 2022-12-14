@@ -20,7 +20,9 @@
 
     <div
       class="shade"
-      :style="'opacity:' + opacity"
+      :style="{
+        opacity: opacity
+      }"
     />
 
     <div class="gradient" />
@@ -32,8 +34,8 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2391 900"
-        :height="win.y"
-        :width="win.y * (2391 / 900)"
+        :height="winHeight"
+        :width="winHeight * (2391 / 900)"
         :style="{
           stroke: stroke
         }"
@@ -70,7 +72,8 @@ export default {
 
   computed: {
     ...mapState(useDeviceStore, [
-      'win'
+      'win',
+      'winHeight'
     ]),
     ...mapState(useDiscoStore, [
       'obj',
@@ -79,11 +82,11 @@ export default {
     ]),
 
     image() {
-      return this.obj.src ?? '/static/tracks/naam-bg.jpg'
+      return this.obj.src || '/static/tracks/naam-bg.jpg'
     },
 
     stroke() {
-      return `#${this.ui ?? 'fff'}`
+      return `#${this.ui || 'fff'}`
     },
 
     type() {

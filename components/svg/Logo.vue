@@ -1,0 +1,97 @@
+<template>
+  <div class="logo">
+    <router-link
+      to="/"
+      title="HOME"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 236 68"
+        width="236"
+        height="68"
+        :fill="fill"
+        focusable="false"
+      >
+        <path d="M8 .75a3.62 3.62 0 0 0 1.9 2.1 10.62 10.62 0 0 0 3.4.3H54l.7 1.2c-15.3 19.2-30.8 38.5-45.8 58.4 3.6.4 12.6.6 19.7.6 18.5 0 21.9-2.5 26.9-13.8l1.7.3c-.7 2.6-2.5 11.1-3.7 15.9H.9l-.4-1.1c15.1-19.6 30.7-38.9 46.1-59.1l-19.7.1c-15-.1-16.4 2.4-19.7 12.8H5.4c.5-5.1 1.1-11.8 1.2-17.7z" />
+        <path d="M62 64.35c8.7-.4 9.5-2.1 9.5-10v-39.8c0-7.8-.8-9.5-9.5-10v-1.4h24.2v1.4c-8.6.5-9.5 2.2-9.5 10v39.8c0 7.9.9 9.6 9.5 10v1.4H62z" />
+        <path d="M160.3 39.05c-5.9.9-6.2 2.2-6.2 6.6v9c0 3.5.1 6.5.9 8.5-6.5 1.6-15 4.1-23.2 4.1-21.8 0-37.2-13.2-37.2-32.2 0-21.9 18.5-33.4 38.2-33.4a74.1 74.1 0 0 1 19.5 2.7c.3 2.9.8 8.6 1.7 14.8l-1.6.2C149.1 6.75 141.3 4 131 4c-19.2 0-29.3 11.1-29.3 29.6 0 14 8 31.1 30.1 31.1a43 43 0 0 0 12.8-1.6c3-1 4.2-2.4 4.2-6.8v-8.7c0-6.1-.5-7.8-11.9-8.6v-1.4h23.4z" />
+        <path d="M235.5 33.55c0 19.9-15.9 33.7-34.9 33.7-18.3 0-33.1-13.5-33.1-32 0-16.8 13-33.6 35.3-33.6 16.7 0 32.7 12.5 32.7 31.9zm-61-1.2c0 19.5 12.3 32.5 28.5 32.5 13.5 0 25.7-9.3 25.7-27.1C228.7 15 216 4 199.9 4c-13.3.15-25.4 9-25.4 28.35z" />
+      </svg>
+    </router-link>
+  </div>
+</template>
+
+<script>
+
+import { mapState } from 'pinia'
+import { useDiscoStore } from '@/stores/disco'
+
+export default {
+
+  data() {
+    return {
+      fill: `#${this.ui}`
+    }
+  },
+
+  computed: {
+    ...mapState(useDiscoStore, [
+      'ui'
+    ])
+  },
+
+  watch: {
+    ui: {
+      immediate: true,
+      handler(ui) {
+        this.fill = `#${ui}`
+      }
+    }
+  },
+
+  methods: {
+    openNav() {
+      this.fill = '#fff'
+    },
+
+    closeNav() {
+      this.fill = `#${this.ui}`
+    }
+  }
+}
+
+</script>
+
+<style lang="stylus">
+
+@import "../../assets/styl/_variables"
+
+.logo {
+  height 10%
+  left 0
+  padding-left 5.8vh
+  position absolute
+  top 0
+  z-index 5
+
+  a {
+    align-items center
+    display flex
+    height 100%
+    justify-content center
+    width 11.55vh
+
+    svg {
+      display block
+      height auto
+      width 100%
+    }
+  }
+
+  +below($mobile) {
+    padding-left 5.77*.5vh
+    top 5%
+  }
+}
+
+</style>

@@ -1,5 +1,5 @@
 <template>
   <main>
-    <h1>Title</h1>
+    <svg-logo />
   </main>
 </template>

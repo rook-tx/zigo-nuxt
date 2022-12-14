@@ -1,7 +1,7 @@
 <template>
-  <div
-    :class="[ type, 'button', buttonDown ? 'down' : '' ]"
-    @mousedown.passive="down"
+  <button
+    type="button"
+    :class="[ type, 'player-button', buttonDown ? 'down' : '' ]"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,10 @@
     >
 
       <g v-if="type === 'playpause'">
-        <g id="pause">
+        <g
+          v-show="playing"
+          id="pause"
+        >
           <rect
             x="34"
             y="25"
@@ -31,6 +34,7 @@
           />
         </g>
         <path
+          v-show="!playing"
           id="play"
           d="M85.92 50.61a.65.65 0 0 0 0-1.22L35.06 20c-.58-.34-1.06-.06-1.06.61v58.76c0 .67.48.95 1.06.61z"
         />
@@ -47,15 +51,17 @@
       </g>
 
     </svg>
-  </div>
+  </button>
 </template>
 
 <script>
 
 import { mapState } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
+import { usePlayerStore } from '@/stores/player'
 
 export default {
+
   props: {
     type: {
       type: String,
@@ -73,6 +79,9 @@ export default {
   computed: {
     ...mapState(useDiscoStore, [
       'ui'
+    ]),
+    ...mapState(usePlayerStore, [
+      'playing'
     ])
   },
 
@@ -83,70 +92,59 @@ export default {
         this.fill = `#${ui}`
       }
     }
-  },
-
-  methods: {
-    down() {
-      this.buttonDown = true
-      this.$emit('down')
-      window.addEventListener('mouseup', this.up, { passive: true })
-    },
-
-    up() {
-      this.buttonDown = false
-      this.$emit('up')
-      window.removeEventListener('mouseup', this.up, { passive: true })
-    }
   }
 }
 
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 
 @import "../../assets/styl/_variables"
 
-.button {
+.player-button {
 	cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: 0;
   height: 10vh;
   left: 50%;
   margin-left: -5.8vh;
   position: absolute;
   width: 11.6vh;
   z-index: 1;
-}
 
-svg {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-path, circle {
-  stroke-linejoin: round;
-}
-
-.next {
-  margin-left: 5.8vh;
-}
-
-.prev {
-  margin-left: -17.4vh;
-}
-
-#play, #pause {
-  transition: all .3s $easeInOutExpo;
-}
-
-#play {
-  .playing & {
-    opacity: 0;
+  svg {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
-}
 
-#pause {
-  .paused & {
-    opacity: 0;
+  path, circle {
+    stroke-linejoin: round;
+  }
+
+  &.next {
+    margin-left: 5.8vh;
+  }
+
+  &.prev {
+    margin-left: -17.4vh;
+  }
+
+  #play, #pause {
+    transition: all .3s $easeInOutExpo;
+  }
+
+  #play {
+    .playing & {
+      opacity: 0;
+    }
+  }
+
+  #pause {
+    .paused & {
+      opacity: 0;
+    }
   }
 }
 
