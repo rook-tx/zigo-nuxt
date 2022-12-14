@@ -3,7 +3,10 @@
     <div
       ref="progress"
       class="progress"
-      :style="'background-color:' + ui"
+      :style="{
+        backgroundColor: `#${ui}`,
+        transform: `translate3d(${trackPosition * -100}%,0,0)`
+      }"
     />
   </div>
 </template>
@@ -15,6 +18,12 @@ import { useDiscoStore } from '@/stores/disco'
 import { usePlayerStore } from '@/stores/player'
 
 export default {
+
+  data() {
+    return {
+      trackPosition: 0
+    }
+  },
 
   computed: {
     ...mapState(usePlayerStore, [
@@ -37,8 +46,7 @@ export default {
   methods: {
     playreport(data) {
       if (data) {
-        const position = 1 - data
-        this.$refs.progress.style.transform = `translate3d(-${position * 100}%,0,0)`
+        this.trackPosition = 1 - data
       }
     }
   }

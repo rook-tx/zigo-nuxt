@@ -26,18 +26,6 @@ import { useDiscoStore } from '@/stores/disco'
 
 export default {
 
-  // props: {
-  //   track: {
-  //     type: String,
-  //     default: ''
-  //   },
-
-  //   idx: {
-  //     type: Number,
-  //     default: 0
-  //   }
-  // },
-
   computed: {
     ...mapState(usePlayerStore, [
       'playing',

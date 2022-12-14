@@ -119,10 +119,13 @@ export const useDiscoStore = defineStore('disco', {
           for (const track in disco[album].tracks) {
             if (disco[album].tracks.length && disco[album].tracks[track].scIdx === newIndex) {
               const router = useRouter()
-              router.push({ params: {
-                album: disco[album].slug,
-                track: disco[album].tracks[track].slug
-              } })
+              router.push({
+                name: 'album-track',
+                params: {
+                  album: disco[album].slug,
+                  track: disco[album].tracks[track].slug
+                }
+              })
             }
           }
         }

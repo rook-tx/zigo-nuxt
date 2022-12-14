@@ -24,11 +24,17 @@
       />
     </div>
 
+    <player-play-controls
+      :type="$route.name === 'video' || $route.name === 'band' ? 'short' : ''"
+    />
+
     <player-track-nav
       v-if="$route.name === 'album-track'"
     />
 
-    <player-play-controls />
+    <player-album-ui
+      v-if="$route.name === 'album-track'"
+    />
 
     <player-audio-frame />
   </div>

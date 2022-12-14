@@ -131,7 +131,7 @@ export default {
     },
 
     updateScroll(idx) {
-      const top = idx * this.winHeight * 0.1
+      const top = idx * this.trackHeight
       setTimeout(() => {
         this.scrollbar.scrollTo(0, top, 1000)
       }, 500)
@@ -139,12 +139,12 @@ export default {
 
     resize() {
       if (this.$refs.albums) {
-        this.$refs.albums.style.paddingTop = `${this.winHeight * 0.8}px`
-        this.$refs.albums.style.paddingBottom = `${this.winHeight * 0.1}px`
+        this.$refs.albums.style.paddingTop = `${this.trackHeight * 8}px`
+        this.$refs.albums.style.paddingBottom = `${this.trackHeight}px`
 
         for (let i = 0; i < this.$refs.tracks.length; i++) {
-          this.$refs.tracks[i].style.height = `${this.winHeight * 0.1}px`
-          this.$refs.tracks[i].style.lineHeight = `${this.winHeight * 0.1}px`
+          this.$refs.tracks[i].style.height = `${this.trackHeight}px`
+          this.$refs.tracks[i].style.lineHeight = `${this.trackHeight}px`
         }
 
         this.updateScroll(this.idx)
