@@ -1,0 +1,57 @@
+// ----------
+// Colours
+// ----------
+
+$b          = #000
+$w          = #fff
+
+$pink				= #fa1178
+$pink				= #e92076
+
+
+// ----------
+// Fonts
+// ----------
+
+$song       = 'SongStd', serif
+$franklin   = 'FranklinGothic-Medium', sans-serif
+$crimson    = 'Crimson Text', serif
+$montserrat = 'Montserrat', sans-serif
+
+font-smoothing()
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale
+
+
+// ----------
+// Mixins
+// ----------
+
+random(a,b)
+	return math(math(0, 'random')*(b - a + 1) + a, 'floor')
+
+
+// ----------
+// Breakpoints
+// ----------
+
+$mobile     = 375px
+$tablet     = 768px
+$notebook   = 1024px
+$laptop	    = 1366px
+$laptop-large	= 1440px
+$desktop    = 1600px
+$ultra	    = 1920px
+
+above($size)
+	@media screen and (min-width: $size + 1)
+		{block}
+
+below($size)
+	@media screen and (max-width: $size)
+		{block}
+
+@import '_ease'
+@import '_type'
+@import '_mixins'

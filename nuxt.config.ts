@@ -1,0 +1,31 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({ // eslint-disable-line no-undef
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en'
+      },
+      title: 'Home',
+      titleTemplate: '%s / ZIGO',
+      meta: [
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
+        { hid: 'description', name: 'description', content: 'We are craftfully creating diverse, progressive, experiences.' }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', type: 'image/jpg', href: '/apple-touch-icon.jpg' },
+        { rel: 'manifest', href: '/manifest.json' }
+      ]
+    },
+  },
+
+  css: [
+    '@/assets/styl/main.styl'
+  ],
+
+  modules: [
+    '@pinia/nuxt'
+  ]
+})

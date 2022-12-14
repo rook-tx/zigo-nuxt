@@ -1,0 +1,39 @@
+// ----------
+// Window/drawer
+// ----------
+
+$slice
+	background $bg
+
+	.wrap
+		margin 0 auto
+		max-width 1060px
+		width (300 / 375) * 100%
+
+		+above($tablet)
+			width (540 / 768) * 100%
+
+		+above($notebook)
+			width (780 / 1024) * 100%
+
+		+above($laptop)
+			width (1060 / 1366) * 100%
+
+$heading
+	color $blue
+	font-family $cormorant
+	fs(44)
+	margin-left -0.08em
+
+$smol-copy
+	fs(14)
+	letter-spacing -(0.1 / 14) * 1em
+	line-height (26 / 14)
+
+abs()
+	height: 100%
+	left: 0
+	position: absolute
+	top: 0
+	width: 100%
+

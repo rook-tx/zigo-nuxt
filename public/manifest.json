@@ -1,0 +1,21 @@
+{
+  "short_name": "ZIGO",
+  "name": "Z I G O A N T H O L O G Y",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.jpg",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "./favicon.ico",
+      "sizes": "100x100"
+    }
+  ],
+  "start_url": ".",
+  "description": "Z I G O A N T H O L O G Y",
+  "background_color": "#e92076",
+  "theme_color": "#e92076",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}
