@@ -78,21 +78,24 @@ export default {
 @import "../../assets/styl/_variables"
 
 .play-controls {
-	bottom 10%
-	left $gut*1em
-	max-width 100%
-	position absolute
-	right $gut*1em
-	transition max-width 1s $easeInOutCubic
-	z-index 5
+  background-image linear-gradient(180deg, rgba($b, 0), rgba($b, .3))
+  bottom 0
+  height 10%
+  left 0
+  max-width 100%
+  position absolute
+  right 0
+  transition max-width 1s $easeInOutCubic
+  z-index 5
 
-	+above($mobile) {
-		left 5.8vh
-		right 5.8vh
-	}
+  +above($mobile) {
+    left 5.8vh
+    right 5.8vh
+  }
 
   &.short {
     +above($mobile) {
+      background-image linear-gradient(180deg, rgba($b, 0), rgba($b, 0))
       max-width 11.6*2vh
     }
   }

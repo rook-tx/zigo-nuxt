@@ -9,6 +9,7 @@
       width="116"
       height="100"
       :fill="fill"
+      focusable="false"
     >
 
       <g v-if="type === 'playpause'">

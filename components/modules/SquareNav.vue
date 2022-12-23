@@ -92,6 +92,7 @@ export default {
     max-width: 12em
 
     +below($mobile)
+      color $w
       mgn(0, 1, 2.5)
 
   ol, li
@@ -123,7 +124,6 @@ export default {
 
   .side-title, .track
     pad(0,.5)
-
 
   // ----------
   // Themes

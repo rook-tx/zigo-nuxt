@@ -61,11 +61,11 @@ export default {
 .trackbar {
   background rgba($b,.1)
   height 1px
-  left 0
+  left $gut * 1em
+  right $gut * 1em
   overflow hidden
   position absolute
   top -1px
-  width 100%
 
   .progress {
     background $b

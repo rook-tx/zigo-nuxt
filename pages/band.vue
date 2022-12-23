@@ -9,7 +9,7 @@
 
       <div class="post-half">
         <div class="post-body blurb">
-          <h5>We are Tom Corbett, James FitzGerald, Will Hayes and Ian Iliopoulos, and we are ZIGO</h5>
+          <h5>We are Tom Corbett, James FitzGerald, Will Hayes and Ian Iliopoulos, and we are ZIGO.</h5>
         </div>
       </div>
     </div>
@@ -117,76 +117,83 @@
   </main>
 </template>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 
 @import "../assets/styl/_variables"
 
 .about {
-  height: 100%;
-}
+  height 100%
 
-.post.initial {
-  height: 100%;
-  padding: 0;
-  position: relative;
+  .post.initial {
+    position relative
 
-  +above($tablet) {
-    .post-half {
-      bottom: 50%;
-      left: 0;
-      position: absolute;
-      width: 50%;
+    +above($tablet) {
+      height 100%
 
-      &:nth-child(2) {
-        left: 50%;
+      .post-half {
+        bottom 50%
+        left 0
+        position absolute
+        width 50%
+
+        &:nth-child(2) {
+          left 50%
+        }
       }
+    }
+
+    +below($tablet) {
+      // display flex
+      // flex-direction column
+      // justify-content flex-end
+      // padding 10vh 0
+
+      .post-half {
+        pad(1, 0)
+      }
+    }
+
+    h1, h2, h3, h5 {
+      margin 0
+    }
+
+    h1 {
+      text-align right
     }
   }
 
-  +below($tablet) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 10vh 0;
+  .post {
+    pad(1, 0)
+
+    +above($mobile) {
+      pad(4, 0)
+    }
   }
 
-  h1, h2, h3, h5 {
-    margin: 0;
+  .post-body {
+    pad(0, 1)
+    position relative
+    mgn(0, auto)
+    max-width ($pwidth + $gut*2)*1em
   }
 
-  h1 {
-    text-align: right;
+  img {
+    mgn(2, auto)
+    width 0.5 * $pwidth * 1rem
   }
-}
 
-.post {
-  pad(4,0);
-}
+  h3 {
+    fs(mp(1))
+    text-align center
 
-.post-body {
-  pad(0,1);
-  position: relative;
-  mgn(0,auto);
-  max-width: ($pwidth + $gut*2)*1em
-}
-
-img {
-  mgn(2,auto);
-  width 0.5 * $pwidth * 1rem
-}
-
-h3 {
-  fs(mp(1));
-  text-align center
-
-  strong {
-    fs(mp(2));
-    // word-spacing: -.1em;
+    strong {
+      fs(mp(2))
+    }
   }
-}
 
-p {
-  word-spacing: -.2em;
+  p {
+    word-spacing -.2em
+  }
 }
 
 </style>

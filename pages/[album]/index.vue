@@ -200,6 +200,7 @@ export default {
       text-transform uppercase
 
       +below($mobile)
+        fs(mp(2))
         text-align center
 
   .tracks
@@ -208,16 +209,14 @@ export default {
     padding 0 0 0 1em
 
   .track
-    fs(mp(1))
-    line-height (($lh*1.5)/mp(1))
+    fs(mp(1), ($lh*1.5))
     position relative
     word-spacing -.2em
 
     &::before
       counter-increment tracks
       content counter(tracks)
-      fs(mp(0))
-      line-height (($lh*1.5)/mp(0))
+      fs(mp(0), ($lh*1.5))
       padding 0 .5em
       position absolute
       opacity .5

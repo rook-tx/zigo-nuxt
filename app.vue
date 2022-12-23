@@ -10,7 +10,7 @@
       :fade="obj.type === 'album' ? 0.8 : fade"
     />
 
-    <svg-logo />
+    <modules-logo-button />
 
     <app-page-nav />
 

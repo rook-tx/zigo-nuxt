@@ -108,10 +108,6 @@ export default {
     +above($mobile) {
       padding-right 5.8vh
     }
-
-    +below($mobile) {
-      top 5%
-    }
   }
 
   li {

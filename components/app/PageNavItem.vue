@@ -2,11 +2,12 @@
   <li
     class="nav-item"
   >
-    <!-- :to="{ name: item.to }" -->
     <nuxt-link
-      :to="`/${item.to}`"
+      :to="{ name: item.to }"
       :title="item.title"
-      :style="'color:#' + ui"
+      :style="{
+        color: `#{ui}`
+      }"
       class="nav-link"
     >
       {{ item.title }}
@@ -42,10 +43,9 @@ export default {
 	.nav-item {
 		display inline-block
 		height 100%
-		width 11.55vh
 
-		+below($mobile) {
-			display inline-block
+		+above($mobile) {
+			width 11.55vh
 		}
 	}
 
@@ -57,9 +57,12 @@ export default {
 		position relative
 		text-align center
 		text-transform uppercase
-
-		fs(mp(-2));
+		fs(mp(-2))
 		line-height 10vh
+		
+		+below($mobile) {
+			padding 0 .75em
+		}
 
 		&::before {
 			border-top 2px solid
@@ -70,10 +73,6 @@ export default {
 			top 0
 			transition opacity .3s
 			width 100%
-
-			+below($mobile) {
-				top -5vh
-			}
 		}
 
 		&.router-link-active {

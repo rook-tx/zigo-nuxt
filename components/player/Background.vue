@@ -102,7 +102,7 @@ export default {
     idx: {
       immediate: true,
       handler(idx) {
-        if (idx < 12) {
+        if (idx < 12 && this.$route.name === 'album-track') {
           this.position = idx / 12 * 100
         } else {
           this.position = 50
@@ -135,12 +135,6 @@ export default {
   created() {
     // this.$root.$on('momo', this.momo)
     // this.$root.$on('toto', this.toto)
-
-    if (this.idx < 12) {
-      this.position = this.idx / 12 * 100
-    } else {
-      this.position = 50
-    }
   },
 
   beforeUnmount() {
