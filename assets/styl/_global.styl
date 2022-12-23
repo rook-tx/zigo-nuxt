@@ -15,22 +15,25 @@ img, svg
 	height auto
 	max-width 100%
 
-h1, h2, h3, h4, h5, p
+h1, h2, h3, h4, h5, p {
 	font-weight normal
-	mgn(1,0)
+	mgn(1, 0)
 	word-spacing -.25em
 
-h1
-	letter-spacing -.03em
+	+above($mobile) {
+		mgn(1, 0)
+	}
+}
 
-h2, h3, h4, h5
+h2, h3, h4, h5, p {
 	max-width $pwidth * 1rem
+}
 
-p
-	max-width $pwidth * 1em
-
-	a
-		border-bottom: 1p solid $pink
+p {
+	a {
+		border-bottom: 1px solid $pink
+	}
+}
 
 h1
 	fs(mp(4))

@@ -15,7 +15,9 @@
           v-for="album in tracks"
           :key="album.id"
           :class="'album ' + album.id"
-          :style="'color:' + color"
+          :style="{
+            color: color
+          }"
         >
           <div class="artwork" />
 

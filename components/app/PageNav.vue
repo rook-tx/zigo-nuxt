@@ -1,49 +1,30 @@
 <template>
   <nav class="page-nav">
     <ul>
-      <item
+      <modules-page-nav-item
         v-for="route in routes"
         :key="route.title"
         :item="route"
-        :ui="ui"
+        :color="color"
       />
 
-      <li class="social-item">
+      <li
+        v-for="social in socials"
+        :key="social.key"
+        class="social-item"
+      >
         <a
-          href="https://open.spotify.com/album/38EQ0oOvcSIrRFxXCcinNZ"
+          :href="social.url"
           target="_blank"
           rel="noopener"
-          title="Listen to ZIGO on Spotify"
+          :title="social.title"
           class="social-link"
         >
-          <svg-spotify :fill="'#' + ui" />
-        </a>
-      </li>
-
-      <li class="social-item">
-        <a
-          href="https://itunes.apple.com/album/the-fox-ep/1020163446"
-          target="_blank"
-          rel="noopener"
-          title="Listen to ZIGO on Apple Music"
-          class="social-link"
-        >
-          <svg-apple
-            :fill="'#' + ui"
-            class="apple"
+          <component
+            :is="social.key"
+            :fill="color"
+            focusable="false"
           />
-        </a>
-      </li>
-
-      <li class="social-item">
-        <a
-          href="https://www.instagram.com/wearezigo/"
-          target="_blank"
-          rel="noopener"
-          title="Follow ZIGO on Instagram"
-          class="social-link"
-        >
-          <svg-instagram :fill="'#' + ui" />
         </a>
       </li>
     </ul>
@@ -55,12 +36,16 @@
 import { mapState } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
 
-import PageNavItem from './PageNavItem.vue'
+import Spotify from '@/components/svg/Spotify.vue'
+import Instagram from '@/components/svg/Instagram.vue'
+import Apple from '@/components/svg/Apple.vue'
 
 export default {
 
   components: {
-    Item: PageNavItem,
+    Spotify,
+    Instagram,
+    Apple
   },
 
   data() {
@@ -79,15 +64,43 @@ export default {
       }
     ]
 
+    const socials = [
+      {
+        key: 'spotify',
+        comp: 'svg-spotify',
+        title: 'Listen to ZIGO on Spotify',
+        url: 'https://open.spotify.com/album/38EQ0oOvcSIrRFxXCcinNZ'
+      },
+      {
+        key: 'apple',
+        comp: 'svg-apple',
+        title: 'Listen to ZIGO on Apple Music',
+        url: 'https://itunes.apple.com/album/the-fox-ep/1020163446'
+      },
+      {
+        key: 'instagram',
+        comp: 'svg-instagram',
+        title: 'Follow ZIGO on Instagram',
+        url: 'https://www.instagram.com/wearezigo/'
+      },
+    ]
+
     return {
-      routes
+      routes,
+      socials
     }
   },
 
   computed: {
     ...mapState(useDiscoStore, [
-      'ui'
+      'color'
     ])
+  },
+
+  methods: {
+    mapComponent(key) {
+      return `Svg${key.charAt(0).toUpperCase()}${key.slice(1)}`
+    }
   }
 }
 

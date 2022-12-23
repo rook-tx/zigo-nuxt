@@ -97,89 +97,102 @@
   </main>
 </template>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 
 @import "../assets/styl/_variables"
 
 .video-page {
-  height: 100%;
-}
+  height 100%
 
-.post.initial {
-  height: 100%;
-  padding: 0;
-  position: relative;
-  max-width: 100%;
+  .post.initial {
+    position relative
+    max-width 100%
 
-  .post-half {
-    bottom: 50%;
-    left: 0;
-    pad(0,1);
-    position: absolute;
-    width: 50%;
+    +above($mobile) {
+      height 100%
+      padding 0
 
-    &:nth-child(2) {
-      left: 50%;
+      .post-half {
+        bottom 50%
+        left 0
+        pad(0, 1)
+        position absolute
+        width 50%
+
+        &:nth-child(2) {
+          left 50%
+        }
+      }
+
+      h1 {
+        text-align right
+      }
+    }
+
+    +below($mobile) {
+      .post-half {
+        pad(1, 0)
+      }
+    }
+
+    h1, h5 {
+      margin 0
     }
   }
 
-  h1, h5 {
-    margin: 0;
+  .video {
+    width 100%
   }
 
-  h1 {
-    text-align: right;
+  .video {
+    background $b
+    border 1px solid rgba($w,.22)
+    height 0
+    padding-bottom (225/400)*100%
+    position relative
+
+    iframe {
+      height 100%
+      left 0
+      position absolute
+      top 0
+      width 100%
+    }
   }
-}
 
-.video {
-  width: 100%;
-}
+  .post {
+    pad(1, 1)
+    mgn(0, auto)
+    max-width $pwidth*1.62em
 
-.video {
-  background: $b;
-  border: 1px solid rgba($w,.22);
-  height: 0;
-  padding-bottom: (225/400)*100%;
-  position: relative;
-
-  iframe {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    +above($mobile) {
+      pad(4, 1)
+    }
   }
-}
 
-.post {
-  pad(4,1);
-  mgn(0,auto);
-  max-width: $pwidth*1.62em;
-}
+  .post-body {
+    mgn(0, auto)
+    max-width ($pwidth + $gut*2)*1em
+    position relative
+  }
 
-.post-body {
-  mgn(0,auto);
-  max-width: ($pwidth + $gut*2)*1em;
-  position: relative;
-}
+  h2, h3, p {
+    mgn(1, auto)
+    text-align center
+    word-spacing -.2em
+  }
 
-h2, h3, p {
-  mgn(1,auto);
-  text-align: center;
-  word-spacing: -.2em;
-}
+  h2 {
+    fs(mp(3))
+  }
 
-h2 {
-  fs(mp(3));
-}
+  h3 {
+    fs(mp(1))
+  }
 
-h3 {
-  fs(mp(1));
-}
-
-p {
-  fs(mp(-1));
+  p {
+    fs(mp(-1))
+  }
 }
 
 </style>

@@ -4,7 +4,7 @@
       ref="progress"
       class="progress"
       :style="{
-        backgroundColor: `#${ui}`,
+        backgroundColor: color,
         transform: `translate3d(${trackPosition * -100}%,0,0)`
       }"
     />
@@ -31,7 +31,7 @@ export default {
       'position'
     ]),
     ...mapState(useDiscoStore, [
-      'ui'
+      'color'
     ])
   },
 
@@ -59,13 +59,18 @@ export default {
 @import "../../assets/styl/_variables"
 
 .trackbar {
-  background rgba($b,.1)
+  background rgba($b, .1)
   height 1px
   left $gut * 1em
   right $gut * 1em
   overflow hidden
   position absolute
   top -1px
+
+  +above($mobile) {
+    left 5.8vh
+    right 5.8vh
+  }
 
   .progress {
     background $b

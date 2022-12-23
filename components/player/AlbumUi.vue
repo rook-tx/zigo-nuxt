@@ -7,7 +7,7 @@
       <div class="tracklist">
         <h3
           :style="{
-            color: `#${ui}`
+            color: color
           }"
           v-html="rdrAlbum.title"
         />
@@ -36,7 +36,7 @@ export default {
     ...mapState(useDiscoStore, [
       'album',
       'track',
-      'ui'
+      'color'
     ])
   },
 

@@ -78,7 +78,7 @@ export default {
 @import "../../assets/styl/_variables"
 
 .play-controls {
-  background-image linear-gradient(180deg, rgba($b, 0), rgba($b, .3))
+  background-image linear-gradient(180deg, rgba($b, 0), rgba($b, .25))
   bottom 0
   height 10%
   left 0
@@ -86,17 +86,13 @@ export default {
   position absolute
   right 0
   transition max-width 1s $easeInOutCubic
+  transition-property max-width, background-image
   z-index 5
-
-  +above($mobile) {
-    left 5.8vh
-    right 5.8vh
-  }
 
   &.short {
     +above($mobile) {
       background-image linear-gradient(180deg, rgba($b, 0), rgba($b, 0))
-      max-width 11.6*2vh
+      max-width 11.6*3vh
     }
   }
 }

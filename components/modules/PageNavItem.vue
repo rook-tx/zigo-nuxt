@@ -6,7 +6,7 @@
       :to="{ name: item.to }"
       :title="item.title"
       :style="{
-        color: `#{ui}`
+        color: color
       }"
       class="nav-link"
     >
@@ -25,7 +25,7 @@ export default {
       default: null
     },
 
-    ui: {
+    color: {
       type: String,
       default: null
     }
@@ -59,7 +59,7 @@ export default {
 		text-transform uppercase
 		fs(mp(-2))
 		line-height 10vh
-		
+
 		+below($mobile) {
 			padding 0 .75em
 		}

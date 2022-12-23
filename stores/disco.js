@@ -19,7 +19,8 @@ export const useDiscoStore = defineStore('disco', {
   }),
 
   getters: {
-    ui: (state) => state.obj.ui
+    ui: (state) => state.obj.ui,
+    color: (state) => `#${state.obj.ui}`
   },
 
   actions: {

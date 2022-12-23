@@ -25,25 +25,9 @@ import disco from '@/assets/disco.json'
 
 export default {
 
-  props: {
-    obj: {
-      type: Object,
-      default: () => ({
-        ui: null
-      })
-    }
-  },
-
   data() {
     return {
-      open: false,
-      color: '#fff',
       tracks: disco
-    }
-  },
-  watch: {
-    obj(obj) {
-      this.color = `#${obj.ui}`
     }
   },
 
@@ -51,16 +35,6 @@ export default {
     bgim(album) {
       const url = `/static/covers/${album}.jpg`
       return url
-    },
-
-    openNav() {
-      this.open = true
-      this.color = '#fff'
-    },
-
-    closeNav() {
-      this.open = false
-      this.color = `#${this.obj.ui}`
     }
   }
 }
@@ -73,30 +47,33 @@ export default {
 
 .square-nav
   +above($mobile)
-    height: 100%
-    left: 0
-    top: 0
-    position: absolute
-    width: 100%
+    height 100%
+    left 0
+    top 0
+    position absolute
+    width 100%
 
   +below($mobile)
-    padding: 15vh 0
+    padding 15vh 0
 
   h2
     color $b
     fs(mp(0))
     min-height 2 * 1.2em
     line-height 1.2
-    text-transform: uppercase
-    mgn(0,auto)
-    max-width: 12em
+    text-transform uppercase
+    mgn(0, auto)
+    max-width 12em
+
+    +above($mobile)
+      max-width 12em
 
     +below($mobile)
       color $w
-      mgn(0, 1, 2.5)
+      pad(0, 1)
 
   ol, li
-    display: block
+    display block
 
   .tihie
     h2
@@ -107,6 +84,7 @@ export default {
     +above($mobile)
       display flex
       height 100%
+      pad(0, .5)
       flex-wrap wrap
 
   .album-title
