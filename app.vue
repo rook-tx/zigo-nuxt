@@ -10,6 +10,8 @@
       :fade="obj.type === 'album' ? 0.8 : fade"
     />
 
+    <player-three-storm />
+
     <modules-logo-button />
 
     <app-page-nav />
