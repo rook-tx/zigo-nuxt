@@ -22,7 +22,7 @@ import {
   Object3D,
   TetrahedronGeometry,
   MeshPhysicalMaterial,
-  DoubleSide,
+  // DoubleSide,
   WebGLRenderer,
   Scene,
   PerspectiveCamera,
@@ -39,9 +39,10 @@ export default {
       }
     }
 
-    const diameter = 300
+    const diameter = 250
 
     return {
+      rate: 1,
       diameter,
       mouse,
       inited: false,
@@ -76,11 +77,6 @@ export default {
     }
   },
 
-  created() {
-    // this.$root.$on('momo', this.momo);
-    // this.$root.$on('resize', this.resize)
-  },
-
   mounted() {
     window.addEventListener('mousemove', this.momo, { passive: true })
 
@@ -97,8 +93,6 @@ export default {
 
   methods: {
     setupScene() {
-      // this.diameter = Math.min(this.winHeight, this.winWidth) * 0.5
-
       this.scene.fog = new FogExp2(this.fogColor, 0.0018)
 
       const clutter = new Object3D()
@@ -106,11 +100,11 @@ export default {
 
       this.rings = []
       // this.geometry = geo;
-      const geo = new TetrahedronGeometry(1)
+      const geo = new TetrahedronGeometry(0.5)
 
       const mat = new MeshPhysicalMaterial({
         // color: '#fff',
-        roughness: 0.25,
+        roughness: 0.5,
         metalness: 1,
         // side: DoubleSide,
         transparent: true,
@@ -189,28 +183,18 @@ export default {
     },
 
     update() {
-      // var i;
-      const time = performance.now() * (this.playing ? 0.00004 : 0.000004)
-
       this.scene.fog.color.setHex(this.fogColor)
 
-      // this.camera.position.x += (-this.mouse.pos.x - this.camera.position.x) * 0.02
-      // this.camera.position.y += (this.mouse.pos.y / 1.5 - this.camera.position.y) * 0.02
       this.camera.position.x += (this.mouse.pos.x - this.camera.position.x) * 0.02
-      this.camera.position.y += (this.mouse.pos.y - this.camera.position.y) * 0.02
+      this.camera.position.y -= (this.mouse.pos.y + this.camera.position.y) * 0.02
 
       this.camera.lookAt(this.scene.position)
 
-      // if (!this.playing) {
-      //   time = performance.now() * 0.000004
-      // }
+      const factor = this.playing ? 4 : 1
 
-      // for (i = 0; i < this.scene.children.length; i++) {
-      // 	var object = this.scene.children[i];
-      // 	if (object instanceof THREE.Points) {
-      // 		object.rotation.y = time * (i < 10 ? i + 1 : -(i + 1));
-      // 	}
-      // }
+      this.rate += (factor - this.rate) * 0.0005
+
+      const time = performance.now() * this.rate * 0.000008
 
       this.rings.forEach((r, i) => {
         r.rotation.y = time * (i < 10 ? i + 1 : -(i + 1))

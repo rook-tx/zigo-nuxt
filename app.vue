@@ -12,13 +12,13 @@
 
     <player-three-storm />
 
-    <modules-logo-button />
+    <modules-logo-button v-show="$route.name !== 'index'" />
 
     <app-page-nav />
 
     <div
       ref="content"
-      class="content"
+      :class="[ 'content', $route.name ]"
       @scroll.passive="handleScroll"
     >
       <nuxt-page
@@ -106,6 +106,10 @@ export default {
     -webkit-overflow-scrolling touch
     overflow-y scroll
     overflow-x hidden
+  }
+
+  &.index {
+    mix-blend-mode overlay
   }
 }
 
