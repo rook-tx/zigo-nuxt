@@ -8,15 +8,15 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "eslint": "^8.35.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-nuxt": "^4.0.0",
-    "nuxt": "^3.2.3",
-    "stylus": "^0.59.0"
+    "nuxt": "^3.9.0",
+    "stylus": "^0.62.0"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.7",
-    "pinia": "^2.0.32",
-    "smooth-scrollbar": "^8.8.1",
-    "three": "^0.150.1"
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.1.7",
+    "smooth-scrollbar": "^8.8.4",
+    "three": "^0.160.0"
   }
 }
