@@ -127,7 +127,7 @@ export default {
     fade: {
       immediate: true,
       handler(fade) {
-        this.opacity = fade * 0.75
+        this.opacity = fade
       }
     }
   },
@@ -223,7 +223,8 @@ export default {
     transition transform 2s $easeOutCubic
 
   .shade
-    background $b
+    background rgba(0,0,0,.75)
+    backdrop-filter blur(4px)
     opacity 0
     transform translate3d(0,0,0)
     z-index 1

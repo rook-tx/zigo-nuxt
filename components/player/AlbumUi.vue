@@ -5,12 +5,14 @@
       :class="[ 'badge', rdrAlbum.id ? rdrAlbum.id : '']"
     >
       <div class="tracklist">
-        <h3
-          :style="{
-            color: color
-          }"
-          v-html="rdrAlbum.title"
-        />
+        <nuxt-link :to="`/${rdrAlbum.slug}`">
+          <h3
+            :style="{
+              color: color
+            }"
+            v-html="rdrAlbum.title"
+          />
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -75,7 +77,7 @@ export default {
   left 0
   padding-left 5.8vh
   position absolute
-  z-index 4
+  z-index 6
 
   +below($mobile)
     display none

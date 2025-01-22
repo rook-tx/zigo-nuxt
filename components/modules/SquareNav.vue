@@ -72,20 +72,26 @@ export default {
       color $w
       pad(0, 1)
 
-  ol, li
-    display block
-
   .tihie
     h2
       font-family $franklin
       word-spacing normal
 
   .albums
+    display block
+
     +above($mobile)
       display flex
       height 100%
       pad(0, .5)
       flex-wrap wrap
+
+  .album
+    display block
+
+    +below($mobile)
+      max-width $let * 12rem
+      margin 0 auto
 
   .album-title
     text-transform uppercase

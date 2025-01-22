@@ -40,6 +40,7 @@ export default {
 @import "../../assets/styl/_variables"
 
 .page-nav {
+
 	.nav-item {
 		display inline-block
 		height 100%

@@ -118,6 +118,10 @@ export default {
     top 0
     z-index 5
 
+    +above($nano) {
+      padding-right $gut * .25rem
+    }
+
     +above($mobile) {
       padding-right 5.8vh
     }
@@ -130,7 +134,7 @@ export default {
   }
 
   .social-item {
-    +below($mobile) {
+    +below($nano) {
       display none
     }
   }

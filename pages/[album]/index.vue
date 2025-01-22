@@ -41,7 +41,7 @@
         >
           <a
             v-if="rdrAlbum.spotters"
-            :href="'//open.spotify.com/album/' + rdrAlbum.spotters"
+            :href="'https://open.spotify.com/album/' + rdrAlbum.spotters"
             :title="rdrAlbum.title + ' on Spotify'"
             target="_blank"
             rel="noopener"
@@ -50,7 +50,7 @@
           </a>
 
           <a
-            :href="'//wearezigo.bandcamp.com/album/' + rdrAlbum.slug"
+            :href="'https://wearezigo.bandcamp.com/album/' + rdrAlbum.slug"
             :title="rdrAlbum.title + ' on Bandcamp'"
             target="_blank"
             rel="noopener"
@@ -59,7 +59,7 @@
           </a>
 
           <a
-            :href="'//soundcloud.com/wearezigo/sets/' + rdrAlbum.slug"
+            :href="'https://soundcloud.com/wearezigo/sets/' + rdrAlbum.slug"
             :title="rdrAlbum.title + ' on Soundcloud'"
             target="_blank"
             rel="noopener"
@@ -74,7 +74,7 @@
         >
           <a
             v-if="rdrAlbum.tracks[0].spotters"
-            :href="'//open.spotify.com/album/' + rdrAlbum.tracks[0].spotters"
+            :href="'https://open.spotify.com/album/' + rdrAlbum.tracks[0].spotters"
             :title="rdrAlbum.tracks[0].title + ' on Spotify'"
             target="_blank"
             rel="noopener"
@@ -83,7 +83,7 @@
           </a>
 
           <a
-            :href="'//wearezigo.bandcamp.com/album/' + rdrAlbum.tracks[0].slug"
+            :href="'https://wearezigo.bandcamp.com/album/' + rdrAlbum.tracks[0].slug"
             :title="rdrAlbum.tracks[0].title + ' on Bandcamp'"
             target="_blank"
             rel="noopener"
@@ -92,7 +92,7 @@
           </a>
 
           <a
-            :href="'//soundcloud.com/wearezigo/' + rdrAlbum.tracks[0].slug.replace('-you', '')"
+            :href="'https://soundcloud.com/wearezigo/' + rdrAlbum.tracks[0].slug.replace('-you', '')"
             :title="rdrAlbum.tracks[0].title + ' on Soundcloud'"
             target="_blank"
             rel="noopener"
@@ -157,31 +157,38 @@ export default {
 @import "../../assets/styl/_variables"
 
 .album-page
-  +above($mobile)
+  +above($tablet)
     height 100%
 
-  +below($mobile)
+  +below($tablet)
     padding 15vh 0
 
   &, .sec-content
     +above($tablet)
       align-items center
       display flex
+      height 100%
       width 100%
 
+  .sec-content
+    +below($tablet)
+      max-width $gut * 14rem
+      margin 0 auto
+
   .artwork-wrap
-    +above($mobile)
+    +above($tablet)
       display flex
       justify-content flex-end
+      pad(0, 0, 0, 1)
       width 50%
 
-    +below($mobile)
-      pad(.5,1)
+    +below($tablet)
+      pad(.5,.5)
 
   .artwork
     border 1px solid rgba($w,.1)
 
-    +above($mobile)
+    +above($tablet)
       height 60vh
       width 60vh
 
@@ -189,9 +196,12 @@ export default {
       width 100%
 
   .tracklist
-    pad(.5,1)
+    pad(.5,.5)
 
-    +above($mobile)
+    +above($tablet)
+      max-height 100%
+      padding 10vh 0 10vh $gut * 1rem
+      overflow auto
       width 50%
 
     h1
@@ -199,7 +209,7 @@ export default {
       margin-top 0
       text-transform uppercase
 
-      +below($mobile)
+      +below($tablet)
         fs(mp(2))
         text-align center
 
@@ -228,7 +238,7 @@ export default {
     svg
       display inline-block
       height 3vh
-      mgn(1,0)
+      mgn(1,.5,1, 0)
       overflow visible
       vertical-align middle
       width 3vh

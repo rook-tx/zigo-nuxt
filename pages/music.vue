@@ -13,7 +13,7 @@
 @import "../assets/styl/_variables"
 
 .music.page {
-	+above($tablet) {
+	+above($mobile) {
 		height 100%
 	}
 
