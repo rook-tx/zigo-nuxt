@@ -200,6 +200,7 @@ export default {
   .over
     opacity .4
     overflow hidden
+    z-index 1
 
     @supports (mix-blend-mode difference)
       mix-blend-mode overlay
@@ -223,8 +224,8 @@ export default {
     transition transform 2s $easeOutCubic
 
   .shade
-    background rgba(0,0,0,.75)
-    backdrop-filter blur(4px)
+    background rgba(0,0,0,.65)
+    backdrop-filter blur(3px)
     opacity 0
     transform translate3d(0,0,0)
     z-index 1
