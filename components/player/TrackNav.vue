@@ -16,7 +16,7 @@
           :key="album.id"
           :class="'album ' + album.id"
           :style="{
-            color: color
+            color: fade ? '#e6e6e6' : color
           }"
         >
           <div class="artwork" />
@@ -28,7 +28,7 @@
             class="track"
           >
             <nuxt-link
-              :to="'/' + album.slug + '/' + track.slug"
+              :to="`/${album.slug}/${track.slug}`"
               class="title"
             >
               <span v-html="track.title" />
@@ -71,7 +71,8 @@ export default {
     ]),
     ...mapState(useDiscoStore, [
       'ui',
-      'idx'
+      'idx',
+      'fade'
     ]),
 
     trackHeight() {
@@ -87,14 +88,12 @@ export default {
     },
 
     ui: {
-      // immediate: true,
       handler(ui) {
         this.updateTrack(ui)
       }
     },
 
     idx: {
-      // immediate: true,
       handler(idx) {
         this.updateScroll(idx)
       }

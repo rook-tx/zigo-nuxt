@@ -16,6 +16,7 @@ export const useDiscoStore = defineStore('disco', {
       bgColor: '000',
       color: 'fff'
     },
+    fade: false
   }),
 
   getters: {
@@ -24,6 +25,10 @@ export const useDiscoStore = defineStore('disco', {
   },
 
   actions: {
+    updateFade(fade) {
+      this.fade = fade
+    },
+
     next(idx = this.idx) {
       this.pag(idx + 1)
     },

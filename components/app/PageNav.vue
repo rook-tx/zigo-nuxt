@@ -5,7 +5,7 @@
         v-for="route in routes"
         :key="route.title"
         :item="route"
-        :color="color"
+        :color="fade ? '#e6e6e6' : color"
       />
 
       <li
@@ -22,7 +22,7 @@
         >
           <component
             :is="social.key"
-            :fill="color"
+            :fill="fade ? '#e6e6e6' : color"
             focusable="false"
           />
         </a>
@@ -93,7 +93,8 @@ export default {
 
   computed: {
     ...mapState(useDiscoStore, [
-      'color'
+      'color',
+      'fade'
     ])
   },
 
@@ -127,7 +128,8 @@ export default {
     }
   }
 
-  li {
+  .nav-item,
+  .social-item {
     display inline-block
     height 100%
     vertical-align top
@@ -147,6 +149,7 @@ export default {
   svg {
     display block
     height 2vh
+    transition fill .3s
     width 2vh
   }
 

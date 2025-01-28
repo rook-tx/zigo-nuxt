@@ -8,7 +8,7 @@
         <nuxt-link :to="`/${rdrAlbum.slug}`">
           <h3
             :style="{
-              color: color
+              color: fade ? '#e6e6e6' : color
             }"
             v-html="rdrAlbum.title"
           />
@@ -29,6 +29,7 @@ export default {
 
   data() {
     return {
+      rdrAlbum: {},
       loading: true,
       disco
     }
@@ -38,7 +39,8 @@ export default {
     ...mapState(useDiscoStore, [
       'album',
       'track',
-      'color'
+      'color',
+      'fade'
     ])
   },
 
@@ -103,6 +105,7 @@ export default {
     display inline-block
     fs(mp(0))
     text-transform uppercase
+    transition color .3s
     vertical-align middle
 
   .network

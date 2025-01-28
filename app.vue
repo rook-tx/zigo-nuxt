@@ -10,7 +10,7 @@
       :fade="obj.type === 'album' ? 0.8 : fade"
     />
 
-    <player-three-storm />
+    <player-three-storm v-if="!mobile" />
 
     <modules-logo-button v-show="$route.name !== 'index'" />
 
@@ -58,6 +58,7 @@ export default {
 
   computed: {
     ...mapState(useDeviceStore, [
+      'mobile',
       'winHeight'
     ]),
     ...mapState(useDiscoStore, [
@@ -68,7 +69,14 @@ export default {
   watch: {
     $route: {
       handler(route) {
+        this.$refs.content.scrollTop = 0
         this.updateTrack(route.params)
+      }
+    },
+
+    fade: {
+      handler(fade) {
+        this.updateFade(fade === 1)
       }
     }
   },
@@ -79,6 +87,7 @@ export default {
 
   methods: {
     ...mapActions(useDiscoStore, [
+      'updateFade',
       'updateTrack'
     ]),
 

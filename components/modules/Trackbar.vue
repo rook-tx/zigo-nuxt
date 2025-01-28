@@ -21,7 +21,7 @@ export default {
 
   data() {
     return {
-      trackPosition: 0
+      trackPosition: 1
     }
   },
 

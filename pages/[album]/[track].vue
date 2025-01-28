@@ -3,8 +3,16 @@
     <div
       v-if="rdrTrack.lyrics"
       class="lyrics"
-      v-html="rdrTrack.lyrics"
-    />
+    >
+      <div
+        v-html="rdrTrack.lyrics"
+      />
+      <div
+        v-if="credits"
+        class="credits"
+        v-html="credits"
+      />
+    </div>
   </section>
 </template>
 
@@ -27,12 +35,10 @@ export default {
   },
 
   data() {
-    const rdrTrack = {}
-
     return {
-      loading: true,
       disco,
-      rdrTrack
+      rdrTrack: {},
+      credits: ''
     }
   },
 
@@ -42,10 +48,10 @@ export default {
         for (const track in this.disco[album].tracks) {
           if (this.$route.params.track === this.disco[album].tracks[track].slug) {
             this.rdrTrack = this.disco[album].tracks[track]
-            this.loading = false
           }
         }
         this.rdrTrack.album = this.disco[album].id
+        this.credits = this.rdrTrack.credits || this.disco[album].credits
       }
     }
   },
@@ -81,5 +87,16 @@ export default {
 
     p
       max-width 100%
+
+  .credits
+    border-top .5px solid
+    opacity .6
+    margin-top 25vh
+
+    p
+      fs(mp(-1))
+      line-height $let * .5rem
+      mgn(.5, 0)
+      max-width 27em
 
 </style>

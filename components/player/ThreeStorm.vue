@@ -22,7 +22,6 @@ import {
   Object3D,
   TetrahedronGeometry,
   MeshPhysicalMaterial,
-  // DoubleSide,
   WebGLRenderer,
   Scene,
   PerspectiveCamera,

@@ -78,9 +78,8 @@ export default {
 @import "../../assets/styl/_variables"
 
 .play-controls {
-  // background-image linear-gradient(180deg, rgba($b, 0), rgba($b, .25))
   background rgba(0,0,0,.01)
-  backdrop-filter blur(2px)
+  backdrop-filter blur(1px)
   bottom 0
   height 10%
   left 0
@@ -93,7 +92,6 @@ export default {
 
   &.short {
     +above($mobile) {
-      // background-image linear-gradient(180deg, rgba($b, 0), rgba($b, 0))
       max-width 11.6*3vh
     }
   }

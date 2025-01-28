@@ -87,11 +87,6 @@ export default {
       flex-wrap wrap
 
   .album
-    display block
-
-    +below($mobile)
-      max-width $let * 12rem
-      margin 0 auto
 
   .album-title
     text-transform uppercase
@@ -109,11 +104,9 @@ export default {
   .side-title, .track
     pad(0,.5)
 
-  // ----------
-  // Themes
-  // ----------
-
   .album
+    display block
+
     a
       display flex
       flex-direction column-reverse
@@ -125,7 +118,14 @@ export default {
       align-items center
       display flex
       height 100%
+      width 50%
+
+    @media screen and (min-width: $mobile) and (min-aspect-ratio: 1)
       width 25%
+
+    +below($mobile)
+      max-width $let * 12rem
+      margin 0 auto
 
   .artwork-wrap
     background-repeat no-repeat

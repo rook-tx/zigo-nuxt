@@ -1,7 +1,5 @@
 <template>
-  <li
-    class="nav-item"
-  >
+  <li class="nav-item">
     <nuxt-link
       :to="{ name: item.to }"
       :title="item.title"
@@ -40,7 +38,6 @@ export default {
 @import "../../assets/styl/_variables"
 
 .page-nav {
-
 	.nav-item {
 		display inline-block
 		height 100%
@@ -60,6 +57,7 @@ export default {
 		text-transform uppercase
 		fs(mp(-2))
 		line-height 10vh
+		transition color .3s
 
 		+below($mobile) {
 			padding 0 .75em

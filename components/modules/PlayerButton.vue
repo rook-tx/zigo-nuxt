@@ -8,7 +8,7 @@
       viewBox="0 0 116 100"
       width="116"
       height="100"
-      :fill="fill"
+      :fill="fade ? '#e6e6e6' : `#${ui}`"
       focusable="false"
     >
 
@@ -73,27 +73,18 @@ export default {
   data() {
     return {
       buttonDown: false,
-      fill: `#${this.ui}`
     }
   },
 
   computed: {
     ...mapState(useDiscoStore, [
-      'ui'
+      'ui',
+      'fade'
     ]),
     ...mapState(usePlayerStore, [
       'playing'
     ])
   },
-
-  watch: {
-    ui: {
-      immediate: true,
-      handler(ui) {
-        this.fill = `#${ui}`
-      }
-    }
-  }
 }
 
 </script>
@@ -116,6 +107,7 @@ export default {
 
   svg {
     display: block;
+    transition: fill .3s;
     height: 100%;
     width: 100%;
   }
@@ -133,7 +125,7 @@ export default {
   }
 
   #play, #pause {
-    transition: all .3s $easeInOutExpo;
+    transition: opacity .3s $easeInOutExpo;
   }
 
   #play {
