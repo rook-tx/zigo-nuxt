@@ -5,7 +5,7 @@
         v-for="route in routes"
         :key="route.title"
         :item="route"
-        :color="fade ? '#e6e6e6' : color"
+        :color="fade ? '#ccc' : color"
       />
 
       <li
@@ -22,7 +22,7 @@
         >
           <component
             :is="social.key"
-            :fill="fade ? '#e6e6e6' : color"
+            :fill="fade ? '#ccc' : color"
             focusable="false"
           />
         </a>

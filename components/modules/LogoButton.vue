@@ -5,7 +5,7 @@
       title="HOME"
     >
       <svg-logo
-        :fill="fade ? '#e6e6e6' : `#${ui}`"
+        :fill="fade ? '#ccc' : `#${ui}`"
       />
     </nuxt-link>
   </div>

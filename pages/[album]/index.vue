@@ -7,7 +7,7 @@
       <div class="artwork-wrap">
         <div class="artwork">
           <img
-            :src="src()"
+            :src="src"
             :alt="rdrAlbum.title"
           >
         </div>
@@ -26,7 +26,7 @@
             class="track"
           >
             <nuxt-link
-              :to="'/' + rdrAlbum.slug + '/' + track.slug"
+              :to="`/${rdrAlbum.slug}/${track.slug}`"
               class="snav-a"
               :title="track.title"
             >
@@ -46,7 +46,7 @@
             target="_blank"
             rel="noopener"
           >
-            <svg-spotify fill="#fff" />
+            <svg-spotify fill="#e6e6e6" />
           </a>
 
           <a
@@ -55,7 +55,7 @@
             target="_blank"
             rel="noopener"
           >
-            <svg-bandcamp fill="#fff" />
+            <svg-bandcamp fill="#e6e6e6" />
           </a>
 
           <a
@@ -64,7 +64,7 @@
             target="_blank"
             rel="noopener"
           >
-            <svg-soundcloud fill="#fff" />
+            <svg-soundcloud fill="#e6e6e6" />
           </a>
         </div>
 
@@ -79,7 +79,7 @@
             target="_blank"
             rel="noopener"
           >
-            <svg-spotify fill="#fff" />
+            <svg-spotify fill="#e6e6e6" />
           </a>
 
           <a
@@ -88,7 +88,7 @@
             target="_blank"
             rel="noopener"
           >
-            <svg-bandcamp fill="#fff" />
+            <svg-bandcamp fill="#e6e6e6" />
           </a>
 
           <a
@@ -97,7 +97,7 @@
             target="_blank"
             rel="noopener"
           >
-            <svg-soundcloud fill="#fff" />
+            <svg-soundcloud fill="#e6e6e6" />
           </a>
         </div>
       </div>
@@ -125,27 +125,19 @@ export default {
     }
   },
 
+  computed: {
+    src() {
+      const url = `/static/covers/${this.rdrAlbum.id}.jpg`
+      return url
+    }
+  },
+
   mounted() {
     for (const album in this.disco) {
       if (this.$route.params.album === this.disco[album].slug) {
         this.rdrAlbum = this.disco[album]
         this.loading = false
       }
-    }
-  },
-
-  methods: {
-    src() {
-      const url = `/static/covers/${this.rdrAlbum.id}.jpg`
-      return url
-    },
-
-    type() {
-      let size = 'contain'
-      if (this.rdrAlbum.id === 'fox' || this.rdrAlbum.id === 'tihie') {
-        size = 'cover'
-      }
-      return size
     }
   }
 }

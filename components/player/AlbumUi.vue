@@ -8,7 +8,7 @@
         <nuxt-link :to="`/${rdrAlbum.slug}`">
           <h3
             :style="{
-              color: fade ? '#e6e6e6' : color
+              color: fade ? '#ccc' : color
             }"
             v-html="rdrAlbum.title"
           />

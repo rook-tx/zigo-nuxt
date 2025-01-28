@@ -16,7 +16,7 @@
           :key="album.id"
           :class="'album ' + album.id"
           :style="{
-            color: fade ? '#e6e6e6' : color
+            color: fade ? '#ccc' : color
           }"
         >
           <div class="artwork" />

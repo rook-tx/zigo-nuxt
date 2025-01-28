@@ -8,7 +8,7 @@
       viewBox="0 0 116 100"
       width="116"
       height="100"
-      :fill="fade ? '#e6e6e6' : `#${ui}`"
+      :fill="fade ? '#ccc' : `#${ui}`"
       focusable="false"
     >
 

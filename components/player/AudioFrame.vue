@@ -45,8 +45,9 @@ export default {
     track: {
       handler() {
         this.$nextTick(() => {
-          this.$refs.audio.play()
-          this.play()
+          this.$refs.audio.play().then(() => {
+            this.play()
+          })
         })
       }
     },
@@ -72,32 +73,32 @@ export default {
       'next'
     ]),
 
-    loadstart(e) {
-      console.log(e)
+    loadstart() {
+      // console.log(e)
     },
 
     progress(e) {
       this.playreport(e)
     },
 
-    durationchange(e) {
-      console.log(e)
+    durationchange() {
+      // console.log(e)
     },
 
-    loadedmetadata(e) {
-      console.log(e)
+    loadedmetadata() {
+      // console.log(e)
     },
 
-    loadeddata(e) {
-      console.log(e)
+    loadeddata() {
+      // console.log(e)
     },
 
-    canplay(e) {
-      console.log(e)
+    canplay() {
+      // console.log(e)
     },
 
-    canplaythrough(e) {
-      console.log(e)
+    canplaythrough() {
+      // console.log(e)
     },
 
     timeupdate(e) {
