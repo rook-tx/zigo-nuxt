@@ -15,11 +15,11 @@
     </div>
 
     <div class="post">
-      <img
+      <nuxt-img
         src="/static/band/band-wood.jpg"
         alt="ZIGO"
         class="full-img"
-      >
+      />
       <div class="post-body">
         <p>What started as a crazy idea in an attic space in September 2005 quickly became something beard-strokingly serious for four young men with delusions of grandeur. From the sweaty depths of boys' bedrooms flowed a unique sound, a blend of their love for artists ranging from Radiohead to Robert Johnson and Focus to Foals, which they collectively filed under the name <strong>ZIGO.</strong></p>
         <p>
@@ -52,11 +52,11 @@
 
     <div class="post">
       <div class="post-body">
-        <img
+        <nuxt-img
           src="/static/band/tom.png"
           alt="Tom Corbett"
           class="band-prof"
-        >
+        />
         <h3><strong>Tom Corbett</strong> shouts.</h3>
         <p>Tom was raised on a balanced diet of good old-fashioned rhythm n' blues and soul/disco, but decided soon after starting his university course that he would have to create a much more "alternative" persona for himself, so inhaled all kinds of math, hardcore and everything underground like as much tequila in the eyeball. To this end, he fulfils the oxymoronic cliché of 'confident frontman with underlying identity issues'.</p>
         <p>As well as offering his guitar and keyboard "skills"; to the band, Tom enjoys long walks on the beach. Like <em>really </em>long. Like <em>bring a tent</em> long. <em>We gonna talk feelin's.</em></p>
@@ -72,11 +72,11 @@
 
     <div class="post">
       <div class="post-body">
-        <img
+        <nuxt-img
           src="/static/band/james.png"
           alt="James FitzGerald"
           class="band-prof"
-        >
+        />
         <h3><strong>James FitzGerald</strong> rumbles.</h3>
         <p>James is the talent. Composer of countless critically-acclaimed symphonies, as well as being the brains behind Lady Gaga, ZIGO allows him to rest on his musical laurels whilst smugly funking away in the corner of the stage. That knowing smile? It's because he's going home to his solid gold bath thanks to a little tune you may have heard called <em>Umbrella</em>.</p>
         <p>During his time at Reading University, he attempted to subtly educate the unwashed masses via his multi-award-winning radio program The Yearbook. He maintains a much quieter profile in his new position of almost-don at Oxford University, which we can only assume means he is building up to the mother of all pun-chlines.</p>
@@ -92,11 +92,11 @@
 
     <div class="post">
       <div class="post-body">
-        <img
+        <nuxt-img
           src="/static/band/will.png"
           alt="Will Hayes"
           class="band-prof"
-        >
+        />
         <h3><strong>Will Hayes</strong> hits.</h3>
         <p>Will, thanks to a hilarious séance incident back in '93, actually channels the spirit of John Bonham, via the mind of Vic Reeves, out through his magic drummin' elbows. Still bitter about ZIGO's move from his own POP Studios to those of the mighty Blizzard Records, he's in the process of converting his History degree to various law certificates - with the sole aim of "pulling a Roger Waters" on the rest of the band.</p>
         <p>He also likes yodelling in songs, and smashing wing mirrors off cars. Who knew?</p>
@@ -105,11 +105,11 @@
 
     <div class="post">
       <div class="post-body">
-        <img
+        <nuxt-img
           src="/static/band/ian.png"
           alt="Ian Iliopoulos"
           class="band-prof"
-        >
+        />
         <h3><strong>Ian Iliopoulos</strong> twangs.</h3>
         <p>Ian has not been seen since he boarded a London&ndash;bound train earlier this year, saying only that he was "doing law". We pray for his safe return.</p>
       </div>

@@ -104,12 +104,9 @@ export default {
 
 .content {
   height 100%
-  position absolute
-  top 0
-  left 0
+  position relative
   overflow-y auto
   overflow-x hidden
-  transition mix-blend-mode 1s 1s
   z-index 1
 
   +below($tablet) {

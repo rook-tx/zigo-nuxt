@@ -9,12 +9,10 @@
         <nuxt-link :to="`/${album.slug}`">
           <h2 v-html="album.title" />
           <div class="artwork-wrap">
-            <div class="artwork">
-              <img
-                :src="bgim(album.id)"
-                :alt="album.title"
-              >
-            </div>
+            <nuxt-img
+              :src="bgim(album.id)"
+              :alt="album.title"
+            />
           </div>
         </nuxt-link>
       </li>
@@ -132,6 +130,9 @@ export default {
 
     +below($mobile)
       pad(.5,1)
+
+    img
+      width 100%
 
   .persuasive-single
     .track

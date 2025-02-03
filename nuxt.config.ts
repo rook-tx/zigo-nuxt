@@ -7,10 +7,14 @@ export default defineNuxtConfig({ // eslint-disable-line no-undef
         lang: 'en'
       },
       title: 'Home',
-      titleTemplate: '%s / ZIGO',
+      titleTemplate: '%s %separator %siteName',
+      templateParams: {
+        siteName: 'ZIGO',
+        separator: '/',
+      },
       meta: [
         { name: 'format-detection', content: 'telephone=no' },
-        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
         { hid: 'description', name: 'description', content: 'We are craftfully creating diverse, progressive, experiences.' }
       ],
@@ -44,7 +48,8 @@ export default defineNuxtConfig({ // eslint-disable-line no-undef
   ],
 
   modules: [
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxt/image',
   ],
 
   compatibilityDate: '2025-01-22'

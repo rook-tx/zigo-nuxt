@@ -64,6 +64,10 @@ export default {
 
     fogColor() {
       return `#${this.obj.color ?? '000000'}`
+    },
+
+    factor() {
+      return this.playing ? 4 : 1
     }
   },
 
@@ -189,9 +193,7 @@ export default {
 
       this.camera.lookAt(this.scene.position)
 
-      const factor = this.playing ? 4 : 1
-
-      this.rate += (factor - this.rate) * 0.0005
+      this.rate += (this.factor - this.rate) * 0.0005
 
       const time = performance.now() * this.rate * 0.000008
 

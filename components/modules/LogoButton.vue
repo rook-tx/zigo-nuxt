@@ -2,11 +2,19 @@
   <div class="logo">
     <nuxt-link
       to="/"
-      title="HOME"
+      title="Home"
     >
-      <svg-logo
-        :fill="fade ? '#ccc' : `#${ui}`"
-      />
+      <transition>
+        <nuxt-img
+          v-if="album === 'this-is-how-it-ends'"
+          src="/static/logo/zigo-white.png"
+          alt="ZIGO"
+        />
+        <svg-logo
+          v-else
+          :fill="fade ? '#ccc' : `#${ui}`"
+        />
+      </transition>
     </nuxt-link>
   </div>
 </template>
@@ -19,6 +27,7 @@ import { useDiscoStore } from '@/stores/disco'
 export default {
   computed: {
     ...mapState(useDiscoStore, [
+      'album',
       'ui',
       'fade'
     ])

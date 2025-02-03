@@ -1,15 +1,14 @@
 <template>
   <section class="album-page">
     <div
-      v-if="!loading"
       :class="[ 'sec-content', rdrAlbum.id ]"
     >
       <div class="artwork-wrap">
         <div class="artwork">
-          <img
+          <nuxt-img
             :src="src"
             :alt="rdrAlbum.title"
-          >
+          />
         </div>
       </div>
 
@@ -111,39 +110,33 @@
 
 import disco from '@/assets/disco.json'
 import { mapState } from 'pinia'
-import { useDiscoStore } from '#imports'
+import { useDiscoStore } from '@/stores/disco'
 
 export default {
 
-  props: {
-    album: {
-      type: String,
-      default: ''
-    }
-  },
-
-  data() {
+  head() {
     return {
-      loading: true,
-      disco
+      title: this.rdrAlbum?.title || ''
     }
   },
 
   computed: {
     ...mapState(useDiscoStore, [ 'track' ]),
+    rdrAlbum() {
+      for (const album in disco) {
+        if (this.$route.params.album === disco[album].slug) {
+          return disco[album]
+        }
+      }
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Page Not Found'
+      })
+    },
     src() {
       const url = `/static/covers/${this.rdrAlbum.id}.jpg`
       return url
-    }
-  },
-
-  mounted() {
-    for (const album in this.disco) {
-      if (this.$route.params.album === this.disco[album].slug) {
-        this.rdrAlbum = this.disco[album]
-        this.loading = false
-      }
-    }
+    },
   }
 }
 
@@ -186,8 +179,7 @@ export default {
     border 1px solid rgba($w,.1)
 
     +above($tablet)
-      height 60vh
-      width 60vh
+      flex-basis 60vh
 
     img
       width 100%

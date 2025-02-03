@@ -32,8 +32,8 @@
     transition fill .6s
   }
 
-  &.page-enter-to,
-  &.page-leave-from {
+  &.page-enter-from,
+  &.page-leave-to {
     opacity 0
   }
 
