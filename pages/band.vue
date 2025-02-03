@@ -1,3 +1,9 @@
+<script setup>
+useHead({
+  title: 'Band'
+})
+</script>
+
 <template>
   <main class="about page">
     <div class="post initial">

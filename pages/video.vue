@@ -1,3 +1,9 @@
+<script setup>
+useHead({
+  title: 'Video'
+})
+</script>
+
 <template>
   <main class="video-page">
     <div class="post initial">
@@ -192,6 +198,7 @@
 
   p {
     fs(mp(-1))
+    mgn(.5, auto)
   }
 
   &.page-enter-from,

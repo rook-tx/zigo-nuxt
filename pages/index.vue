@@ -20,8 +20,10 @@
     fill $b
     margin auto
 
-    &:hover {
-      fill $w
+    @media (hover:hover) {
+      &:hover {
+        fill $w
+      }
     }
   }
 

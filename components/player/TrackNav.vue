@@ -1,22 +1,20 @@
 <template>
-  <nav :class="[ 'track-nav', open ? ' open' : '' ]">
+  <nav
+    :class="['track-nav', open ? ' open' : '']"
+    :style="{
+      width: `${winWidth}px`,
+    }"
+  >
     <div class="overlay" />
 
-    <div
-      ref="scroll"
-      class="scroll"
-    >
-      <div
-        ref="albums"
-        class="albums"
-        @click="closeNav"
-      >
+    <div ref="scroll" class="scroll">
+      <div ref="albums" class="albums" @click="closeNav">
         <ol
           v-for="album in tracks"
           :key="album.id"
           :class="'album ' + album.id"
           :style="{
-            color: fade ? '#ccc' : color
+            color: fade ? '#ccc' : color,
           }"
         >
           <div class="artwork" />
@@ -27,10 +25,7 @@
             ref="tracks"
             class="track"
           >
-            <nuxt-link
-              :to="`/${album.slug}/${track.slug}`"
-              class="title"
-            >
+            <nuxt-link :to="`/${album.slug}/${track.slug}`" class="title">
               <span v-html="track.title" />
             </nuxt-link>
           </li>
@@ -38,15 +33,11 @@
       </div>
     </div>
 
-    <div
-      class="menu-cover"
-      @click="openNav"
-    />
+    <div class="menu-cover" @click="openNav" />
   </nav>
 </template>
 
 <script>
-
 import Scrollbar from 'smooth-scrollbar'
 
 import { mapState } from 'pinia'
@@ -56,48 +47,41 @@ import { useDeviceStore } from '@/stores/device'
 import disco from '@/assets/disco.json'
 
 export default {
-
   data() {
     return {
       open: false,
       color: '#fff',
-      tracks: disco
+      tracks: disco,
     }
   },
 
   computed: {
-    ...mapState(useDeviceStore, [
-      'winHeight'
-    ]),
-    ...mapState(useDiscoStore, [
-      'ui',
-      'idx',
-      'fade'
-    ]),
+    ...mapState(useDeviceStore, ['winWidth', 'winHeight']),
+    ...mapState(useDiscoStore, ['ui', 'idx', 'fade']),
 
     trackHeight() {
       return this.winHeight / 10
-    }
+    },
   },
 
   watch: {
     winHeight: {
       handler() {
         this.resize()
-      }
+      },
     },
 
     ui: {
       handler(ui) {
         this.updateTrack(ui)
-      }
+      },
     },
 
     idx: {
       handler(idx) {
         this.updateScroll(idx)
-      }
-    }
+      },
+    },
   },
 
   mounted() {
@@ -150,10 +134,9 @@ export default {
 
         this.updateScroll(this.idx)
       }
-    }
-  }
+    },
+  },
 }
-
 </script>
 
 <style lang="stylus">
@@ -162,7 +145,7 @@ export default {
 
 .track-nav {
 	background rgba($b, .001)
-	backdrop-filter blur(0px)
+	backdrop-filter blur(1px)
 	clip-path polygon(0% 80%, 100% 80%, 100% 90%, 0% 90%)
 	bottom 0
 	height 100%
@@ -174,6 +157,10 @@ export default {
 	transition all 1s $easeInOutCubic
 	width 100%
 	z-index 5
+
+	@media screen and (min-aspect-ratio: 1) {
+		backdrop-filter blur(0px)
+	}
 
 	&.open {
 		background rgba($b, .8)
@@ -242,8 +229,10 @@ export default {
 		transition background .3s
 		white-space nowrap
 
-		&:hover {
-			background rgba($w,.1)
+		@media (hover:hover) {
+			&:hover {
+				background rgba($w,.1)
+			}
 		}
 	}
 
@@ -293,8 +282,10 @@ export default {
 		right 0
 		z-index 3
 
-		&:hover {
-			opacity .1
+		@media (hover:hover) {
+			&:hover {
+				opacity .1
+			}
 		}
 	}
 
@@ -317,5 +308,4 @@ export default {
 		}
 	}
 }
-
 </style>

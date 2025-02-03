@@ -118,9 +118,10 @@ export default {
     right 0
     top 0
     z-index 5
+    padding-right $gut * .25rem
 
     +above($nano) {
-      padding-right $gut * .25rem
+      padding-right $gut * .5rem
     }
 
     +above($mobile) {
@@ -133,6 +134,12 @@ export default {
     display inline-block
     height 100%
     vertical-align top
+  }
+
+  .nav-item {
+    + .social-item {
+      margin-left 1vh
+    }
   }
 
   .social-item {
