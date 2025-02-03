@@ -9,6 +9,7 @@
           v-if="album === 'this-is-how-it-ends'"
           src="/static/logo/zigo-white.png"
           alt="ZIGO"
+          sizes="108px"
         />
         <svg-logo
           v-else

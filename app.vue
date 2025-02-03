@@ -1,14 +1,8 @@
 <template>
-  <div
-    :class="[
-      'sec', 'player'
-    ]"
-  >
+  <div :class="['sec', 'player']">
     <ui-sniffer />
 
-    <player-background
-      :fade="obj.type === 'album' ? 0.8 : fade"
-    />
+    <player-background :fade="obj.type === 'album' ? 0.8 : fade" />
 
     <player-three-storm v-if="!mobile" />
 
@@ -18,7 +12,7 @@
 
     <div
       ref="content"
-      :class="[ 'content', $route.name ]"
+      :class="['content', $route.name]"
       @scroll.passive="handleScroll"
     >
       <nuxt-page />
@@ -28,55 +22,44 @@
       :type="$route.name === 'video' || $route.name === 'band' ? 'short' : ''"
     />
 
-    <player-track-nav
-      v-if="$route.name === 'album-track'"
-    />
+    <player-track-nav v-if="$route.name === 'album-track'" />
 
-    <player-album-ui
-      v-if="$route.name === 'album-track'"
-    />
+    <player-album-ui v-if="$route.name === 'album-track'" />
 
     <player-audio-frame />
   </div>
 </template>
 
 <script>
-
 import { mapState, mapActions } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
 import { useDeviceStore } from '@/stores/device'
 
 export default {
-
   data() {
     return {
-      fade: 0
+      fade: 0,
     }
   },
 
   computed: {
-    ...mapState(useDeviceStore, [
-      'mobile',
-      'winHeight'
-    ]),
-    ...mapState(useDiscoStore, [
-      'obj'
-    ])
+    ...mapState(useDeviceStore, ['mobile', 'winHeight']),
+    ...mapState(useDiscoStore, ['obj']),
   },
 
   watch: {
     $route: {
       handler(route) {
-        this.$refs.content.scrollTop = 0
         this.updateTrack(route.params)
-      }
+        this.$refs.content.scrollTo({ top: 0, behavior: 'smooth' })
+      },
     },
 
     fade: {
       handler(fade) {
         this.updateFade(fade === 1)
-      }
-    }
+      },
+    },
   },
 
   mounted() {
@@ -84,18 +67,14 @@ export default {
   },
 
   methods: {
-    ...mapActions(useDiscoStore, [
-      'updateFade',
-      'updateTrack'
-    ]),
+    ...mapActions(useDiscoStore, ['updateFade', 'updateTrack']),
 
     handleScroll(e) {
       const fade = e.target.scrollTop / (this.winHeight / 2)
       this.fade = Math.min(1, fade)
-    }
-  }
+    },
+  },
 }
-
 </script>
 
 <style lang="stylus">
@@ -123,8 +102,6 @@ export default {
 .page,
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 1s;
+  transition: opacity .9s;
 }
-
 </style>
-

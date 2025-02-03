@@ -1,75 +1,39 @@
+<script setup>
+import disco from "@/assets/disco.json"
+const route = useRoute()
+
+const rdrTrack = computed(() => {
+  for (const album in disco) {
+    if (route.params.album === disco[album].slug) {
+      for (const track in disco[album].tracks) {
+        if (route.params.track === disco[album].tracks[track].slug) {
+          return {
+            ...disco[album].tracks[track],
+            album: disco[album].id,
+          }
+        }
+      }
+    }
+  }
+})
+
+const credits = computed(() => {
+  return rdrTrack.value.credits || disco[rdrTrack.value.album].credits
+})
+
+useHead({
+  title: rdrTrack.value.title,
+})
+</script>
+
 <template>
   <section class="track-page">
-    <div
-      v-if="rdrTrack.lyrics"
-      class="lyrics"
-    >
-      <div
-        v-html="rdrTrack.lyrics"
-      />
-      <div
-        v-if="credits"
-        class="credits"
-        v-html="credits"
-      />
+    <div v-if="rdrTrack.lyrics" class="lyrics">
+      <div v-html="rdrTrack.lyrics" />
+      <div v-if="credits" class="credits" v-html="credits" />
     </div>
   </section>
 </template>
-
-<script>
-
-import disco from '@/assets/disco.json'
-
-export default {
-
-  props: {
-    album: {
-      type: String,
-      default: ''
-    },
-
-    track: {
-      type: String,
-      default: ''
-    }
-  },
-
-  data() {
-    return {
-      disco,
-      rdrTrack: {},
-      credits: ''
-    }
-  },
-
-  mounted() {
-    for (const album in this.disco) {
-      if (this.$route.params.album === this.disco[album].slug) {
-        for (const track in this.disco[album].tracks) {
-          if (this.$route.params.track === this.disco[album].tracks[track].slug) {
-            this.rdrTrack = this.disco[album].tracks[track]
-          }
-        }
-        this.rdrTrack.album = this.disco[album].id
-        this.credits = this.rdrTrack.credits || this.disco[album].credits
-      }
-    }
-  },
-
-  methods: {
-    src() {
-      const url = (this.rdrTrack.album === 'tihie') ? '/static/tracks/tihie-inner-bg.jpg' : `/static/tracks/${this.rdrTrack.id}-bg.jpg`
-      return url
-    },
-
-    type() {
-      const size = (this.rdrTrack.album === 'fox' || this.rdrTrack.album === 'tihie') ? 'cover' : 'contain'
-      return size
-    }
-  }
-}
-
-</script>
 
 <style lang="stylus">
 
@@ -98,5 +62,20 @@ export default {
       line-height $let * .5rem
       mgn(.5, 0)
       max-width 27em
+
+.page-enter-active,
+.page-leave-active
+  .lyrics
+    transition opacity .6s
+
+.page-enter-from,
+.page-leave-to
+  .lyrics
+    opacity 0
+
+.page-enter-to,
+.page-leave-from
+  .lyrics
+    opacity 1
 
 </style>

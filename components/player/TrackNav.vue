@@ -161,6 +161,8 @@ export default {
 @import "../../assets/styl/_variables"
 
 .track-nav {
+	background rgba($b, .001)
+	backdrop-filter blur(0px)
 	clip-path polygon(0% 80%, 100% 80%, 100% 90%, 0% 90%)
 	bottom 0
 	height 100%
@@ -174,6 +176,8 @@ export default {
 	z-index 5
 
 	&.open {
+		background rgba($b, .8)
+		backdrop-filter blur(6px)
 		-webkit-clip-path polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)
 		clip-path polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)
 
@@ -182,7 +186,7 @@ export default {
 		}
 
 		.overlay {
-			opacity .85
+			opacity 1
 		}
 
 		.scroll {
@@ -191,7 +195,6 @@ export default {
 	}
 
 	.overlay {
-		background $b
 		bottom 0
 		left 0
 		height 100%

@@ -194,6 +194,16 @@
   p {
     word-spacing -.2em
   }
+
+  &.page-enter-from,
+  &.page-leave-to {
+    opacity 0
+  }
+
+  &.page-enter-to,
+  &.page-leave-from {
+    opacity 1
+  }
 }
 
 </style>

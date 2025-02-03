@@ -1,26 +1,38 @@
+<script setup>
+import disco from "@/assets/disco.json"
+import { useDiscoStore } from "@/stores/disco"
+const route = useRoute()
+
+const discoStore = useDiscoStore()
+
+const rdrAlbum = computed(() => {
+  for (const album in disco) {
+    if (route.params.album === disco[album].slug) {
+      return disco[album]
+    }
+  }
+})
+
+const src = computed(() => `/static/covers/${rdrAlbum.value.id}.jpg`)
+
+useHead({
+  title: rdrAlbum.value.title || "",
+})
+</script>
+
 <template>
   <section class="album-page">
-    <div
-      :class="[ 'sec-content', rdrAlbum.id ]"
-    >
+    <div :class="['sec-content', rdrAlbum.id]">
       <div class="artwork-wrap">
         <div class="artwork">
-          <nuxt-img
-            :src="src"
-            :alt="rdrAlbum.title"
-          />
+          <nuxt-img :src="src" :alt="rdrAlbum.title" sizes="75vw md:50vw"/>
         </div>
       </div>
 
       <div class="tracklist">
-        <h1
-          class="album-title"
-          v-html="rdrAlbum.title"
-        />
+        <h1 class="album-title" v-html="rdrAlbum.title" />
 
-        <ol
-          :class="['tracks', rdrAlbum.id ? rdrAlbum.id : '']"
-        >
+        <ol :class="['tracks', rdrAlbum.id ? rdrAlbum.id : '']">
           <li
             v-for="albumTrack in rdrAlbum.tracks"
             :key="albumTrack.slug"
@@ -28,7 +40,10 @@
           >
             <nuxt-link
               :to="`/${rdrAlbum.slug}/${albumTrack.slug}`"
-              :class="['snav-a', albumTrack.slug === track && 'active']"
+              :class="[
+                'snav-a',
+                albumTrack.slug === discoStore.track && 'active',
+              ]"
               :title="albumTrack.title"
             >
               {{ albumTrack.title }}
@@ -36,10 +51,7 @@
           </li>
         </ol>
 
-        <div
-          v-if="rdrAlbum.tracks.length > 1"
-          class="network"
-        >
+        <div v-if="rdrAlbum.tracks.length > 1" class="network">
           <a
             v-if="rdrAlbum.spotters"
             :href="'https://open.spotify.com/album/' + rdrAlbum.spotters"
@@ -69,13 +81,12 @@
           </a>
         </div>
 
-        <div
-          v-else-if="rdrAlbum.tracks.length === 1"
-          class="network"
-        >
+        <div v-else-if="rdrAlbum.tracks.length === 1" class="network">
           <a
             v-if="rdrAlbum.tracks[0].spotters"
-            :href="'https://open.spotify.com/album/' + rdrAlbum.tracks[0].spotters"
+            :href="
+              'https://open.spotify.com/album/' + rdrAlbum.tracks[0].spotters
+            "
             :title="rdrAlbum.tracks[0].title + ' on Spotify'"
             target="_blank"
             rel="noopener"
@@ -84,7 +95,9 @@
           </a>
 
           <a
-            :href="'https://wearezigo.bandcamp.com/album/' + rdrAlbum.tracks[0].slug"
+            :href="
+              'https://wearezigo.bandcamp.com/album/' + rdrAlbum.tracks[0].slug
+            "
             :title="rdrAlbum.tracks[0].title + ' on Bandcamp'"
             target="_blank"
             rel="noopener"
@@ -93,7 +106,10 @@
           </a>
 
           <a
-            :href="'https://soundcloud.com/wearezigo/' + rdrAlbum.tracks[0].slug.replace('-you', '')"
+            :href="
+              'https://soundcloud.com/wearezigo/' +
+              rdrAlbum.tracks[0].slug.replace('-you', '')
+            "
             :title="rdrAlbum.tracks[0].title + ' on Soundcloud'"
             target="_blank"
             rel="noopener"
@@ -105,42 +121,6 @@
     </div>
   </section>
 </template>
-
-<script>
-
-import disco from '@/assets/disco.json'
-import { mapState } from 'pinia'
-import { useDiscoStore } from '@/stores/disco'
-
-export default {
-
-  head() {
-    return {
-      title: this.rdrAlbum?.title || ''
-    }
-  },
-
-  computed: {
-    ...mapState(useDiscoStore, [ 'track' ]),
-    rdrAlbum() {
-      for (const album in disco) {
-        if (this.$route.params.album === disco[album].slug) {
-          return disco[album]
-        }
-      }
-      throw createError({
-        statusCode: 404,
-        statusMessage: 'Page Not Found'
-      })
-    },
-    src() {
-      const url = `/static/covers/${this.rdrAlbum.id}.jpg`
-      return url
-    },
-  }
-}
-
-</script>
 
 <style lang="stylus">
 
@@ -300,5 +280,4 @@ export default {
   .track
     opacity: 1
     transform translateY(0%)
-
 </style>
