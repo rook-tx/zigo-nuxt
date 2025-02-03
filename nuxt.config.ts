@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  // eslint-disable-line no-undef
+
+export default defineNuxtConfig({ // eslint-disable-line no-undef
   app: {
     head: {
       htmlAttrs: {
@@ -32,6 +32,11 @@ export default defineNuxtConfig({
         }
       ]
     },
+
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in'
+    }
   },
 
   css: [

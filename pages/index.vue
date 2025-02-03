@@ -1,6 +1,3 @@
-
-import { NuxtLink } from '~~/.nuxt/components';
-
 <template>
   <main class="home">
     <div class="logo-wrap">
@@ -33,6 +30,16 @@ import { NuxtLink } from '~~/.nuxt/components';
     height 10vh
     width auto
     transition fill .6s
+  }
+
+  &.page-enter-to,
+  &.page-leave-from {
+    opacity 0
+  }
+
+  &.page-enter-to,
+  &.page-leave-from {
+    opacity 1
   }
 }
 

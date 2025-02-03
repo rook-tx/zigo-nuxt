@@ -2,15 +2,18 @@
   <nav class="square-nav">
     <ol class="albums">
       <li
-        v-for="album in tracks"
+        v-for="album in disco"
         :key="album.id"
         :class="['album', album.id]"
       >
-        <nuxt-link :to="'/' + album.slug">
+        <nuxt-link :to="`/${album.slug}`">
           <h2 v-html="album.title" />
           <div class="artwork-wrap">
             <div class="artwork">
-              <img :src="bgim(album.id)">
+              <img
+                :src="bgim(album.id)"
+                :alt="album.title"
+              >
             </div>
           </div>
         </nuxt-link>
@@ -20,14 +23,12 @@
 </template>
 
 <script>
-
 import disco from '@/assets/disco.json'
 
 export default {
-
   data() {
     return {
-      tracks: disco
+      disco,
     }
   },
 
@@ -35,10 +36,9 @@ export default {
     bgim(album) {
       const url = `/static/covers/${album}.jpg`
       return url
-    }
-  }
+    },
+  },
 }
-
 </script>
 
 <style lang="stylus">
@@ -85,8 +85,6 @@ export default {
       height 100%
       pad(0, .5)
       flex-wrap wrap
-
-  .album
 
   .album-title
     text-transform uppercase
@@ -143,5 +141,27 @@ export default {
   .album.naam
     .album-title
       display none
+
+.page-enter-active,
+.page-leave-active
+  .album
+    transition: opacity 0.5s $easeOutCubic
+    transition-property transform, opacity
+
+    for n in 2..4
+      &:nth-child({n})
+        transition-delay (n * .1s)
+
+.page-enter-from,
+.page-leave-to
+  .album
+    opacity: 0
+    transform translateY(5%)
+
+.page-enter-to,
+.page-leave-from
+  .album
+    opacity: 1
+    transform translateY(0%)
 
 </style>

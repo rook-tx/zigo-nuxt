@@ -21,9 +21,7 @@
       :class="[ 'content', $route.name ]"
       @scroll.passive="handleScroll"
     >
-      <nuxt-page
-        :key="$route.fullPath"
-      />
+      <nuxt-page />
     </div>
 
     <player-play-controls
@@ -106,9 +104,12 @@ export default {
 
 .content {
   height 100%
-  position relative
+  position absolute
+  top 0
+  left 0
   overflow-y auto
   overflow-x hidden
+  transition mix-blend-mode 1s 1s
   z-index 1
 
   +below($tablet) {
@@ -120,6 +121,12 @@ export default {
   &.index {
     mix-blend-mode overlay
   }
+}
+
+.page,
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 1s;
 }
 
 </style>

@@ -1,9 +1,7 @@
 <template>
   <section class="music page">
     <div class="nav-wrap">
-      <transition>
-        <modules-square-nav />
-      </transition>
+      <modules-square-nav />
     </div>
   </section>
 </template>

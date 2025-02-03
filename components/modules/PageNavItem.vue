@@ -80,8 +80,12 @@ export default {
 			}
 		}
 
-		+above($tablet) {
-			font-weight 400
+		@media (hover:hover) {
+			&:hover {
+				&::before {
+					opacity 1
+				}
+			}
 		}
 	}
 }

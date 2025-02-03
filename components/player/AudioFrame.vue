@@ -121,3 +121,11 @@ export default {
 }
 
 </script>
+
+<style lang="stylus">
+
+.audio-frame
+  position absolute
+  top 100%
+
+</style>

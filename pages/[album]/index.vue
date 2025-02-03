@@ -14,23 +14,25 @@
       </div>
 
       <div class="tracklist">
-        <h1 v-html="rdrAlbum.title" />
+        <h1
+          class="album-title"
+          v-html="rdrAlbum.title"
+        />
 
         <ol
-          v-if="rdrAlbum.tracks.length > 1"
           :class="['tracks', rdrAlbum.id ? rdrAlbum.id : '']"
         >
           <li
-            v-for="track in rdrAlbum.tracks"
-            :key="track.slug"
+            v-for="albumTrack in rdrAlbum.tracks"
+            :key="albumTrack.slug"
             class="track"
           >
             <nuxt-link
-              :to="`/${rdrAlbum.slug}/${track.slug}`"
-              class="snav-a"
-              :title="track.title"
+              :to="`/${rdrAlbum.slug}/${albumTrack.slug}`"
+              :class="['snav-a', albumTrack.slug === track && 'active']"
+              :title="albumTrack.title"
             >
-              {{ track.title }}
+              {{ albumTrack.title }}
             </nuxt-link>
           </li>
         </ol>
@@ -108,6 +110,8 @@
 <script>
 
 import disco from '@/assets/disco.json'
+import { mapState } from 'pinia'
+import { useDiscoStore } from '#imports'
 
 export default {
 
@@ -126,6 +130,7 @@ export default {
   },
 
   computed: {
+    ...mapState(useDiscoStore, [ 'track' ]),
     src() {
       const url = `/static/covers/${this.rdrAlbum.id}.jpg`
       return url
@@ -196,14 +201,14 @@ export default {
       overflow auto
       width 50%
 
-    h1
-      fs(mp(3))
-      margin-top 0
-      text-transform uppercase
+  .album-title
+    fs(mp(3))
+    margin-top 0
+    text-transform uppercase
 
-      +below($tablet)
-        fs(mp(2))
-        text-align center
+    +below($tablet)
+      fs(mp(2))
+      text-align center
 
   .tracks
     counter-reset tracks
@@ -226,6 +231,16 @@ export default {
       text-align right
       top 0
 
+  .snav-a
+    transition color .3s
+
+    &.active
+      color $pink
+
+    @media (hover:hover)
+      &:hover
+        color $pink
+
   .network
     svg
       display inline-block
@@ -236,7 +251,7 @@ export default {
       width 3vh
 
   .tihie
-    h1
+    .album-title
       fs(mp(2))
       font-family $franklin
       word-spacing normal
@@ -258,5 +273,40 @@ export default {
         .open &
           background $b
           color $w
+
+.page-enter-active,
+.page-leave-active
+  .artwork,
+  .album-title,
+  .track
+    transition: opacity 0.5s $easeOutCubic
+    transition-property transform, opacity
+
+  .track
+    for n in 1..12
+      &:nth-child({n})
+        transition-delay (n * .05s)
+
+.page-enter-from,
+.page-leave-to
+  .artwork
+    opacity: 0
+    transform scale(.98)
+
+  .album-title,
+  .track
+    opacity: 0
+    transform translateY(50%)
+
+.page-enter-to,
+.page-leave-from
+  .artwork
+    opacity: 1
+    transform scale(1)
+
+  .album-title,
+  .track
+    opacity: 1
+    transform translateY(0%)
 
 </style>
