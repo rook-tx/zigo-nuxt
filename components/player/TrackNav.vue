@@ -1,10 +1,5 @@
 <template>
-  <nav
-    :class="['track-nav', open ? ' open' : '']"
-    :style="{
-      width: `${winWidth}px`,
-    }"
-  >
+  <nav :class="['track-nav', open ? ' open' : '']">
     <div class="overlay" />
 
     <div ref="scroll" class="scroll">
@@ -17,15 +12,19 @@
             color: fade ? '#ccc' : color,
           }"
         >
-          <div class="artwork" />
-
           <li
             v-for="track in album.tracks"
             :key="track.title"
             ref="tracks"
             class="track"
           >
-            <nuxt-link :to="`/${album.slug}/${track.slug}`" class="title">
+            <nuxt-link
+              :to="`/${album.slug}/${track.slug}`"
+              class="title"
+              :style="{
+                width: `${winWidth}px`,
+              }"
+            >
               <span v-html="track.title" />
             </nuxt-link>
           </li>
@@ -241,6 +240,8 @@ export default {
 		fs(mp(1));
 		line-height inherit
 		word-spacing -.2em
+		overflow hidden
+		text-overflow ellipsis
 
 		&::before {
 			counter-increment tracks
