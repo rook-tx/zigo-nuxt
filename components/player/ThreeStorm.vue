@@ -227,7 +227,7 @@ export default {
       this.resize()
       this.setupScene()
 
-      var light = new SpotLight(0x0805d5)
+      let light = new SpotLight(0x0805d5)
       light.position.set(0, 1000, 4000)
       this.scene.add(light)
 

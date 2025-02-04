@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-export default defineNuxtConfig({ // eslint-disable-line no-undef
+export default defineNuxtConfig({  
   app: {
     head: {
       htmlAttrs: {
@@ -50,6 +50,7 @@ export default defineNuxtConfig({ // eslint-disable-line no-undef
   modules: [
     '@pinia/nuxt',
     '@nuxt/image',
+    '@nuxt/eslint'
   ],
 
   compatibilityDate: '2025-01-22'

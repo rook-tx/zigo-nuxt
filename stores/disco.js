@@ -124,7 +124,7 @@ export const useDiscoStore = defineStore('disco', {
         if (disco) {
           for (const track in disco[album].tracks) {
             if (disco[album].tracks.length && disco[album].tracks[track].scIdx === newIndex) {
-              const router = useRouter() // eslint-disable-line no-undef
+              const router = useRouter()  
               router.push({
                 name: 'album-track',
                 params: {
