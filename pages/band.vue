@@ -25,6 +25,8 @@ useHead({
         src="/static/band/band-wood.jpg"
         alt="ZIGO"
         class="full-img"
+        width="932"
+        height="576"
       />
       <div class="post-body">
         <p>What started as a crazy idea in an attic space in September 2005 quickly became something beard-strokingly serious for four young men with delusions of grandeur. From the sweaty depths of boys' bedrooms flowed a unique sound, a blend of their love for artists ranging from Radiohead to Robert Johnson and Focus to Foals, which they collectively filed under the name <strong>ZIGO.</strong></p>
@@ -62,6 +64,8 @@ useHead({
           src="/static/band/tom.png"
           alt="Tom Corbett"
           class="band-prof"
+          width="220"
+          height="220"
         />
         <h3><strong>Tom Corbett</strong> shouts.</h3>
         <p>Tom was raised on a balanced diet of good old-fashioned rhythm n' blues and soul/disco, but decided soon after starting his university course that he would have to create a much more "alternative" persona for himself, so inhaled all kinds of math, hardcore and everything underground like as much tequila in the eyeball. To this end, he fulfils the oxymoronic cliché of 'confident frontman with underlying identity issues'.</p>
@@ -82,6 +86,8 @@ useHead({
           src="/static/band/james.png"
           alt="James FitzGerald"
           class="band-prof"
+          width="220"
+          height="220"
         />
         <h3><strong>James FitzGerald</strong> rumbles.</h3>
         <p>James is the talent. Composer of countless critically-acclaimed symphonies, as well as being the brains behind Lady Gaga, ZIGO allows him to rest on his musical laurels whilst smugly funking away in the corner of the stage. That knowing smile? It's because he's going home to his solid gold bath thanks to a little tune you may have heard called <em>Umbrella</em>.</p>
@@ -102,6 +108,8 @@ useHead({
           src="/static/band/will.png"
           alt="Will Hayes"
           class="band-prof"
+          width="220"
+          height="220"
         />
         <h3><strong>Will Hayes</strong> hits.</h3>
         <p>Will, thanks to a hilarious séance incident back in '93, actually channels the spirit of John Bonham, via the mind of Vic Reeves, out through his magic drummin' elbows. Still bitter about ZIGO's move from his own POP Studios to those of the mighty Blizzard Records, he's in the process of converting his History degree to various law certificates - with the sole aim of "pulling a Roger Waters" on the rest of the band.</p>
@@ -115,6 +123,8 @@ useHead({
           src="/static/band/ian.png"
           alt="Ian Iliopoulos"
           class="band-prof"
+          width="220"
+          height="220"
         />
         <h3><strong>Ian Iliopoulos</strong> twangs.</h3>
         <p>Ian has not been seen since he boarded a London&ndash;bound train earlier this year, saying only that he was "doing law". We pray for his safe return.</p>
@@ -149,11 +159,6 @@ useHead({
     }
 
     +below($tablet) {
-      // display flex
-      // flex-direction column
-      // justify-content flex-end
-      // padding 10vh 0
-
       .post-half {
         pad(1, 0)
       }
@@ -185,7 +190,6 @@ useHead({
 
   img {
     mgn(2, auto)
-    width 0.5 * $pwidth * 1rem
   }
 
   h3 {
