@@ -229,34 +229,42 @@ export default {
 
       let light = new SpotLight(0x0805d5)
       light.position.set(0, 1000, 4000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0x680002)
       light.position.set(-2000, -100, -4000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xba9544)
       light.position.set(1500, -1000, 3000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xe92076)
       light.position.set(-1500, -1500, 3000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xe92076)
       light.position.set(-1500, 1500, -1000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xb86405)
       light.position.set(-1000, 1000, 4000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xb86405)
       light.position.set(1000, 1000, -4000)
+      light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0x79d0f9)
       light.position.set(1000, 1000, 5000)
+      light.intensity = 50
       this.scene.add(light)
       // window.addEventListener('resize', () => this.resize());
 

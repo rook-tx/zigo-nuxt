@@ -11,6 +11,7 @@ const rdrAlbum = computed(() => {
       return disco[album]
     }
   }
+  return disco.tihie
 })
 
 const src = computed(() => `/static/covers/${rdrAlbum.value.id}.jpg`)

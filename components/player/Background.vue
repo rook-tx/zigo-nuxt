@@ -27,6 +27,7 @@
 
     <div class="gradient" />
 
+    <!-- v-if="$route.name !== 'wall'" -->
     <div
       ref="over"
       class="over"

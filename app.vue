@@ -4,7 +4,7 @@
 
     <player-background :fade="obj.type === 'album' ? 0.8 : fade" />
 
-    <player-three-storm v-if="!mobile" />
+    <player-three-storm v-if="!mobile && $route.name !== 'wall'" />
 
     <modules-logo-button v-show="$route.name !== 'index'" />
 
@@ -19,6 +19,7 @@
     </div>
 
     <player-play-controls
+    v-if="$route.name !== 'wall'" 
       :type="$route.name === 'video' || $route.name === 'band' ? 'short' : ''"
     />
 
