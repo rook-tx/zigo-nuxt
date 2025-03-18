@@ -127,5 +127,7 @@ export default {
 .audio-frame
   position absolute
   top 100%
+  opacity 0
+  height 0
 
 </style>

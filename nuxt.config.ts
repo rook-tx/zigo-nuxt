@@ -47,11 +47,7 @@ export default defineNuxtConfig({
     '@/assets/styl/main.styl'
   ],
 
-  modules: [
-    '@pinia/nuxt',
-    '@nuxt/image',
-    '@nuxt/eslint'
-  ],
+  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxtjs/sitemap'],
 
   compatibilityDate: '2025-01-22'
 })

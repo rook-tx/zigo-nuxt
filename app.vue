@@ -19,7 +19,7 @@
     </div>
 
     <player-play-controls
-    v-if="$route.name !== 'wall'" 
+      v-if="$route.name !== 'wall'" 
       :type="$route.name === 'video' || $route.name === 'band' ? 'short' : ''"
     />
 
@@ -28,6 +28,8 @@
     <player-album-ui v-if="$route.name === 'album-track'" />
 
     <player-audio-frame />
+
+    <ui-headless />
   </div>
 </template>
 

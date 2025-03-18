@@ -193,8 +193,8 @@ export default {
     transition transform 2s $easeOutCubic
 
   .shade
-    background rgba(0,0,0,.65)
-    backdrop-filter blur(5px)
+    background rgba(0,0,0,.55)
+    backdrop-filter blur(10px)
     opacity 0
     transform translate3d(0,0,0)
     z-index 1
