@@ -8,11 +8,20 @@ const pos = ref({
   y: 0,
 })
 
+const moving = ref(false)
+
+let timeout
+
 function updatePos(e) {
+  clearTimeout(timeout)
+  moving.value = true
   pos.value = {
     x: e.clientX,
     y: e.clientY,
   }
+  timeout = setTimeout(() => {
+    moving.value = false
+  }, 600)
 }
 
 onMounted(() => {
@@ -25,7 +34,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="headless" :style="{transform: `translateX(${pos.x}px) translateY(${pos.y}px)`}">
+  <div
+    :class="[
+      'headless',
+      { 'headless--moving': moving },
+    ]"
+    :style="{transform: `translateX(${pos.x}px) translateY(${pos.y}px) rotate(${moving ? 0 : -20}deg)`}"
+  >
     <svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" fill="none" viewBox="0 0 240 240" class="headless-icon">
       <path 
         :fill="discoStore.fade ? '#ccc' : `#${discoStore.ui}`"
@@ -49,7 +64,8 @@ onBeforeUnmount(() => {
   top 0
   position fixed
   width 2rem
-  transition transform .5s $easeOutCubic
+  opacity 0
+  transition opacity .3s, transform .5s $easeOutCubic
   z-index 6
   pointer-events none
 
@@ -58,4 +74,7 @@ onBeforeUnmount(() => {
 
   &-head
     opacity .3 
+
+  &--moving
+    opacity 1
 </style>
