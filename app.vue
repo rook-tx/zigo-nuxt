@@ -4,7 +4,7 @@
 
     <player-background :fade="obj.type === 'album' ? 0.8 : fade" />
 
-    <player-three-storm v-if="!mobile && $route.name !== 'wall'" />
+    <player-three-storm v-if="!mobile && loaded && $route.name !== 'wall'" />
 
     <modules-logo-button v-show="$route.name !== 'index'" />
 
@@ -19,7 +19,7 @@
     </div>
 
     <player-play-controls
-      v-if="$route.name !== 'wall'" 
+      v-if="loaded && $route.name !== 'wall'" 
       :type="$route.name === 'video' || $route.name === 'band' ? 'short' : ''"
     />
 
@@ -27,9 +27,13 @@
 
     <player-album-ui v-if="$route.name === 'album-track'" />
 
-    <player-audio-frame />
+    <player-audio-frame v-if="loaded" />
 
     <ui-headless />
+
+    <transition appear>
+      <modules-preloader v-if="!loaded" />
+    </transition>
   </div>
 </template>
 
@@ -42,6 +46,7 @@ export default {
   data() {
     return {
       fade: 0,
+      loaded: false,
     }
   },
 
@@ -67,6 +72,7 @@ export default {
 
   mounted() {
     this.updateTrack(this.$route.params)
+    setTimeout(() => { this.loaded = true }, 1200)
   },
 
   methods: {
