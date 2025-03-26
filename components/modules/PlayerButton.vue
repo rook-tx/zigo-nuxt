@@ -104,6 +104,18 @@ export default {
   position: absolute;
   width: 11.6vh;
   z-index: 1;
+  opacity .9
+  transition opacity .15s
+  
+  @media (hover: hover) {
+    &:hover {
+      opacity 1
+    }
+  }
+
+  &:active {
+    opacity .5
+  }
 
   svg {
     display: block;
@@ -112,7 +124,7 @@ export default {
     width: 100%;
   }
 
-  path, circle {
+  path {
     stroke-linejoin: round;
   }
 

@@ -1,17 +1,16 @@
 <template>
   <div class="album-ui">
-    <div
-      v-if="!loading"
-      :class="[ 'badge', rdrAlbum.id ? rdrAlbum.id : '']"
-    >
+    <div v-if="!loading" :class="['badge', rdrAlbum.id ? rdrAlbum.id : '']">
       <div class="tracklist">
-        <nuxt-link :to="`/${rdrAlbum.slug}`">
+        <nuxt-link :to="`/${rdrAlbum.slug}`" class="tracklist-link">
           <h3
+            class="tracklist-title"
             :style="{
-              color: fade ? '#ccc' : color
+              color: fade ? '#ccc' : color,
             }"
-            v-html="rdrAlbum.title"
-          />
+          >
+            {{ rdrAlbum.title }}
+          </h3>
         </nuxt-link>
       </div>
     </div>
@@ -19,37 +18,30 @@
 </template>
 
 <script>
-
 import { mapState } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
 
 import disco from '@/assets/disco.json'
 
 export default {
-
   data() {
     return {
       rdrAlbum: {},
       loading: true,
-      disco
+      disco,
     }
   },
 
   computed: {
-    ...mapState(useDiscoStore, [
-      'album',
-      'track',
-      'color',
-      'fade'
-    ])
+    ...mapState(useDiscoStore, ['album', 'track', 'color', 'fade']),
   },
 
   watch: {
     album: {
       handler() {
         this.getAlbum()
-      }
-    }
+      },
+    },
   },
 
   mounted() {
@@ -64,10 +56,9 @@ export default {
           this.loading = false
         }
       }
-    }
-  }
+    },
+  },
 }
-
 </script>
 
 <style lang="stylus">
@@ -101,51 +92,23 @@ export default {
     img
       width 100%
 
-  h3
-    display inline-block
-    fs(mp(0))
-    text-transform uppercase
-    transition color .3s
-    vertical-align middle
+  .tracklist
+    &-link
+      @media (hover:hover)
+        &:hover
+          .tracklist-title
+            text-decoration underline
 
-  .network
-    display inline-block
-    font-size 2vh
-    vertical-align middle
-
-    a
+    &-title
       display inline-block
+      fs(mp(0))
+      text-transform uppercase
+      transition color .3s
       vertical-align middle
 
   .tihie
-    h3
+    .tracklist-title
       font-family $franklin
       word-spacing normal
-
-    .track
-      fs(mp(0))
-      font-family $franklin
-      text-transform uppercase
-      word-spacing normal
-
-      &::before
-        fs(mp(-1))
-
-      span
-        background darken($w,5%)
-        color #111820
-        pad(.25,.5)
-
-        .open &
-          background $b
-          color $w
-
-  svg
-    display block
-    height 2vh
-    width 2vh
-
-  .apple
-    width (19/23)*2vh
 
 </style>
