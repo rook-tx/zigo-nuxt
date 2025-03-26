@@ -4,9 +4,11 @@
 
     <player-background :fade="obj.type === 'album' ? 0.8 : fade" />
 
-    <player-three-storm v-if="!mobile && loaded && $route.name !== 'wall'" />
+    <player-three-storm v-if="!mobile && loaded && mode !== 'nav'" />
 
-    <modules-logo-button v-show="$route.name !== 'index'" />
+    <transition>
+      <modules-logo-button v-show="mode !== 'nologo'" />
+    </transition>
 
     <app-page-nav />
 
@@ -19,21 +21,21 @@
     </div>
 
     <player-play-controls
-      v-if="loaded && $route.name !== 'wall'" 
+      v-if="loaded && mode !== 'nav'" 
       :type="$route.name === 'video' || $route.name === 'band' ? 'short' : ''"
     />
 
-    <player-track-nav v-if="$route.name === 'album-track'" />
+    <player-track-nav v-if="loaded && mode === 'track'" />
 
-    <player-album-ui v-if="$route.name === 'album-track'" />
+    <player-album-ui v-if="loaded && mode === 'track'" />
 
     <player-audio-frame v-if="loaded" />
-
-    <ui-headless />
-
+    
     <transition>
       <modules-preloader v-if="!loaded" />
     </transition>
+
+    <ui-headless />
   </div>
 </template>
 
@@ -53,6 +55,18 @@ export default {
   computed: {
     ...mapState(useDeviceStore, ['mobile', 'winHeight']),
     ...mapState(useDiscoStore, ['obj']),
+
+    mode() {
+      if (this.$route.name === 'wall') {
+        return 'nav'
+      } else if (this.$route.name === 'album-track') {
+        return 'track'
+      } else if (this.$route.name === 'index') {
+        return 'nologo'
+      } else {
+        return 'default'
+      }
+    }
   },
 
   watch: {
