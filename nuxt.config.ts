@@ -43,6 +43,11 @@ export default defineNuxtConfig({
     }
   },
 
+  site: {
+    name: 'ZIGO',
+    url: 'https://www.wearezigo.com',
+  },
+
   css: [
     '@/assets/styl/main.styl'
   ],
