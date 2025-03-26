@@ -27,7 +27,6 @@
 
     <div class="gradient" />
 
-    <!-- v-if="$route.name !== 'wall'" -->
     <div
       ref="over"
       class="over"
@@ -149,7 +148,7 @@ export default {
   z-index 0
 
   .gradient
-    background linear-gradient(0deg, rgba($b,.12), rgba($b,0) 35%, rgba($b,0) 65%, rgba($b,.12))
+    background linear-gradient(180deg, rgba($b,.12), rgba($b,0) 15%, rgba($b,0) 75%, rgba($b,.12))
 
   .outer
     opacity 1

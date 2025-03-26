@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useDiscoStore } from '@/stores/disco'
+
+const discoStore = useDiscoStore()
+</script>
+
 <template>
   <div class="logo">
     <nuxt-link
@@ -6,36 +12,19 @@
     >
       <transition>
         <nuxt-img
-          v-if="album === 'this-is-how-it-ends'"
+          v-if="discoStore.album === 'this-is-how-it-ends'"
           src="/static/logo/zigo-white.png"
           alt="ZIGO"
           sizes="108px"
         />
         <svg-logo
           v-else
-          :fill="fade ? '#ccc' : `#${ui}`"
+          :fill="discoStore.fade ? '#ccc' : `#${discoStore.ui}`"
         />
       </transition>
     </nuxt-link>
   </div>
 </template>
-
-<script>
-
-import { mapState } from 'pinia'
-import { useDiscoStore } from '@/stores/disco'
-
-export default {
-  computed: {
-    ...mapState(useDiscoStore, [
-      'album',
-      'ui',
-      'fade'
-    ])
-  },
-}
-
-</script>
 
 <style lang="stylus">
 

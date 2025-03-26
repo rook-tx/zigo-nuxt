@@ -1,69 +1,64 @@
+<script setup lang="ts">
+import { usePlayerStore } from '@/stores/player'
+import { useDiscoStore } from '@/stores/disco'
+
+const discoStore = useDiscoStore()
+const playerStore = usePlayerStore()
+
+defineProps({
+  type: {
+    type: String,
+    default: '',
+  },
+})
+
+function keyup(e: KeyboardEvent) {
+  if (e.code === 'Space') {
+    playerStore.playpause()
+  } else if (
+    e.code === 'ArrowRight' ||
+    e.code === 'ArrowDown'
+  ) {
+    discoStore.next()
+  } else if (
+    e.code === 'ArrowLeft' ||
+    e.code === 'ArrowUp'
+  ) {
+    discoStore.prev()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keyup', keyup, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keyup', keyup)
+})
+</script>
+
 <template>
   <div :class="['play-controls', type]">
     <modules-trackbar />
 
     <modules-player-button
-      :title="playing ? 'Pause' : 'Play'"
-      @click="playpause()"
+      :title="playerStore.playing ? 'Pause' : 'Play'"
+      @click="playerStore.playpause()"
     />
 
-    <modules-player-button type="next" title="Next track" @click="next(idx)" />
+    <modules-player-button
+      type="next"
+      title="Next track"
+      @click="discoStore.next(discoStore.idx)"
+    />
 
     <modules-player-button
       type="prev"
       title="Previous track"
-      @click="prev(idx)"
+      @click="discoStore.prev(discoStore.idx)"
     />
   </div>
 </template>
-
-<script>
-import { mapActions, mapState } from 'pinia'
-import { usePlayerStore } from '@/stores/player'
-import { useDiscoStore } from '@/stores/disco'
-
-export default {
-  props: {
-    type: {
-      type: String,
-      default: '',
-    },
-  },
-
-  computed: {
-    ...mapState(usePlayerStore, ['playing']),
-    ...mapState(useDiscoStore, ['idx']),
-  },
-
-  mounted() {
-    window.addEventListener('keyup', this.keyup, { passive: true })
-  },
-
-  beforeUnmount() {
-    window.removeEventListener('keyup', this.keyup, { passive: true })
-  },
-
-  methods: {
-    ...mapActions(usePlayerStore, ['playpause']),
-    ...mapActions(useDiscoStore, ['next', 'prev']),
-
-    keyup(e) {
-      if (e.keyCode === 32) {
-        this.playpause()
-      } else if (e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 9) {
-        this.next()
-      } else if (
-        e.keyCode === 37 ||
-        e.keyCode === 38 ||
-        e.keyCode === 8 ||
-        e.keyCode === 46
-      ) {
-        this.prev()
-      }
-    },
-  },
-}
-</script>
 
 <style lang="stylus">
 
