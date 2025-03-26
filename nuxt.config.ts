@@ -16,7 +16,7 @@ export default defineNuxtConfig({
         { name: 'format-detection', content: 'telephone=no' },
         { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
-        { hid: 'description', name: 'description', content: 'We are craftfully creating diverse, progressive, experiences.' }
+        { name: 'description', content: 'We are ZIGO. We are a four-piece guitar band from Kent driven by groove, existenialist angst and razor-sharp wit.' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
           src: 'https://www.googletagmanager.com/gtag/js?id=G-BZYDLG7H21'
         },
         {
-          children: `window.dataLayer = window.dataLayer || [];
+          innerHTML: `window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-BZYDLG7H21');`
