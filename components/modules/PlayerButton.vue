@@ -1,20 +1,35 @@
+<script setup lang="ts">
+import { useDiscoStore } from '@/stores/disco'
+import { usePlayerStore } from '@/stores/player'
+
+const discoStore = useDiscoStore()
+const playerStore = usePlayerStore()
+
+defineProps({
+  type: {
+    type: String,
+    default: 'playpause'
+  }
+})
+</script>
+
 <template>
   <button
     type="button"
-    :class="[ type, 'player-button', buttonDown ? 'down' : '' ]"
+    :class="[ type, 'player-button' ]"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 116 100"
       width="116"
       height="100"
-      :fill="fade ? '#ccc' : `#${ui}`"
+      :fill="discoStore.fade ? '#ccc' : `#${discoStore.ui}`"
       focusable="false"
     >
 
       <g v-if="type === 'playpause'">
         <g
-          v-show="playing"
+          v-show="playerStore.playing"
           id="pause"
         >
           <rect
@@ -35,7 +50,7 @@
           />
         </g>
         <path
-          v-show="!playing"
+          v-show="!playerStore.playing"
           id="play"
           d="M85.92 50.61a.65.65 0 0 0 0-1.22L35.06 20c-.58-.34-1.06-.06-1.06.61v58.76c0 .67.48.95 1.06.61z"
         />
@@ -55,39 +70,6 @@
   </button>
 </template>
 
-<script>
-
-import { mapState } from 'pinia'
-import { useDiscoStore } from '@/stores/disco'
-import { usePlayerStore } from '@/stores/player'
-
-export default {
-
-  props: {
-    type: {
-      type: String,
-      default: 'playpause'
-    }
-  },
-
-  data() {
-    return {
-      buttonDown: false,
-    }
-  },
-
-  computed: {
-    ...mapState(useDiscoStore, [
-      'ui',
-      'fade'
-    ]),
-    ...mapState(usePlayerStore, [
-      'playing'
-    ])
-  },
-}
-
-</script>
 
 <style lang="stylus">
 
@@ -104,10 +86,11 @@ export default {
   position: absolute;
   width: 11.6vh;
   z-index: 1;
-  opacity .9
   transition opacity .15s
   
   @media (hover: hover) {
+    opacity .9
+
     &:hover {
       opacity 1
     }

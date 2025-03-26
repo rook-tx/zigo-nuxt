@@ -1,16 +1,12 @@
 <template>
   <div class="canvas-wrap">
-    <div
-      ref="inner"
-      class="inner-wrap"
-    >
+    <div ref="inner" class="inner-wrap">
       <canvas ref="canvas" />
     </div>
   </div>
 </template>
 
 <script>
-
 import { mapState } from 'pinia'
 import { useDiscoStore } from '@/stores/disco'
 import { usePlayerStore } from '@/stores/player'
@@ -29,13 +25,12 @@ import {
 } from 'three'
 
 export default {
-
   data() {
     const mouse = {
       pos: {
         x: 0,
-        y: 0
-      }
+        y: 0,
+      },
     }
 
     const diameter = 250
@@ -45,22 +40,14 @@ export default {
       diameter,
       mouse,
       inited: false,
-      stopped: false
+      stopped: false,
     }
   },
 
   computed: {
-    ...mapState(useDeviceStore, [
-      'win',
-      'winWidth',
-      'winHeight'
-    ]),
-    ...mapState(usePlayerStore, [
-      'playing'
-    ]),
-    ...mapState(useDiscoStore, [
-      'obj'
-    ]),
+    ...mapState(useDeviceStore, ['win', 'winWidth', 'winHeight']),
+    ...mapState(usePlayerStore, ['playing']),
+    ...mapState(useDiscoStore, ['obj']),
 
     fogColor() {
       return `#${this.obj.color ?? '000000'}`
@@ -68,7 +55,7 @@ export default {
 
     factor() {
       return this.playing ? 4 : 1
-    }
+    },
   },
 
   watch: {
@@ -76,12 +63,13 @@ export default {
       immediate: true,
       handler() {
         this.resize()
-      }
-    }
+      },
+    },
   },
 
   mounted() {
     window.addEventListener('mousemove', this.momo, { passive: true })
+    document.addEventListener('visibilitychange', this.visibilityChange)
 
     if (!this.inited) {
       this.init()
@@ -92,6 +80,7 @@ export default {
   beforeUnmount() {
     this.stop()
     window.removeEventListener('mousemove', this.momo, { passive: true })
+    document.removeEventListener('visibilitychange', this.visibilityChange)
   },
 
   methods: {
@@ -125,7 +114,6 @@ export default {
       // const d = 300
 
       for (let i = 0; i < n; i++) {
-
         const mesh = new Mesh(geo, mat)
 
         mesh.position.x = (Math.random() - 0.5) * this.diameter
@@ -135,7 +123,6 @@ export default {
         // this.scene.add(mesh)
 
         ringGeo.add(mesh)
-
       }
 
       for (let i = 0; i < r; i++) {
@@ -188,8 +175,10 @@ export default {
     update() {
       this.scene.fog.color.setHex(this.fogColor)
 
-      this.camera.position.x += (this.mouse.pos.x - this.camera.position.x) * 0.02
-      this.camera.position.y -= (this.mouse.pos.y + this.camera.position.y) * 0.02
+      this.camera.position.x +=
+        (this.mouse.pos.x - this.camera.position.x) * 0.02
+      this.camera.position.y -=
+        (this.mouse.pos.y + this.camera.position.y) * 0.02
 
       this.camera.lookAt(this.scene.position)
 
@@ -213,11 +202,13 @@ export default {
       this.renderer = new WebGLRenderer({
         alpha: true,
         antialias: false,
-        canvas: this.$refs.canvas
+        canvas: this.$refs.canvas,
       })
 
       this.renderer.setClearColor(0x000000, 0)
-      this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1)
+      this.renderer.setPixelRatio(
+        window.devicePixelRatio ? window.devicePixelRatio : 1,
+      )
 
       this.scene = new Scene()
 
@@ -285,11 +276,13 @@ export default {
     },
 
     start() {
+      console.log('start')
       this.stopped = false
       this.render()
     },
 
     stop() {
+      console.log('stop')
       this.stopped = true
     },
 
@@ -302,8 +295,8 @@ export default {
       //   y: e.clientY
       // }
       const delta = {
-        x: e.clientX / this.winWidth * 2 - 1,
-        y: e.clientY / this.winHeight * 2 - 1
+        x: (e.clientX / this.winWidth) * 2 - 1,
+        y: (e.clientY / this.winHeight) * 2 - 1,
       }
       // this.momoActive = true
 
@@ -323,8 +316,8 @@ export default {
           // x: mouse[0] / 2 * this.Wwidth,
           // y: mouse[1] / 2 * this.Wheight
           x: delta.x * (this.diameter / 6),
-          y: delta.y * (this.diameter / 6)
-        }
+          y: delta.y * (this.diameter / 6),
+        },
       }
       // }
     },
@@ -351,10 +344,17 @@ export default {
       if (this.renderer) {
         this.renderer.setSize(this.winWidth, this.winHeight)
       }
-    }
-  }
-}
+    },
 
+    visibilityChange() {
+      if (document.hidden) {
+        this.stop()
+      } else {
+        this.start()
+      }
+    },
+  },
+}
 </script>
 
 <style lang="stylus">
@@ -381,5 +381,4 @@ export default {
 		width 100%
 	}
 }
-
 </style>
