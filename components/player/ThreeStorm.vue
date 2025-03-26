@@ -79,39 +79,32 @@ export default {
 
   beforeUnmount() {
     this.stop()
-    window.removeEventListener('mousemove', this.momo, { passive: true })
+    window.removeEventListener('mousemove', this.momo)
     document.removeEventListener('visibilitychange', this.visibilityChange)
   },
 
   methods: {
     setupScene() {
-      this.scene.fog = new FogExp2(this.fogColor, 0.0018)
+      this.scene.fog = new FogExp2(this.fogColor, 0.18)
 
       const clutter = new Object3D()
-      // this.geometry = new THREE.Geometry();
-
+      
       this.rings = []
-      // this.geometry = geo;
-      const geo = new TetrahedronGeometry(0.5)
+      const geo = new TetrahedronGeometry(.6)
 
       const mat = new MeshPhysicalMaterial({
         // color: '#fff',
         roughness: 0.5,
         metalness: 1,
         // side: DoubleSide,
-        transparent: true,
-        opacity: 0.75,
+        // transparent: true,
+        // opacity: 0.75,
         // reflectivity: 0.9
       })
 
-      // const mesh = new THREE.Mesh(geo, mat);
-
-      // this.scene.add(mesh);
-
       const r = 6
       const ringGeo = new Object3D()
-      const n = this.diameter / 12
-      // const d = 300
+      const n = this.diameter / 10
 
       for (let i = 0; i < n; i++) {
         const mesh = new Mesh(geo, mat)
@@ -119,8 +112,6 @@ export default {
         mesh.position.x = (Math.random() - 0.5) * this.diameter
         mesh.position.y = (Math.random() - 0.5) * this.diameter
         mesh.position.z = (Math.random() - 0.5) * this.diameter
-
-        // this.scene.add(mesh)
 
         ringGeo.add(mesh)
       }

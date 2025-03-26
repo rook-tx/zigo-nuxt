@@ -31,7 +31,7 @@
 
     <ui-headless />
 
-    <transition appear>
+    <transition>
       <modules-preloader v-if="!loaded" />
     </transition>
   </div>

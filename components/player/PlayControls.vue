@@ -65,7 +65,6 @@ onBeforeUnmount(() => {
 @import "../../assets/styl/_variables"
 
 .play-controls {
-  background rgba(0,0,0,.001)
   backdrop-filter blur(1px)
   bottom 0
   height 10%

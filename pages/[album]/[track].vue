@@ -15,6 +15,7 @@ const rdrTrack = computed(() => {
       }
     }
   }
+  return disco.tihie
 })
 
 const credits = computed(() => {
@@ -51,6 +52,11 @@ useHead({
 
     p
       max-width 100%
+
+    &-title
+      opacity 0
+      font-size 0
+      margin 0
 
   .credits
     border-top .5px solid
