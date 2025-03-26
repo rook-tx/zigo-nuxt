@@ -194,7 +194,7 @@ export default {
 
   .shade
     background rgba(0,0,0,.55)
-    backdrop-filter blur(10px)
+    backdrop-filter blur(8px)
     opacity 0
     transform translate3d(0,0,0)
     z-index 1

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://app.invintorywines.com/sitemap.xml
+Sitemap: https://www.wearezigo.com/sitemap.xml
