@@ -128,39 +128,6 @@ export default {
       }
 
       this.scene.add(clutter)
-
-      // this.geometry = new THREE.Geometry();
-
-      // var i;
-
-      // this.materials = [];
-
-      // var sprite = new THREE.TextureLoader().load(texture);
-
-      // for (i = 0; i < 360; i++) {
-      // 	var vertex = new THREE.Vector3();
-      // 	vertex.x = (Math.random() - 0.5) * 2000;
-      // 	vertex.y = (Math.random() - 0.5) * 2000;
-      // 	vertex.z = (Math.random() - 0.5) * 2000;
-      // 	this.geometry.vertices.push(vertex);
-      // }
-
-      // for (i = 0; i < 6; i++) {
-      // 	this.materials[i] = new THREE.PointsMaterial({ size: i + 1, alphaTest: 0.1, map: sprite });
-      // 	var particles = new THREE.Points(this.geometry, this.materials[i]);
-
-      // 	particles.rotation.x = Math.random() * Math.PI * 2;
-      // 	particles.rotation.y = Math.random() * Math.PI * 2;
-      // 	particles.rotation.z = Math.random() * Math.PI * 2;
-
-      // 	this.scene.add(particles);
-      // }
-
-      // var geometryS = new THREE.SphereGeometry(618, 32, 16);
-      // var materialS = new THREE.MeshLambertMaterial({ wireframe: true });
-      // this.sphere = new THREE.Mesh(geometryS, materialS);
-
-      // this.scene.add(this.sphere);
     },
 
     update() {
@@ -210,45 +177,44 @@ export default {
       this.setupScene()
 
       let light = new SpotLight(0x0805d5)
-      light.position.set(0, 1000, 4000)
-      light.intensity = 50
+      light.position.set(0, 10, 40)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0x680002)
-      light.position.set(-2000, -100, -4000)
-      light.intensity = 50
+      light.position.set(-20, -1, -40)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xba9544)
-      light.position.set(1500, -1000, 3000)
-      light.intensity = 50
+      light.position.set(15, -10, 30)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xe92076)
-      light.position.set(-1500, -1500, 3000)
-      light.intensity = 50
+      light.position.set(-15, -15, 30)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xe92076)
-      light.position.set(-1500, 1500, -1000)
-      light.intensity = 50
+      light.position.set(-15, 15, -10)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xb86405)
-      light.position.set(-1000, 1000, 4000)
-      light.intensity = 50
+      light.position.set(-10, 10, 40)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0xb86405)
-      light.position.set(1000, 1000, -4000)
-      light.intensity = 50
+      light.position.set(10, 10, -40)
+      // light.intensity = 50
       this.scene.add(light)
 
       light = new SpotLight(0x79d0f9)
-      light.position.set(1000, 1000, 5000)
-      light.intensity = 50
+      light.position.set(10, 10, 50)
+      // light.intensity = 50
       this.scene.add(light)
-      // window.addEventListener('resize', () => this.resize());
 
       this.inited = true
     },

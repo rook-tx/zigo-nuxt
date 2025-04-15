@@ -1,10 +1,57 @@
+<script setup lang="ts">
+import { useDeviceStore } from '@/stores/device'
+import { useDiscoStore } from '@/stores/disco'
+
+const deviceStore = useDeviceStore()
+const discoStore = useDiscoStore()
+const route = useRoute()
+
+const position = ref(50)
+const opacity = ref(0)
+
+const img = useImage()
+const dim = computed(() => (deviceStore.portrait ? deviceStore.winHeight : deviceStore.winWidth))
+const image = computed(() =>
+  img(discoStore.obj.src || '/static/tracks/naam-bg.jpg', {
+    width: dim.value,
+  }),
+)
+const stroke = computed(() => `#${discoStore.ui || 'fff'}`)
+const color = computed(() => `#${discoStore.obj.bgColor || '000'}`)
+const size = computed(() => discoStore.obj.bgType || 'cover')
+
+const props = defineProps({
+  fade: {
+    type: Number,
+    default: 0,
+  },
+})
+
+watch(
+  () => discoStore.idx,
+  (idx) => {
+    if (idx < 12 && route.name === 'album-track') {
+      position.value = (idx / 12) * 100
+    } else {
+      position.value = 50
+    }
+  },
+  { immediate: true },
+)
+
+watch(
+  () => props.fade,
+  (fade) => {
+    opacity.value = fade
+  },
+  { immediate: true },
+)
+</script>
+
 <template>
   <div class="background-cover">
     <transition>
-      <div
-        :key="image"
-        class="outer"
-      >
+      <div :key="image" class="outer">
         <div
           ref="inner"
           class="inner"
@@ -12,7 +59,7 @@
             backgroundImage: `url(${image})`,
             backgroundColor: color,
             backgroundPosition: `${position}% center`,
-            backgroundSize: size
+            backgroundSize: size,
           }"
         />
       </div>
@@ -21,119 +68,89 @@
     <div
       class="shade"
       :style="{
-        opacity: opacity
+        opacity: opacity,
       }"
     />
 
     <div class="gradient" />
 
-    <div
-      ref="over"
-      class="over"
-    >
+    <div ref="over" class="over">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2391 900"
-        :height="winHeight"
-        :width="winHeight * (2391 / 900)"
+        :height="deviceStore.winHeight"
+        :width="deviceStore.winHeight * (2391 / 900)"
         :style="{
-          stroke: stroke
+          stroke: stroke,
         }"
       >
-        <path d="M1143.14-.08l519.72 900.16" /><path d="M1039.14-.08l519.72 900.16" /><path d="M935.14-.08l519.72 900.16" /><path d="M831.14-.08l519.72 900.16" /><path d="M727.14-.08l519.72 900.16" /><path d="M623.14-.08l519.72 900.16" /><path d="M519.14-.08l519.72 900.16" /><path d="M415.14-.08l519.72 900.16" /><path d="M311.14-.08l519.72 900.16" /><path d="M207.14-.08l519.72 900.16" /><path d="M103.14-.08l519.72 900.16" /><path d="M-.86-.08l519.72 900.16" /><path d="M-1 179l415.86 721.08" /><path d="M0 362l310.86 538.08" /><path d="M0 542l206.86 358.08" /><path d="M-1 721l103.86 179.08" /><path d="M1247.14-.08l519.72 900.16" /><path d="M1351.14-.08l519.72 900.16" /><path d="M1455.14-.08l519.72 900.16" /><path d="M1559.14-.08l519.72 900.16" /><path d="M1663.14-.08l519.72 900.16" /><path d="M1767.14-.08l519.72 900.16" /><path d="M1871.14-.08l519.72 900.16" /><path d="M1975.14-.08L2391 720" /><path d="M2079.14-.08L2391 540" /><path d="M2183.14-.08L2391 360" /><path d="M2287.14-.08L2394 184" /><path d="M1143.14 900.08L1662.86-.08" /><path d="M1039.14 900.08L1558.86-.08" /><path d="M935.14 900.08L1454.86-.08" /><path d="M831.14 900.08L1350.86-.08" /><path d="M727.14 900.08L1246.86-.08" /><path d="M623.14 900.08L1142.86-.08" /><path d="M519.14 900.08L1038.86-.08" /><path d="M415.14 900.08L934.86-.08" /><path d="M311.14 900.08L830.86-.08" /><path d="M207.14 900.08L726.86-.08" /><path d="M103.14 900.08L622.86-.08" /><path d="M-.86 900.08L518.86-.08" /><path d="M-1 721L414.86-.08" /><path d="M0 538L310.86-.08" /><path d="M0 358L206.86-.08" /><path d="M-1 179L102.86-.08" /><path d="M1247.14 900.08L1766.86-.08" /><path d="M1351.14 900.08L1870.86-.08" /><path d="M1455.14 900.08L1974.86-.08" /><path d="M1559.14 900.08L2078.86-.08" /><path d="M1663.14 900.08L2182.86-.08" /><path d="M1767.14 900.08L2286.86-.08" /><path d="M1871.14 900.08L2390.86-.08" /><path d="M1975.14 900.08L2391 180" /><path d="M2079.14 900.08L2391 360" /><path d="M2183.14 900.08L2391 540" /><path d="M2287.14 900.08L2394 716" /><path d="M0 89h2391" /><path d="M0 179h2391" /><path d="M0 269h2391" /><path d="M0 359h2391" /><path d="M0 449h2391" /><path d="M0 539h2391" /><path d="M0 629h2391" /><path d="M0 719h2391" /><path d="M0 809h2391" />
+        <path d="M1143.14-.08l519.72 900.16" />
+        <path d="M1039.14-.08l519.72 900.16" />
+        <path d="M935.14-.08l519.72 900.16" />
+        <path d="M831.14-.08l519.72 900.16" />
+        <path d="M727.14-.08l519.72 900.16" />
+        <path d="M623.14-.08l519.72 900.16" />
+        <path d="M519.14-.08l519.72 900.16" />
+        <path d="M415.14-.08l519.72 900.16" />
+        <path d="M311.14-.08l519.72 900.16" />
+        <path d="M207.14-.08l519.72 900.16" />
+        <path d="M103.14-.08l519.72 900.16" />
+        <path d="M-.86-.08l519.72 900.16" />
+        <path d="M-1 179l415.86 721.08" />
+        <path d="M0 362l310.86 538.08" />
+        <path d="M0 542l206.86 358.08" />
+        <path d="M-1 721l103.86 179.08" />
+        <path d="M1247.14-.08l519.72 900.16" />
+        <path d="M1351.14-.08l519.72 900.16" />
+        <path d="M1455.14-.08l519.72 900.16" />
+        <path d="M1559.14-.08l519.72 900.16" />
+        <path d="M1663.14-.08l519.72 900.16" />
+        <path d="M1767.14-.08l519.72 900.16" />
+        <path d="M1871.14-.08l519.72 900.16" />
+        <path d="M1975.14-.08L2391 720" />
+        <path d="M2079.14-.08L2391 540" />
+        <path d="M2183.14-.08L2391 360" />
+        <path d="M2287.14-.08L2394 184" />
+        <path d="M1143.14 900.08L1662.86-.08" />
+        <path d="M1039.14 900.08L1558.86-.08" />
+        <path d="M935.14 900.08L1454.86-.08" />
+        <path d="M831.14 900.08L1350.86-.08" />
+        <path d="M727.14 900.08L1246.86-.08" />
+        <path d="M623.14 900.08L1142.86-.08" />
+        <path d="M519.14 900.08L1038.86-.08" />
+        <path d="M415.14 900.08L934.86-.08" />
+        <path d="M311.14 900.08L830.86-.08" />
+        <path d="M207.14 900.08L726.86-.08" />
+        <path d="M103.14 900.08L622.86-.08" />
+        <path d="M-.86 900.08L518.86-.08" />
+        <path d="M-1 721L414.86-.08" />
+        <path d="M0 538L310.86-.08" />
+        <path d="M0 358L206.86-.08" />
+        <path d="M-1 179L102.86-.08" />
+        <path d="M1247.14 900.08L1766.86-.08" />
+        <path d="M1351.14 900.08L1870.86-.08" />
+        <path d="M1455.14 900.08L1974.86-.08" />
+        <path d="M1559.14 900.08L2078.86-.08" />
+        <path d="M1663.14 900.08L2182.86-.08" />
+        <path d="M1767.14 900.08L2286.86-.08" />
+        <path d="M1871.14 900.08L2390.86-.08" />
+        <path d="M1975.14 900.08L2391 180" />
+        <path d="M2079.14 900.08L2391 360" />
+        <path d="M2183.14 900.08L2391 540" />
+        <path d="M2287.14 900.08L2394 716" />
+        <path d="M0 89h2391" />
+        <path d="M0 179h2391" />
+        <path d="M0 269h2391" />
+        <path d="M0 359h2391" />
+        <path d="M0 449h2391" />
+        <path d="M0 539h2391" />
+        <path d="M0 629h2391" />
+        <path d="M0 719h2391" />
+        <path d="M0 809h2391" />
       </svg>
     </div>
   </div>
 </template>
-
-<script>
-
-import { mapState } from 'pinia'
-import { useDeviceStore } from '@/stores/device'
-import { useDiscoStore } from '@/stores/disco'
-
-export default {
-
-  props: {
-    fade: {
-      type: Number,
-      default: 0
-    }
-  },
-
-  data() {
-    return {
-      color: '000',
-      position: 50,
-      size: 'cover',
-      opacity: 0
-    }
-  },
-
-  computed: {
-    ...mapState(useDeviceStore, [
-      'win',
-      'winHeight'
-    ]),
-    ...mapState(useDiscoStore, [
-      'obj',
-      'ui',
-      'idx'
-    ]),
-
-    image() {
-      return this.obj.src || '/static/tracks/naam-bg.jpg'
-    },
-
-    stroke() {
-      return `#${this.ui || 'fff'}`
-    },
-
-    type() {
-      return this.obj.bgType
-    },
-
-    bg() {
-      return this.obj.bgColor
-    }
-  },
-
-  watch: {
-    idx: {
-      immediate: true,
-      handler(idx) {
-        if (idx < 12 && this.$route.name === 'album-track') {
-          this.position = idx / 12 * 100
-        } else {
-          this.position = 50
-        }
-      },
-    },
-
-    type: {
-      immediate: true,
-      handler(type) {
-        this.size = type
-      },
-    },
-
-    bg: {
-      immediate: true,
-      handler(bg) {
-        this.color = `#${bg}`
-      },
-    },
-
-    fade: {
-      immediate: true,
-      handler(fade) {
-        this.opacity = fade
-      }
-    }
-  },
-}
-
-</script>
 
 <style lang="stylus">
 
@@ -197,5 +214,4 @@ export default {
     opacity 0
     transform translate3d(0,0,0)
     z-index 1
-
 </style>

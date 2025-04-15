@@ -1,3 +1,9 @@
+<script setup>
+useHead({
+  title: 'Music', 
+})
+</script>
+
 <template>
   <section class="music page">
     <div class="nav-wrap">

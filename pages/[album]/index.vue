@@ -1,6 +1,6 @@
 <script setup>
-import disco from "@/assets/disco.json"
-import { useDiscoStore } from "@/stores/disco"
+import disco from '@/assets/disco.json'
+import { useDiscoStore } from '@/stores/disco'
 const route = useRoute()
 
 const discoStore = useDiscoStore()
@@ -17,7 +17,7 @@ const rdrAlbum = computed(() => {
 const src = computed(() => `/static/covers/${rdrAlbum.value.id}.jpg`)
 
 useHead({
-  title: rdrAlbum.value.title || "",
+  title: rdrAlbum.value.title || '',
 })
 </script>
 
@@ -26,12 +26,12 @@ useHead({
     <div :class="['sec-content', rdrAlbum.id]">
       <div class="artwork-wrap">
         <div class="artwork">
-          <nuxt-img :src="src" :alt="rdrAlbum.title" sizes="75vw md:50vw"/>
+          <nuxt-img :src="src" :alt="rdrAlbum.title" sizes="75vw md:50vw" />
         </div>
       </div>
 
       <div class="tracklist">
-        <h1 class="album-title" v-html="rdrAlbum.title" />
+        <h1 class="album-title">{{ rdrAlbum.title }}</h1>
 
         <ol :class="['tracks', rdrAlbum.id ? rdrAlbum.id : '']">
           <li
