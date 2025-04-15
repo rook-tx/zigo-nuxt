@@ -15,7 +15,7 @@ const discoStore = useDiscoStore()
           v-if="discoStore.album === 'this-is-how-it-ends'"
           src="/static/logo/zigo-white.png"
           alt="ZIGO"
-          sizes="108px"
+          sizes="108"
         />
         <svg-logo
           v-else
