@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import disco from '@/assets/disco.json'
+
+function bgim(album: string) {
+  return `/static/covers/${album}.jpg`
+}
+</script>
+
 <template>
   <nav class="square-nav">
     <ol class="albums">
@@ -7,11 +15,12 @@
         :class="['album', album.id]"
       >
         <nuxt-link :to="`/${album.slug}`">
-          <h2 v-html="album.title" />
+          <h2>{{ album.title }}</h2>
           <div class="artwork-wrap">
             <nuxt-img
               :src="bgim(album.id)"
               :alt="album.title"
+              sizes="362 sm:50vw md:25vw"
             />
           </div>
         </nuxt-link>
@@ -19,25 +28,6 @@
     </ol>
   </nav>
 </template>
-
-<script>
-import disco from '@/assets/disco.json'
-
-export default {
-  data() {
-    return {
-      disco,
-    }
-  },
-
-  methods: {
-    bgim(album) {
-      const url = `/static/covers/${album}.jpg`
-      return url
-    },
-  },
-}
-</script>
 
 <style lang="stylus">
 

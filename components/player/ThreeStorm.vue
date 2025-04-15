@@ -233,62 +233,27 @@ export default {
     },
 
     start() {
-      console.log('start')
       this.stopped = false
       this.render()
     },
 
     stop() {
-      console.log('stop')
       this.stopped = true
     },
 
     momo(e) {
-      // if (this.debounce()) { return }
-
-      // if (Math.abs(e.clientX - this.mouse.x) > 1 || Math.abs(e.clientY - this.mouse.y) > 1) {
-      // const mouse = {
-      //   x: e.clientX,
-      //   y: e.clientY
-      // }
       const delta = {
         x: (e.clientX / this.winWidth) * 2 - 1,
         y: (e.clientY / this.winHeight) * 2 - 1,
       }
-      // this.momoActive = true
-
-      // const momo = {
-      //   x: delta.x,
-      //   y: delta.y,
-      //   mouse: {
-      //     x: mouse.x,
-      //     y: mouse.y
-      //   }
-      // }
-
-      // console.log(momo.x, momo.y)
 
       this.mouse = {
         pos: {
-          // x: mouse[0] / 2 * this.Wwidth,
-          // y: mouse[1] / 2 * this.Wheight
           x: delta.x * (this.diameter / 6),
           y: delta.y * (this.diameter / 6),
         },
       }
-      // }
     },
-
-    // momo(mouse) {
-    //   this.mouse = {
-    //     pos: {
-    //       // x: mouse[0] / 2 * this.Wwidth,
-    //       // y: mouse[1] / 2 * this.Wheight
-    //       x: mouse.mouse.x / 2,
-    //       y: mouse.mouse.y / 2
-    //     }
-    //   }
-    // },
 
     resize() {
       this.diameter = Math.max(this.winHeight, this.winWidth) * 0.15

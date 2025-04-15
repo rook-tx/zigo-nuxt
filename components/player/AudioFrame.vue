@@ -4,41 +4,33 @@
       ref="audio"
       :src="soundFile"
       controls
-      @loadstart="loadstart"
+      @progress="progress"
+      @timeupdate="timeupdate"
+      @pause="trackPause"
+    />
+    <!-- @loadstart="loadstart"
       @durationchange="durationchange"
       @loadedmetadata="loadedmetadata"
       @loadeddata="loadeddata"
-      @progress="progress"
       @canplay="canplay"
       @canplaythrough="canplaythrough"
-      @timeupdate="timeupdate"
-      @play="trackPlay"
-      @pause="trackPause"
-    />
+      @play="trackPlay" -->
   </div>
 </template>
 
 <script>
-
 import { mapActions, mapState } from 'pinia'
 import { usePlayerStore } from '@/stores/player'
 import { useDiscoStore } from '@/stores/disco'
 
 export default {
-
   computed: {
-    ...mapState(usePlayerStore, [
-      'playing',
-      'position'
-    ]),
-    ...mapState(useDiscoStore, [
-      'track',
-      'idx'
-    ]),
+    ...mapState(usePlayerStore, ['playing', 'position']),
+    ...mapState(useDiscoStore, ['track', 'idx']),
 
     soundFile() {
       return `/static/tracks/${this.track ? this.track : 'k'}.mp3`
-    }
+    },
   },
 
   watch: {
@@ -49,7 +41,7 @@ export default {
             this.play()
           })
         })
-      }
+      },
     },
 
     playing: {
@@ -59,67 +51,31 @@ export default {
         } else {
           this.$refs.audio.pause()
         }
-      }
-    }
+      },
+    },
   },
 
   methods: {
-    ...mapActions(usePlayerStore, [
-      'play',
-      'pause',
-      'playreport'
-    ]),
-    ...mapActions(useDiscoStore, [
-      'next'
-    ]),
-
-    loadstart() {
-      // console.log(e)
-    },
+    ...mapActions(usePlayerStore, ['play', 'pause', 'playreport']),
+    ...mapActions(useDiscoStore, ['next']),
 
     progress(e) {
       this.playreport(e)
-    },
-
-    durationchange() {
-      // console.log(e)
-    },
-
-    loadedmetadata() {
-      // console.log(e)
-    },
-
-    loadeddata() {
-      // console.log(e)
-    },
-
-    canplay() {
-      // console.log(e)
-    },
-
-    canplaythrough() {
-      // console.log(e)
     },
 
     timeupdate(e) {
       this.playreport(e)
     },
 
-    trackPlay(e) {
-      console.log(e)
-    },
-
-    trackPause(e) {
-      console.log(e)
+    trackPause() {
       if (this.position === 1) {
         this.next(this.idx)
       } else {
         this.pause()
       }
-    }
-  }
+    },
+  },
 }
-
 </script>
 
 <style lang="stylus">

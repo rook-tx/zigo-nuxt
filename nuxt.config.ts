@@ -58,6 +58,21 @@ export default defineNuxtConfig({
     url: 'https://www.wearezigo.com',
   },
 
+  image: {
+    quality: 80,
+    formats: ['avif', 'webp' ],
+    sizes: {
+      // $nano: 400,
+      sm: 600, // $mobile
+      md: 768, // $tablet
+      lg: 1024, // $notebook
+      xl: 1366, // $laptop
+      xxl: 1440, // $laptop-large
+      '2xl': 1600, // $desktop
+      // '3xl': 1920, // $ultra
+    },
+  },
+
   css: ['@/assets/styl/main.styl'],
 
   modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxtjs/sitemap'],

@@ -10,11 +10,13 @@ const position = ref(50)
 const opacity = ref(0)
 
 const img = useImage()
-const dim = computed(() => (deviceStore.portrait ? deviceStore.winHeight : deviceStore.winWidth))
+const options = (deviceStore.portrait || discoStore.album === 'this-is-how-it-ends') ? {
+  height: deviceStore.winHeight,
+} : {
+  width: deviceStore.winWidth,
+}
 const image = computed(() =>
-  img(discoStore.obj.src || '/static/tracks/naam-bg.jpg', {
-    width: dim.value,
-  }),
+  img(discoStore.obj.src || '/static/tracks/naam-bg.jpg', options),
 )
 const stroke = computed(() => `#${discoStore.ui || 'fff'}`)
 const color = computed(() => `#${discoStore.obj.bgColor || '000'}`)
