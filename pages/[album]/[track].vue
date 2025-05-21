@@ -1,5 +1,5 @@
 <script setup>
-import disco from "@/assets/disco.json"
+import disco from '@/assets/disco.json'
 const route = useRoute()
 
 const rdrTrack = computed(() => {

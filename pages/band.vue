@@ -15,7 +15,7 @@ useHead({
 
       <div class="post-half">
         <div class="post-body blurb">
-          <h5>We are Tom Corbett, James FitzGerald, Will Hayes and Ian Iliopoulos, and we are ZIGO.</h5>
+          <h5>We are Tom Corbett, James FitzGerald, Will Hayes and Ian Holmes, and we are ZIGO.</h5>
         </div>
       </div>
     </div>
@@ -121,12 +121,12 @@ useHead({
       <div class="post-body">
         <nuxt-img
           src="/static/band/ian.png"
-          alt="Ian Iliopoulos"
+          alt="Ian Holmes"
           class="band-prof"
           width="220"
           height="220"
         />
-        <h3><strong>Ian Iliopoulos</strong> twangs.</h3>
+        <h3><strong>Ian Holmes</strong> twangs.</h3>
         <p>Ian has not been seen since he boarded a London&ndash;bound train earlier this year, saying only that he was "doing law". We pray for his safe return.</p>
       </div>
     </div>
