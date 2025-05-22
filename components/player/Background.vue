@@ -71,6 +71,22 @@ watch(
       </div>
     </transition>
 
+    <transition>
+      <div
+        v-if="route.name === 'album-track' &&
+          discoStore.album === 'the-fox'"
+        :key="discoStore.track"
+        class="circle"
+      >
+        <nuxt-img
+          class="circle-inner"
+          :src="`/static/tracks/the-fox/${discoStore.track}-circle.jpg`"
+          width="100%"
+          height="100%"
+        />
+      </div>
+    </transition>
+
     <div
       class="shade"
       :style="{
@@ -88,6 +104,8 @@ watch(
         :width="deviceStore.winHeight * (2391 / 900)"
         :style="{
           stroke: stroke,
+          'stroke-width': (route.name === 'album-track' &&
+            discoStore.album === 'the-fox') ? 2 : 1
         }"
       >
         <path d="M1143.14-.08l519.72 900.16" />
@@ -189,6 +207,18 @@ watch(
     transition-property transform, background
     transition-duration 3s, 1s
 
+  .circle
+    border-radius 40vh
+    margin 10vh auto
+    height 80vh
+    width 80vh
+    overflow hidden
+    position relative
+
+    &-inner
+      height 100%
+      width 100%
+
   .over
     opacity .4
     overflow hidden
@@ -208,7 +238,6 @@ watch(
 
     path
       fill none
-      stroke-width 1px
       stroke-miterlimit 10
 
   .upper
