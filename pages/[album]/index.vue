@@ -59,7 +59,7 @@ useHead({
             target="_blank"
             rel="noopener"
           >
-            <svg-spotify fill="#e6e6e6" />
+            <svg-headless />
           </a>
 
           <a
