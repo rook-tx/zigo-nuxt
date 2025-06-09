@@ -208,12 +208,14 @@ watch(
     transition-duration 3s, 1s
 
   .circle
-    border-radius 40vh
-    margin 10vh auto
-    height 80vh
-    width 80vh
+    aspect-ratio 1
+    border-radius 50%
+    height 80%
+    left 50%
+    top 10%
     overflow hidden
-    position relative
+    position absolute
+    transform translate3d(-50%, 0, 0)
 
     &-inner
       height 100%
