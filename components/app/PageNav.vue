@@ -69,13 +69,13 @@ export default {
         key: 'spotify',
         comp: 'svg-spotify',
         title: 'Listen to ZIGO on Spotify',
-        url: 'https://open.spotify.com/album/38EQ0oOvcSIrRFxXCcinNZ'
+        url: 'https://open.spotify.com/artist/7wbdzkkW3cPNpzrFAVtd2f'
       },
       {
         key: 'apple',
         comp: 'svg-apple',
         title: 'Listen to ZIGO on Apple Music',
-        url: 'https://itunes.apple.com/album/the-fox-ep/1020163446'
+        url: 'https://music.apple.com/album/the-fox-ep/1020163446'
       },
       {
         key: 'instagram',

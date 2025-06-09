@@ -52,11 +52,10 @@ useHead({
           </li>
         </ol>
 
-        <div v-if="rdrAlbum.tracks.length > 1" class="network">
+        <div class="network">
           <a
-            v-if="rdrAlbum.spotters"
-            :href="'https://open.spotify.com/album/' + rdrAlbum.spotters"
-            :title="rdrAlbum.title + ' on Spotify'"
+            :href="`https://distrokid.com/hyperfollow/zigo/${rdrAlbum.hyperfollow}`"
+            :title="rdrAlbum.title + ' on all platforms'"
             target="_blank"
             rel="noopener"
           >
@@ -64,7 +63,27 @@ useHead({
           </a>
 
           <a
-            :href="'https://wearezigo.bandcamp.com/album/' + rdrAlbum.slug"
+            v-if="rdrAlbum.spotters"
+            :href="`https://open.spotify.com/album/${rdrAlbum.spotters}`"
+            :title="rdrAlbum.title + ' on Spotify'"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg-spotify fill="#e6e6e6" />
+          </a>
+          
+          <a
+            v-if="rdrAlbum.apple"
+            :href="`https://music.apple.com/${rdrAlbum.apple}`"
+            :title="rdrAlbum.title + ' on Apple Music'"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg-apple fill="#e6e6e6" />
+          </a>
+
+          <a
+            :href="`https://wearezigo.bandcamp.com/album/${rdrAlbum.slug}`"
             :title="rdrAlbum.title + ' on Bandcamp'"
             target="_blank"
             rel="noopener"
@@ -73,45 +92,8 @@ useHead({
           </a>
 
           <a
-            :href="'https://soundcloud.com/wearezigo/sets/' + rdrAlbum.slug"
+            :href="`https://soundcloud.com/wearezigo/${rdrAlbum.soundcloud}`"
             :title="rdrAlbum.title + ' on Soundcloud'"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg-soundcloud fill="#e6e6e6" />
-          </a>
-        </div>
-
-        <div v-else-if="rdrAlbum.tracks.length === 1" class="network">
-          <a
-            v-if="rdrAlbum.tracks[0].spotters"
-            :href="
-              'https://open.spotify.com/album/' + rdrAlbum.tracks[0].spotters
-            "
-            :title="rdrAlbum.tracks[0].title + ' on Spotify'"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg-spotify fill="#e6e6e6" />
-          </a>
-
-          <a
-            :href="
-              'https://wearezigo.bandcamp.com/album/' + rdrAlbum.tracks[0].slug
-            "
-            :title="rdrAlbum.tracks[0].title + ' on Bandcamp'"
-            target="_blank"
-            rel="noopener"
-          >
-            <svg-bandcamp fill="#e6e6e6" />
-          </a>
-
-          <a
-            :href="
-              'https://soundcloud.com/wearezigo/' +
-              rdrAlbum.tracks[0].slug.replace('-you', '')
-            "
-            :title="rdrAlbum.tracks[0].title + ' on Soundcloud'"
             target="_blank"
             rel="noopener"
           >
