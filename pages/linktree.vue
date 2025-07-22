@@ -32,7 +32,7 @@ const links = [
                 class="album-cover"
                 :src="`/static/covers/${album.id}.jpg`"
                 :alt="album.title"
-                sizes="60"
+                sizes="72"
               />
             </div>
           </a>
