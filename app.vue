@@ -2,7 +2,9 @@
   <div :class="['sec', 'player']">
     <ui-sniffer />
 
-    <player-background :fade="obj.type === 'album' ? 0.8 : fade" />
+    <player-background
+:fade="obj.type === 'album' || $route.name === 'linktree' 
+      ? 0.8 : fade" />
 
     <player-three-storm v-if="!mobile && loaded && mode !== 'nav'" />
 
@@ -57,7 +59,7 @@ export default {
     ...mapState(useDiscoStore, ['obj']),
 
     mode() {
-      if (this.$route.name === 'wall') {
+      if (['wall', 'linktree'].includes(this.$route.name)) {
         return 'nav'
       } else if (this.$route.name === 'album-track') {
         return 'track'
