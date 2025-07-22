@@ -1,6 +1,7 @@
 <script setup>
 import disco from '@/assets/disco.json'
 import { useDiscoStore } from '@/stores/disco'
+import { formatHyperfollow } from '@/utils/helpers'
 const route = useRoute()
 
 const discoStore = useDiscoStore()
@@ -54,7 +55,7 @@ useHead({
 
         <div class="network">
           <a
-            :href="`https://distrokid.com/hyperfollow/zigo/${rdrAlbum.hyperfollow}`"
+            :href="formatHyperfollow(rdrAlbum.hyperfollow)"
             :title="rdrAlbum.title + ' on all platforms'"
             target="_blank"
             rel="noopener"
