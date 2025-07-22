@@ -104,7 +104,6 @@ const links = [
   }
 
   .link-title {
-    // fs(mp(1))
     text-align center
   }
 
@@ -115,13 +114,14 @@ const links = [
 
   .album-title {
     order 2
-    // fs(mp(1))
-    line-height 1.2
+    line-height $let*.75
     text-transform uppercase
+    max-width 15em
   }
   
   .album-cover {
     order 1
+    width $gut*2rem
   }
 }
 
