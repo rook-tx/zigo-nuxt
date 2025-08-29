@@ -12,54 +12,48 @@ import {
   RepeatWrapping,
   PMREMGenerator,
   MathUtils,
-  BoxGeometry,
-  MeshStandardMaterial,
-  Mesh,
+  // BoxGeometry,
+  // MeshStandardMaterial,
+  // Mesh,
+  FogExp2,
 } from 'three'
 // import { GUI } from 'three/addons/libs/lil-gui.module.min.js'
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { Water } from 'three/addons/objects/Water.js'
 import { Sky } from 'three/addons/objects/Sky.js'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 // const deviceStore = useDeviceStore()
 
 const canvas = useTemplateRef('canvas')
 
-let camera, scene, renderer
-let controls, water, sun, mesh
-
-function init() {
-
-  renderer = new WebGLRenderer({
+async function init() {
+  // Scene
+  const renderer = new WebGLRenderer({
     canvas: canvas.value,
   })
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(window.innerWidth, window.innerHeight)
-  renderer.setAnimationLoop(animate)
   renderer.toneMapping = ACESFilmicToneMapping
-  renderer.toneMappingExposure = 0.5
+  renderer.toneMappingExposure = 0.6
 
-  //
+  const scene = new Scene()
 
-  scene = new Scene()
-
-  camera = new PerspectiveCamera(
+  const camera = new PerspectiveCamera(
     55,
     window.innerWidth / window.innerHeight,
     1,
     20000,
   )
-  camera.position.set(5, 25, 80)
+  camera.position.set(20, 18, 90)
 
-  //
-
-  sun = new Vector3()
+  // Sun
+  const sun = new Vector3()
 
   // Water
+  const waterGeometry = new PlaneGeometry(100, 3000)
 
-  const waterGeometry = new PlaneGeometry(100, 10000)
-
-  water = new Water(waterGeometry, {
+  const water = new Water(waterGeometry, {
     textureWidth: 512,
     textureHeight: 512,
     waterNormals: new TextureLoader().load(
@@ -69,7 +63,7 @@ function init() {
       },
     ),
     sunDirection: new Vector3(),
-    sunColor: 0xffffff,
+    sunColor: 0xeeeeee,
     waterColor: 0x001e0f,
     distortionScale: 3.7,
     fog: scene.fog !== undefined,
@@ -81,63 +75,111 @@ function init() {
 
   // Skybox
 
-  const sky = new Sky()
-  sky.scale.setScalar(70)
-  scene.add(sky)
-
-  const skyUniforms = sky.material.uniforms
-
-  skyUniforms['turbidity'].value = 50
-  skyUniforms['rayleigh'].value = 4
-  skyUniforms['mieCoefficient'].value = 0.005
-  skyUniforms['mieDirectionalG'].value = 0.8
-
-  const parameters = {
-    elevation: 0.5,
-    azimuth: 180,
-  }
-
-  const pmremGenerator = new PMREMGenerator(renderer)
-  const sceneEnv = new Scene()
-
-  let renderTarget
-
-  function updateSun() {
-    const phi = MathUtils.degToRad(90 - parameters.elevation)
-    const theta = MathUtils.degToRad(parameters.azimuth)
-
-    sun.setFromSphericalCoords(1, phi, theta)
-
-    sky.material.uniforms['sunPosition'].value.copy(sun)
-    water.material.uniforms['sunDirection'].value.copy(sun).normalize()
-
-    if (renderTarget !== undefined) renderTarget.dispose()
-
-    sceneEnv.add(sky)
-    renderTarget = pmremGenerator.fromScene(sceneEnv)
+    const sky = new Sky()
+    sky.scale.setScalar(70)
     scene.add(sky)
+    const skyUniforms = sky.material.uniforms
 
-    scene.environment = renderTarget.texture
+    sky.position.y = 9
+  
+    skyUniforms['turbidity'].value = 50
+    skyUniforms['rayleigh'].value = 4
+    skyUniforms['mieCoefficient'].value = 0.005
+    skyUniforms['mieDirectionalG'].value = 0.8
+
+    const parameters = {
+      elevation: 0.5,
+      azimuth: 180,
+    }
+
+    const pmremGenerator = new PMREMGenerator(renderer)
+    const sceneEnv = new Scene()
+
+    let renderTarget
+
+    function updateSun() {
+      const phi = MathUtils.degToRad(90 - parameters.elevation)
+      const theta = MathUtils.degToRad(parameters.azimuth)
+
+      sun.setFromSphericalCoords(1, phi, theta)
+
+      sky.material.uniforms['sunPosition'].value.copy(sun)
+      water.material.uniforms['sunDirection'].value.copy(sun).normalize()
+
+      if (renderTarget !== undefined) renderTarget.dispose()
+
+      sceneEnv.add(sky)
+      renderTarget = pmremGenerator.fromScene(sceneEnv)
+      scene.add(sky)
+
+      scene.environment = renderTarget.texture
+    }
+
+    updateSun()
+
+  // Boat
+
+  // const geometry = new BoxGeometry(10, 12, 50)
+  // const material = new MeshStandardMaterial({ roughness: 0 })
+
+  // mesh = new Mesh(geometry, material)
+  // scene.add(mesh)
+
+  const loader = new GLTFLoader().setPath( 'static/models/' )
+
+  const model = await loader.loadAsync( 'scene.gltf' )
+
+  model.scene.scale.set(.85, .85, .85)
+  model.scene.rotation.y = Math.PI / 2
+
+  scene.add(model.scene)
+
+  scene.fog = new FogExp2( 0x331144, 0.0001 );
+
+  // Controls
+  // const controls = new OrbitControls(camera, renderer.domElement)
+  // controls.maxPolarAngle = Math.PI * 0.495
+  // controls.target.set(0, 10, 0)
+  // controls.minDistance = 50.0
+  // controls.maxDistance = 200.0
+  // controls.update()
+
+
+  renderer.setAnimationLoop(animate)
+
+  function animate() {
+    render()
+    // stats.update();
   }
 
-  updateSun()
+  // let time = 10
 
-  //
+  function render() {
+    const time = performance.now() / 1000 
 
-  const geometry = new BoxGeometry(10, 12, 50)
-  const material = new MeshStandardMaterial({ roughness: 0 })
+    const beat = time * (60 / 108)
 
-  mesh = new Mesh(geometry, material)
-  scene.add(mesh)
+    water.material.uniforms['time'].value = time
+    model.scene.position.y = Math.sin(beat * 2) * 0.6 + 6.3
+   
+    // const travel = time * 0.00001
+    // sky.position.z -= travel
+    // model.scene.position.z -= travel
 
-  //
+    const circleTime = beat / 16
+    const r = 108
+    camera.position.x = Math.sin(circleTime) * r
+    camera.position.z = model.scene.position.z + Math.cos(circleTime) * r
+    camera.position.y = Math.cos(circleTime * 2 - Math.PI) * 8 + 22
 
-  controls = new OrbitControls(camera, renderer.domElement)
-  controls.maxPolarAngle = Math.PI * 0.495
-  controls.target.set(0, 10, 0)
-  controls.minDistance = 50.0
-  controls.maxDistance = 200.0
-  controls.update()
+    const el = 3
+    parameters.elevation =  Math.cos(circleTime * 2 - Math.PI) * el + el + 0.2
+    updateSun()
+
+    camera.lookAt(model.scene.position)
+
+    renderer.render(scene, camera)
+  }
 
   //
 
@@ -161,37 +203,26 @@ function init() {
   // folderWater.open();
 
   //
+  
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  }
 
   window.addEventListener('resize', onWindowResize)
 }
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-
-  renderer.setSize(window.innerWidth, window.innerHeight)
-}
-
-function animate() {
-  render()
-  // stats.update();
-}
-
-function render() {
-  const time = performance.now() * 0.001
-
-  mesh.position.y = Math.sin(time) * 2 + 5
-  // camera.position.z -= time * 0.001
-  // mesh.position.z -= time * 0.001
-
-  water.material.uniforms['time'].value += 1.0 / 60.0
-
-  renderer.render(scene, camera)
-}
-
+  
 onMounted(() => {
   init()
 })
+
+// onBeforeMount(() => {
+//   window.removeEventListener('resize', onWindowResize)
+// })
+
+// "Ship JJ" (https://skfb.ly/oMKWO) by gogiart is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 </script>
 
 <template>
