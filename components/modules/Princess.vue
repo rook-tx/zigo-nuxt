@@ -21,7 +21,7 @@ import {
 // import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { Water } from 'three/addons/objects/Water.js'
 import { Sky } from 'three/addons/objects/Sky.js'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 // const deviceStore = useDeviceStore()
 
@@ -75,47 +75,47 @@ async function init() {
 
   // Skybox
 
-    const sky = new Sky()
-    sky.scale.setScalar(70)
+  const sky = new Sky()
+  sky.scale.setScalar(70)
+  scene.add(sky)
+  const skyUniforms = sky.material.uniforms
+
+  sky.position.y = 9
+
+  skyUniforms['turbidity'].value = 50
+  skyUniforms['rayleigh'].value = 4
+  skyUniforms['mieCoefficient'].value = 0.005
+  skyUniforms['mieDirectionalG'].value = 0.8
+
+  const parameters = {
+    elevation: 0.5,
+    azimuth: 180,
+  }
+
+  const pmremGenerator = new PMREMGenerator(renderer)
+  const sceneEnv = new Scene()
+
+  let renderTarget
+
+  function updateSun() {
+    const phi = MathUtils.degToRad(90 - parameters.elevation)
+    const theta = MathUtils.degToRad(parameters.azimuth)
+
+    sun.setFromSphericalCoords(1, phi, theta)
+
+    sky.material.uniforms['sunPosition'].value.copy(sun)
+    water.material.uniforms['sunDirection'].value.copy(sun).normalize()
+
+    if (renderTarget !== undefined) renderTarget.dispose()
+
+    sceneEnv.add(sky)
+    renderTarget = pmremGenerator.fromScene(sceneEnv)
     scene.add(sky)
-    const skyUniforms = sky.material.uniforms
 
-    sky.position.y = 9
-  
-    skyUniforms['turbidity'].value = 50
-    skyUniforms['rayleigh'].value = 4
-    skyUniforms['mieCoefficient'].value = 0.005
-    skyUniforms['mieDirectionalG'].value = 0.8
+    scene.environment = renderTarget.texture
+  }
 
-    const parameters = {
-      elevation: 0.5,
-      azimuth: 180,
-    }
-
-    const pmremGenerator = new PMREMGenerator(renderer)
-    const sceneEnv = new Scene()
-
-    let renderTarget
-
-    function updateSun() {
-      const phi = MathUtils.degToRad(90 - parameters.elevation)
-      const theta = MathUtils.degToRad(parameters.azimuth)
-
-      sun.setFromSphericalCoords(1, phi, theta)
-
-      sky.material.uniforms['sunPosition'].value.copy(sun)
-      water.material.uniforms['sunDirection'].value.copy(sun).normalize()
-
-      if (renderTarget !== undefined) renderTarget.dispose()
-
-      sceneEnv.add(sky)
-      renderTarget = pmremGenerator.fromScene(sceneEnv)
-      scene.add(sky)
-
-      scene.environment = renderTarget.texture
-    }
-
-    updateSun()
+  updateSun()
 
   // Boat
 
@@ -125,16 +125,16 @@ async function init() {
   // mesh = new Mesh(geometry, material)
   // scene.add(mesh)
 
-  const loader = new GLTFLoader().setPath( 'static/models/' )
+  const loader = new GLTFLoader().setPath('static/models/')
 
-  const model = await loader.loadAsync( 'scene.gltf' )
+  const model = await loader.loadAsync('scene.gltf')
 
-  model.scene.scale.set(.85, .85, .85)
+  model.scene.scale.set(0.85, 0.85, 0.85)
   model.scene.rotation.y = Math.PI / 2
 
   scene.add(model.scene)
 
-  scene.fog = new FogExp2( 0x331144, 0.0001 );
+  scene.fog = new FogExp2(0x331144, 0.0001)
 
   // Controls
   // const controls = new OrbitControls(camera, renderer.domElement)
@@ -143,7 +143,6 @@ async function init() {
   // controls.minDistance = 50.0
   // controls.maxDistance = 200.0
   // controls.update()
-
 
   renderer.setAnimationLoop(animate)
 
@@ -154,26 +153,33 @@ async function init() {
 
   // let time = 10
 
-  function render() {
-    const time = performance.now() / 1000 
+  let time = 0
 
-    const beat = time * (60 / 108)
+  function render() {
+    time += performance.now() / 1000 - time
+
+    const beat = (108 / 60) * time
+    const bar = Math.ceil(beat)
+
+    const boatY = 1 + beat > 32 ? Math.min(1, (beat - 32) / 16) * 6.3 : 0
 
     water.material.uniforms['time'].value = time
-    model.scene.position.y = Math.sin(beat * 2) * 0.6 + 6.3
-   
+    const boatSine = Math.sin(beat / 2) * 0.6 + boatY
+
+    model.scene.position.y = boatSine
+
     // const travel = time * 0.00001
     // sky.position.z -= travel
     // model.scene.position.z -= travel
 
-    const circleTime = beat / 16
+    const circleTime = beat / 32
     const r = 108
     camera.position.x = Math.sin(circleTime) * r
     camera.position.z = model.scene.position.z + Math.cos(circleTime) * r
     camera.position.y = Math.cos(circleTime * 2 - Math.PI) * 8 + 22
 
     const el = 3
-    parameters.elevation =  Math.cos(circleTime * 2 - Math.PI) * el + el + 0.2
+    parameters.elevation = Math.cos(circleTime * 2 - Math.PI) * el + el + 0.2
     updateSun()
 
     camera.lookAt(model.scene.position)
@@ -203,24 +209,25 @@ async function init() {
   // folderWater.open();
 
   //
-  
+
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
-    
+
     renderer.setSize(window.innerWidth, window.innerHeight)
   }
 
   window.addEventListener('resize', onWindowResize)
+
+  onBeforeUnmount(() => {
+    renderer.setAnimationLoop(null)
+    window.removeEventListener('resize', onWindowResize)
+  })
 }
-  
+
 onMounted(() => {
   init()
 })
-
-// onBeforeMount(() => {
-//   window.removeEventListener('resize', onWindowResize)
-// })
 
 // "Ship JJ" (https://skfb.ly/oMKWO) by gogiart is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 </script>
