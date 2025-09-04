@@ -27,6 +27,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 const canvas = useTemplateRef('canvas')
 
+const chorus = 48
+
 async function init() {
   // Scene
   const renderer = new WebGLRenderer({
@@ -156,21 +158,27 @@ async function init() {
   let time = 0
 
   function render() {
-    time += performance.now() / 1000 - time
+    time = performance.now() / 1000
+    water.material.uniforms['time'].value = time
 
     const beat = (108 / 60) * time
-    const bar = Math.ceil(beat)
+    // const bar = Math.ceil(beat)
 
-    const boatY = 1 + beat > 32 ? Math.min(1, (beat - 32) / 16) * 6.3 : 0
-
-    water.material.uniforms['time'].value = time
-    const boatSine = Math.sin(beat / 2) * 0.6 + boatY
-
+    // const boatY = 1 + beat > 32 ? Math.min(1, (Math.max(0, beat - 32) / 16)) * 6.3 : 0
+    const boatY = 1.3
+    const boatSine = Math.sin(beat / 2) * 0.5 + boatY
     model.scene.position.y = boatSine
+    
+    const transition = (start, length) => Math.min(1, (Math.max(0, beat - start) / length))
+    
+    const takeoff = (Math.PI / 90)
+    const boatRot = beat > 64 ? takeoff - transition(64, 8) * takeoff :
+      beat > chorus ? transition(chorus, 8) * takeoff : 0
+    model.scene.rotation.x = boatRot
 
-    // const travel = time * 0.00001
-    // sky.position.z -= travel
-    // model.scene.position.z -= travel
+    const waterY = beat > chorus ? transition(chorus, 16) * -10 : 0
+    // const waterRot = (Math.PI * 2) + beat > 32 ? waterFactor * (Math.PI / 180) : 0
+    water.position.y = waterY
 
     const circleTime = beat / 32
     const r = 108
