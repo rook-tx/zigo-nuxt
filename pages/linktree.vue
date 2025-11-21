@@ -4,6 +4,11 @@ import { formatHyperfollow } from '@/utils/helpers'
 useHead({
   title: 'Linktree',
 })
+const sophia = [
+  { title: 'Bandcamp', url: 'https://wearezigo.bandcamp.com/track/sophia' },
+  { title: 'Spotify', url: 'https://open.spotify.com/album/3dWXHJzXUrCRtoqVaZs10M' },
+  // { title: 'Tidal', url: 'https://open.spotify.com/album/3dWXHJzXUrCRtoqVaZs10M' },
+]
 const links = [
   { title: 'Website', url: '/' },
   { title: 'Who are ZIGO?', url: '/band' },
@@ -16,7 +21,30 @@ const links = [
 
       <h1 class="page-title">Links</h1>
 
-      <h2 class="links-title">Listen now</h2>
+      <h2 class="links-title">Listen to Sophia</h2>
+
+      <ul class="links">
+        <li v-for="link in sophia" :key="link.id">
+          <a
+            :href="link.url"
+            :title="'Sophia on ' + link.title"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="link">
+              <span class="link-title">{{ link.title }}</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <nuxt-img
+        :src="`/static/covers/sophia.jpg`"
+        alt="ZIGO - Sophia"
+        sizes="600"
+      />
+
+      <h2 class="links-title">More Music</h2>
 
       <ul class="links">
         <li v-for="album in disco" :key="album.id">
