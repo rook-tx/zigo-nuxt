@@ -37,12 +37,19 @@ const links = [
           </a>
         </li>
       </ul>
-
-      <nuxt-img
-        :src="`/static/covers/sophia.jpg`"
-        alt="ZIGO - Sophia"
-        sizes="600"
-      />
+      
+      <a
+        href="https://distrokid.com/hyperfollow/zigo/sophia"
+        title="Sophia on all platforms"
+        target="_blank"
+        rel="noopener"
+      >
+        <nuxt-img
+          :src="`/static/covers/sophia.jpg`"
+          alt="ZIGO - Sophia"
+          sizes="600"
+        />
+      </a>
 
       <h2 class="links-title">More Music</h2>
 
