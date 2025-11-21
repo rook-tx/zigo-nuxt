@@ -42,12 +42,13 @@ async function init() {
   const scene = new Scene()
 
   const camera = new PerspectiveCamera(
-    55,
+    75,
     window.innerWidth / window.innerHeight,
     1,
     20000,
   )
-  camera.position.set(20, 18, 90)
+  camera.position.set(3, 18, 40)
+  camera.lookAt(0,-18,5)
 
   // Sun
   const sun = new Vector3()
@@ -165,32 +166,32 @@ async function init() {
     // const bar = Math.ceil(beat)
 
     // const boatY = 1 + beat > 32 ? Math.min(1, (Math.max(0, beat - 32) / 16)) * 6.3 : 0
-    const boatY = 1.3
-    const boatSine = Math.sin(beat / 2) * 0.5 + boatY
+    const boatY = 30
+    const boatSine = Math.sin(beat / 2) * 1 + boatY
     model.scene.position.y = boatSine
     
-    const transition = (start, length) => Math.min(1, (Math.max(0, beat - start) / length))
+    // const transition = (start, length) => Math.min(1, (Math.max(0, beat - start) / length))
     
-    const takeoff = (Math.PI / 90)
-    const boatRot = beat > 64 ? takeoff - transition(64, 8) * takeoff :
-      beat > chorus ? transition(chorus, 8) * takeoff : 0
-    model.scene.rotation.x = boatRot
+    // const takeoff = (Math.PI / 90)
+    // const boatRot = beat > 64 ? takeoff - transition(64, 8) * takeoff :
+    //   beat > chorus ? transition(chorus, 8) * takeoff : 0
+    // model.scene.rotation.x = boatRot
 
-    const waterY = beat > chorus ? transition(chorus, 16) * -10 : 0
-    // const waterRot = (Math.PI * 2) + beat > 32 ? waterFactor * (Math.PI / 180) : 0
-    water.position.y = waterY
+    // const waterY = beat > chorus ? transition(chorus, 16) * -10 : 0
+    // // const waterRot = (Math.PI * 2) + beat > 32 ? waterFactor * (Math.PI / 180) : 0
+    // water.position.y = waterY
 
     const circleTime = beat / 32
     const r = 108
-    camera.position.x = Math.sin(circleTime) * r
-    camera.position.z = model.scene.position.z + Math.cos(circleTime) * r
-    camera.position.y = Math.cos(circleTime * 2 - Math.PI) * 8 + 22
+    // camera.position.x = Math.sin(circleTime) * r
+    // camera.position.z = -model.scene.position.z - Math.cos(circleTime) * r
+    // camera.position.y = Math.cos(circleTime * 2 - Math.PI) * 8 + 22
 
     const el = 3
-    parameters.elevation = Math.cos(circleTime * 2 - Math.PI) * el + el + 0.2
+    parameters.elevation = Math.cos(circleTime * 4 - Math.PI) * el + el + 0.2
     updateSun()
 
-    camera.lookAt(model.scene.position)
+    // camera.lookAt(model.scene.position)
 
     renderer.render(scene, camera)
   }

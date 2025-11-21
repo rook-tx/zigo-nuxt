@@ -8,11 +8,11 @@ definePageMeta({
 
 <template>
   <div class="sophia-page">
-    <transition>
+    <!-- <transition>
       <modules-logo-button />
-    </transition>
+    </transition> -->
 
-    <app-page-nav />
+    <!-- <app-page-nav /> -->
     <Princess />
   </div>
 </template>
