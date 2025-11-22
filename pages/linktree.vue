@@ -7,6 +7,7 @@ useHead({
 const sophia = [
   { title: 'Bandcamp', url: 'https://wearezigo.bandcamp.com/track/sophia' },
   { title: 'Spotify', url: 'https://open.spotify.com/album/3dWXHJzXUrCRtoqVaZs10M' },
+  { title: 'Apple Music', url: 'https://music.apple.com/album/sophia-single/1855161510' },
   { title: 'Tidal', url: 'https://tidal.com/album/475308034' },
 ]
 const links = [
