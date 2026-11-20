@@ -4,10 +4,23 @@ import { formatHyperfollow } from '@/utils/helpers'
 useHead({
   title: 'Linktree',
 })
+const ganye = [
+  { title: 'Bandcamp', url: 'https://wearezigo.bandcamp.com/track/ganye' },
+  {
+    title: 'All platforms',
+    url: 'https://distrokid.com/hyperfollow/zigo6/ganye',
+  },
+]
 const sophia = [
   { title: 'Bandcamp', url: 'https://wearezigo.bandcamp.com/track/sophia' },
-  { title: 'Spotify', url: 'https://open.spotify.com/album/3dWXHJzXUrCRtoqVaZs10M' },
-  { title: 'Apple Music', url: 'https://music.apple.com/album/sophia-single/1855161510' },
+  {
+    title: 'Spotify',
+    url: 'https://open.spotify.com/album/3dWXHJzXUrCRtoqVaZs10M',
+  },
+  {
+    title: 'Apple Music',
+    url: 'https://music.apple.com/album/sophia-single/1855161510',
+  },
   { title: 'Tidal', url: 'https://tidal.com/album/475308034' },
 ]
 const links = [
@@ -19,8 +32,37 @@ const links = [
 <template>
   <main>
     <div class="links-content">
-
       <h1 class="page-title">Links</h1>
+
+      <h2 class="links-title">Listen to Ganye</h2>
+
+      <ul class="links">
+        <li v-for="link in ganye" :key="link.id">
+          <a
+            :href="link.url"
+            :title="'Ganye on ' + link.title"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="link">
+              <span class="link-title">{{ link.title }}</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <a
+        href="https://distrokid.com/hyperfollow/zigo6/ganye"
+        title="Ganye on all platforms"
+        target="_blank"
+        rel="noopener"
+      >
+        <nuxt-img
+          :src="`/static/covers/ganye.jpg`"
+          alt="ZIGO - Ganye"
+          sizes="600"
+        />
+      </a>
 
       <h2 class="links-title">Listen to Sophia</h2>
 
@@ -38,7 +80,7 @@ const links = [
           </a>
         </li>
       </ul>
-      
+
       <a
         href="https://distrokid.com/hyperfollow/zigo/sophia"
         title="Sophia on all platforms"
@@ -79,10 +121,7 @@ const links = [
 
       <ul>
         <li v-for="link in links" :key="link.url">
-          <NuxtLink
-            :to="link.url"
-            :title="link.title"
-          >
+          <NuxtLink :to="link.url" :title="link.title">
             <div class="link">
               <span class="link-title">{{ link.title }}</span>
             </div>
@@ -90,7 +129,6 @@ const links = [
         </li>
       </ul>
     </div>
-
   </main>
 </template>
 
@@ -154,11 +192,10 @@ const links = [
     text-transform uppercase
     max-width 15em
   }
-  
+
   .album-cover {
     order 1
     width $gut*2rem
   }
 }
-
 </style>
