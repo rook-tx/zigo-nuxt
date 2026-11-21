@@ -10,7 +10,7 @@ export const useDiscoStore = defineStore('disco', {
     idx: 0,
     obj: {
       ui: 'fff',
-      src: '/static/tracks/naam-bg.jpg',
+      src: '/static/tracks/ganye-bg.jpg',
       bg: '000',
       bgType: 'cover',
       bgColor: '000',
@@ -44,7 +44,7 @@ export const useDiscoStore = defineStore('disco', {
 
       let nowPlaying = {
         ui: 'fff',
-        src: '/static/tracks/naam-bg.jpg',
+        src: '/static/tracks/ganye-bg.jpg',
         bg: '000',
         bgType: 'cover',
         bgColor: '000',
@@ -99,7 +99,7 @@ export const useDiscoStore = defineStore('disco', {
           scIdx: nowPlaying.scIdx || 0,
           ui: nowPlaying.ui || 'fff',
           type: nowPlaying.type || 'track',
-          src: nowPlaying.src || '/static/tracks/naam-bg.jpg',
+          src: nowPlaying.src || '/static/tracks/ganye-bg.jpg',
           bgType: nowPlaying.bgType || 'cover',
           bgColor: nowPlaying.bgColor || '000000',
           color: nowPlaying.color || 'fa1178'
