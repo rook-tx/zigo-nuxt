@@ -7,21 +7,21 @@ useHead({
 const ganye = [
   { title: 'Bandcamp', url: 'https://wearezigo.bandcamp.com/track/ganye' },
   {
+    title: 'Spotify',
+    url: 'https://open.spotify.com/track/5yxa2apdWQX91FxsWeuuVs',
+  },
+  {
+    title: 'Apple Music',
+    url: 'https://music.apple.com/album/ganye-single/6837373159',
+  },
+  {
     title: 'All platforms',
     url: 'https://distrokid.com/hyperfollow/zigo6/ganye',
   },
 ]
 const sophia = [
   { title: 'Bandcamp', url: 'https://wearezigo.bandcamp.com/track/sophia' },
-  {
-    title: 'Spotify',
-    url: 'https://open.spotify.com/album/3dWXHJzXUrCRtoqVaZs10M',
-  },
-  {
-    title: 'Apple Music',
-    url: 'https://music.apple.com/album/sophia-single/1855161510',
-  },
-  { title: 'Tidal', url: 'https://tidal.com/album/475308034' },
+  { title: 'Streaming', url: 'https://distrokid.com/hyperfollow/zigo/sophia' },
 ]
 const links = [
   { title: 'Website', url: '/' },
