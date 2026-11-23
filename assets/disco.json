@@ -370,11 +370,11 @@
     "side": "Sophia",
     "cover": "../images/covers/sophia.jpg",
     "bg": "ffffff",
-    "color": "070ca3",
-    "ui": "040d72",
-    "apple": "album/sophia-single/1816104792",
+    "color": "ffffff",
+    "ui": "ffffff",
+    "apple": "album/sophia-single/1855161510",
     "hyperfollow": "sophia",
-    "spotters": "0O21yuHTauypyuHoe6RPR7",
+    "spotters": "3dWXHJzXUrCRtoqVaZs10M",
     "scIdx": 24,
     "credits": "<p>Released November 19, 2025</p><p>Written and performed by ZIGO: Tom Corbett, James FitzGerald, Will Hayes and Ian Holmes.</p><p>Engineered and produced by Tom Corbett and Will Hayes.</p><p>Cover artwork by Tom Corbett.",
     "tracks": [
@@ -382,8 +382,8 @@
         "slug": "sophia",
         "id": "sophia",
         "bg": "ffffff",
-        "color": "0805d5",
-        "ui": "040d72",
+        "color": "ffffff",
+        "ui": "ffffff",
         "title": "Sophia",
         "scIdx": 24,
         "lyrics": "<h1 class=\"lyrics-title\">Sophia</h1><p>He was someone more persuasive than you<br>And he turned around slowly and walked out on you<br>He was trying so hard to be proud of you<br>But this is not your best<br>This is not a test.</p><p>It's not strictly true, I never relied on divine intervention<br>I look at you, and I see a whole other side to perfection</p><p>Now it's all over your face<br>And it's all over the news<br>That I could break your brittle teenage heart in two</p><p>Break away!<br>Let's live our lives unfettered<br>Break away!<br>Let's live our lives unending</p><p>...now it's all over the news.</p><p>Welcome to Hell, let me get you a drink<br>You can stay, if you want to.</p>"
@@ -398,10 +398,11 @@
     "cover": "../images/covers/ganye.jpg",
     "bg": "496F6E",
     "color": "496F6E",
-    "ui": "ffffff",
-    "apple": "album/ganye-single/1816104792",
-    "hyperfollow": "ganye",
-    "spotters": "0O21yuHTauypyuHoe6RPR7",
+    "ui": "00322C",
+    "apple": "album/ganye-single/6837373159",
+    "hyperfollow": "https://distrokid.com/hyperfollow/zigo6/ganye",
+    "spotters": "5yxa2apdWQX91FxsWeuuVs",
+    "soundcloud": "",
     "scIdx": 25,
     "credits": "<p>Released November 20, 2026</p><p>Written and performed by ZIGO: Tom Corbett, James FitzGerald, Will Hayes and Ian Holmes.</p><p>Engineered and produced by Tom Corbett and Will Hayes.</p><p>Cover artwork by Tom Corbett.",
     "tracks": [
@@ -410,10 +411,10 @@
         "id": "ganye",
         "bg": "496F6E",
         "color": "496F6E",
-        "ui": "ffffff",
+        "ui": "00322C",
         "title": "Ganye",
         "scIdx": 25,
-        "lyrics": "<h1 class=\"lyrics-title\">Ganye</h1><p>He was someone more persuasive than you<br>And he turned around slowly and walked out on you<br>He was trying so hard to be proud of you<br>But this is not your best<br>This is not a test.</p><p>It's not strictly true, I never relied on divine intervention<br>I look at you, and I see a whole other side to perfection</p><p>Now it's all over your face<br>And it's all over the news<br>That I could break your brittle teenage heart in two</p><p>Break away!<br>Let's live our lives unfettered<br>Break away!<br>Let's live our lives unending</p><p>...now it's all over the news.</p><p>Welcome to Hell, let me get you a drink<br>You can stay, if you want to.</p>"
+        "lyrics": "<h1 class=\"lyrics-title\">Ganye</h1><p>I don’t want to seem ungrateful for<br>\nBlissful memories you gave me<br>\nWhen we shared the same space but<br>\nYou left it in such a way<br>\nRemoved every single trace of your love<br>\nThat I can’t help looking back with distaste<br></p><p>\nI can’t help the way you make me feel<br>\nHolding on to what felt so real<br>\nAnd I refuse to let it go because<br>\nYou held me in such a way<br>\nTook on a better shape in my arms<br>\nAnd now you think that you’re better off without me?</p>\n\n<p>You must be fooling yourself</p>\n\n<p>Depression kept me in bed for weeks<br>\nWas never much of a friend to me<br>\nI tried and tried without doing anything<br>\nBut you’re in my head<br>\nIn my head<br>\nIn my head<br>\nWithout me</p>\n\n<p>You’re in my head<br>\nYou’re in my head<br>\nYou’re in my head<br>\nWithout me<br>\nYou’re in my head<br>\nYou’re in my head<br>\nYou’re in my head<br>\nWithout me</p>\n\n<p>I was future with no past<br>\nI was staring into broken glass<br>\nTake my rejects<br>\nTake my pain<br>\nReshape my body and take my name</p>\n\n<p>We<br>\nAre<br>\nForever<br>\nNo longer.</p>\n\n<p>Depression kept me in bed for weeks</p>\n\n<p>I spent all night trying to leave your bedroom<br>\nGuess I got a fear of the known</p>\n\n<p>When I<br>\nSpent the last days of your reign<br>\nSpinning like a broken piece of porcelain<br>\nOn the tiles of my own brain<br>\nSinging out:<br>\nSurprise!</p>\n\n<p>If you came to me now<br>\nWith fire in your heart<br>\nAnd penance in your eyes<br>\nWe could pretend like nothing else mattered<br>\nLike nothing else mattered<br>\nI know that you’re broken, I know you’ve changed<br>\nBut your body still fits mine<br>\nWe could pretend like nothing else mattered<br>\nLike nothing else mattered</p>\n\n<p>We<br>\nAre<br>\nForever<br>\nNo longer.</p>"
       }
     ]
   }

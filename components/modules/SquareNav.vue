@@ -153,7 +153,7 @@ function bgim(album: string) {
     transition: opacity 0.5s $easeOutCubic
     transition-property transform, opacity
 
-    for n in 2..4
+    for n in 2..6
       &:nth-child({n})
         transition-delay (n * .1s)
 

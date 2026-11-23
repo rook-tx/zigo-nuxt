@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
   <div
     :class="['headless', { 'headless--moving': moving }]"
     :style="{
-      transform: `translateX(${pos.x}px) translateY(${pos.y}px) rotate(${moving ? 0 : -20}deg)`,
+      transform: `translateX(${pos.x}px) translateY(${pos.y}px) rotate(${moving ? 0 : 20}deg)`,
     }"
   >
     <svg
