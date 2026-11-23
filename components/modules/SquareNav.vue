@@ -9,11 +9,7 @@ function bgim(album: string) {
 <template>
   <nav class="square-nav">
     <ol class="albums">
-      <li
-        v-for="album in disco"
-        :key="album.id"
-        :class="['album', album.id]"
-      >
+      <li v-for="album in disco" :key="album.id" :class="['album', album.id]">
         <nuxt-link :to="`/${album.slug}`">
           <h2>{{ album.title }}</h2>
           <div class="artwork-wrap">
@@ -60,6 +56,9 @@ function bgim(album: string) {
       color $w
       pad(0, 1)
 
+    @media screen and (min-width: $mobile) and (min-aspect-ratio: 1)
+      font-size 0
+
   .tihie
     h2
       font-family $franklin
@@ -73,6 +72,10 @@ function bgim(album: string) {
       height 100%
       pad(0, .5)
       flex-wrap wrap
+
+    @media screen and (min-width: $mobile) and (min-aspect-ratio: 1)
+      max-width 120vh
+      margin-inline auto
 
   .album-title
     text-transform uppercase
@@ -107,14 +110,17 @@ function bgim(album: string) {
       width 50%
 
     @media screen and (min-width: $mobile) and (min-aspect-ratio: 1)
-      width 25%
+      height 50%
+      width 33%
+
+      a
+        height 100%
 
     +below($mobile)
       max-width $let * 12rem
       margin 0 auto
 
   .artwork-wrap
-    background-repeat no-repeat
     flex-shrink 0
     pad(.5,.5)
 
@@ -123,6 +129,14 @@ function bgim(album: string) {
 
     img
       width 100%
+
+    @media screen and (min-width: $mobile) and (min-aspect-ratio: 1)
+      margin-inline auto
+      height 100%
+
+      img
+        width auto
+        height 100%
 
   .persuasive-single
     .track
@@ -139,7 +153,7 @@ function bgim(album: string) {
     transition: opacity 0.5s $easeOutCubic
     transition-property transform, opacity
 
-    for n in 2..4
+    for n in 2..6
       &:nth-child({n})
         transition-delay (n * .1s)
 
@@ -154,5 +168,4 @@ function bgim(album: string) {
   .album
     opacity: 1
     transform translateY(0%)
-
 </style>

@@ -8,16 +8,13 @@ const playerStore = usePlayerStore()
 defineProps({
   type: {
     type: String,
-    default: 'playpause'
-  }
+    default: 'playpause',
+  },
 })
 </script>
 
 <template>
-  <button
-    type="button"
-    :class="[ type, 'player-button' ]"
-  >
+  <button type="button" :class="[type, 'player-button']">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 116 100"
@@ -26,28 +23,10 @@ defineProps({
       :fill="discoStore.fade ? '#ccc' : `#${discoStore.ui}`"
       focusable="false"
     >
-
       <g v-if="type === 'playpause'">
-        <g
-          v-show="playerStore.playing"
-          id="pause"
-        >
-          <rect
-            x="34"
-            y="25"
-            width="19"
-            height="50"
-            rx="1"
-            ry="1"
-          />
-          <rect
-            x="63"
-            y="25"
-            width="19"
-            height="50"
-            rx="1"
-            ry="1"
-          />
+        <g v-show="playerStore.playing" id="pause">
+          <rect x="34" y="25" width="19" height="50" rx="1" ry="1" />
+          <rect x="63" y="25" width="19" height="50" rx="1" ry="1" />
         </g>
         <path
           v-show="!playerStore.playing"
@@ -57,19 +36,25 @@ defineProps({
       </g>
 
       <g v-else-if="type === 'prev'">
-        <path d="M30.53 49.5a.53.53 0 0 0 0 1l27.13 15.67c.48.28.87 0 .87-.5V34.33c0-.55-.39-.77-.87-.5z" />
-        <path d="M49.77 49.5a.53.53 0 0 0 0 1l27.14 15.67c.48.28.87 0 .87-.5V34.33c0-.55-.39-.77-.87-.5z" />
+        <path
+          d="M30.53 49.5a.53.53 0 0 0 0 1l27.13 15.67c.48.28.87 0 .87-.5V34.33c0-.55-.39-.77-.87-.5z"
+        />
+        <path
+          d="M49.77 49.5a.53.53 0 0 0 0 1l27.14 15.67c.48.28.87 0 .87-.5V34.33c0-.55-.39-.77-.87-.5z"
+        />
       </g>
 
       <g v-else-if="type === 'next'">
-        <path d="M85.47 50.5a.53.53 0 0 0 0-1L58.34 33.83c-.48-.27-.87-.05-.87.5v31.34c0 .55.39.78.87.5z" />
-        <path d="M66.23 50.5a.53.53 0 0 0 0-1L39.09 33.83c-.48-.27-.87-.05-.87.5v31.34c0 .55.39.78.87.5z" />
+        <path
+          d="M85.47 50.5a.53.53 0 0 0 0-1L58.34 33.83c-.48-.27-.87-.05-.87.5v31.34c0 .55.39.78.87.5z"
+        />
+        <path
+          d="M66.23 50.5a.53.53 0 0 0 0-1L39.09 33.83c-.48-.27-.87-.05-.87.5v31.34c0 .55.39.78.87.5z"
+        />
       </g>
-
     </svg>
   </button>
 </template>
-
 
 <style lang="stylus">
 
@@ -87,9 +72,9 @@ defineProps({
   width: 11.6vh;
   z-index: 1;
   transition opacity .15s
-  
+
   @media (hover: hover) {
-    opacity .9
+    opacity .8
 
     &:hover {
       opacity 1
@@ -109,6 +94,10 @@ defineProps({
 
   path {
     stroke-linejoin: round;
+  }
+
+  &.playpause {
+    padding: .5vh;
   }
 
   &.next {
@@ -135,5 +124,4 @@ defineProps({
     }
   }
 }
-
 </style>

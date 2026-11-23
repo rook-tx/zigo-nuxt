@@ -10,13 +10,17 @@ const position = ref(50)
 const opacity = ref(0)
 
 const img = useImage()
-const options = computed(() => (deviceStore.portrait || discoStore.album === 'this-is-how-it-ends') ? {
-  height: deviceStore.winHeight,
-} : {
-  width: deviceStore.winWidth,
-})
+const options = computed(() =>
+  deviceStore.portrait || discoStore.album === 'this-is-how-it-ends'
+    ? {
+        height: deviceStore.winHeight,
+      }
+    : {
+        width: deviceStore.winWidth,
+      },
+)
 const image = computed(() =>
-  img(discoStore.obj.src || '/static/tracks/naam-bg.jpg', {
+  img(discoStore.obj.src || '/static/tracks/ganye-bg.jpg', {
     ...options.value,
     quality: 80,
     format: 'webp',
@@ -35,7 +39,7 @@ const props = defineProps({
 
 watch(
   () => discoStore.idx,
-  (idx) => {
+  (idx: number) => {
     if (idx < 12 && route.name === 'album-track') {
       position.value = (idx / 12) * 100
     } else {
@@ -47,7 +51,7 @@ watch(
 
 watch(
   () => props.fade,
-  (fade) => {
+  (fade: number) => {
     opacity.value = fade
   },
   { immediate: true },
@@ -73,8 +77,7 @@ watch(
 
     <transition>
       <div
-        v-if="route.name === 'album-track' &&
-          discoStore.album === 'the-fox'"
+        v-if="route.name === 'album-track' && discoStore.album === 'the-fox'"
         :key="discoStore.track"
         class="circle"
       >
@@ -104,8 +107,10 @@ watch(
         :width="deviceStore.winHeight * (2391 / 900)"
         :style="{
           stroke: stroke,
-          'stroke-width': (route.name === 'album-track' &&
-            discoStore.album === 'the-fox') ? 2 : 1
+          'stroke-width':
+            route.name === 'album-track' && discoStore.album === 'the-fox'
+              ? 2
+              : 1,
         }"
       >
         <path d="M1143.14-.08l519.72 900.16" />
@@ -226,7 +231,7 @@ watch(
     overflow hidden
 
     @supports (mix-blend-mode difference)
-      mix-blend-mode overlay
+      mix-blend-mode soft-light
 
     svg
       display block
